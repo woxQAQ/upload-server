@@ -1,14 +1,14 @@
 package models
 
-import "gorm.io/gorm"
-
 type Progress struct {
-	gorm.Model
-	Kind        string
-	TaskId      string
-	OrgName     string `gorm:"index:idx_org_user"`
-	User        string `gorm:"index:idx_org_user"`
-	Status      string `gorm:"index:idx_status_approver"`
-	Description string
-	Approver    string
+	Model
+	Name            *string `gorm:"not null;index:idx_name"`
+	Kind            *string `gorm:"not null"`
+	TaskId          *string `gorm:"not null"`
+	OrgName         *string `gorm:"not null;index:idx_org_user"`
+	UserId          *string `gorm:"not null;index:idx_org_user"`
+	Status          *string `gorm:"not null;index:idx_status_approver"`
+	Description     string
+	Approver        string `gorm:"index:idx_status_approver"`
+	ApprovalOpinion string
 }

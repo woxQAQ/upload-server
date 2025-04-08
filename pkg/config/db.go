@@ -2,26 +2,26 @@ package config
 
 import (
 	"github.com/glebarez/sqlite"
-	"github.com/spf13/viper"
 	"github.com/woxQAQ/upload-server/internal/models"
-	"github.com/woxQAQ/upload-server/pkg/constants"
+	"github.com/woxQAQ/upload-server/pkg/types"
 	"gorm.io/gorm"
 )
 
-func init() {
-	viper.MustBindEnv(constants.DatabaseDSN)
-}
-
-func InitDb() *gorm.DB {
-	dsn := viper.GetString(constants.DatabaseDSN)
-	if dsn == "" {
+func InitDb(cfg *types.AppConfig) *gorm.DB {
+	if cfg.DatabaseDSN == "" {
 		panic("dsn missing")
 	}
 
-	driver, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
+	driver, err := gorm.Open(sqlite.Open(cfg.DatabaseDSN), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
-	driver.AutoMigrate(models.ImportTaskDetail{}, models.Progress{})
+	driver.AutoMigrate(
+		models.ImportTaskDetail{},
+		models.Progress{},
+		models.User{},
+		models.UserOrg{},
+		models.Organization{},
+	)
 	return driver
 }

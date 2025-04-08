@@ -5,6 +5,7 @@ go 1.23.6
 require (
 	github.com/glebarez/sqlite v1.11.0
 	github.com/minio/minio-go/v7 v7.0.89
+	github.com/sony/sonyflake v1.2.0
 	github.com/spf13/viper v1.20.1
 )
 

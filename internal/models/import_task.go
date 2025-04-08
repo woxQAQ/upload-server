@@ -1,18 +1,16 @@
 package models
 
-import "gorm.io/gorm"
-
 type ImportTaskDetail struct {
-	gorm.Model
+	Model
 
-	OrgName            string
-	UserName           string
-	DatabaseIdentifier string
+	OrgName            string `gorm:"index:idx_org_user_db"`
+	UserName           string `gorm:"index:idx_org_user_db"`
+	DatabaseIdentifier string `gorm:"index:idx_org_user_db"`
 
 	Database string
 	Table    string
 
 	FileName string
-	FileSize string
+	FileSize string `gorm:"index:idx_size"`
 	OSSUrl   string
 }

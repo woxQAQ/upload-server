@@ -23,7 +23,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	db := config.InitDb()
+	db := config.InitDb(cfg)
 	g := config.InitApp(db, cfg)
 
 	srv := http.Server{

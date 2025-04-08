@@ -31,8 +31,8 @@ func (u *uploadController) Register(e *gin.RouterGroup) {
 }
 
 func (u *uploadController) Presign(c *gin.Context) {
-	var req *PresignRequest
-	err := c.ShouldBind(req)
+	var req PresignRequest
+	err := c.ShouldBind(&req)
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}

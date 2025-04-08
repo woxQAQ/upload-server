@@ -7,10 +7,11 @@ import (
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/woxQAQ/upload-server/internal/controller"
+	"github.com/woxQAQ/upload-server/pkg/types"
 	"gorm.io/gorm"
 )
 
-func InitApp(db *gorm.DB, cfg *AppConfig) *gin.Engine {
+func InitApp(db *gorm.DB, cfg *types.AppConfig) *gin.Engine {
 	e := gin.New()
 
 	minioCli, err := minio.New(cfg.MinioEndpoint, &minio.Options{
