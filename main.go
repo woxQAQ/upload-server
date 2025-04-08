@@ -9,18 +9,21 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/joho/godotenv/autoload"
 	"github.com/spf13/viper"
 	"github.com/woxQAQ/upload-server/pkg/config"
 )
 
 func main() {
-	db := config.InitDb()
 	cfg := &config.AppConfig{}
+	viper.AddConfigPath(".")
+	viper.SetConfigName("local")
+	viper.SetConfigType("env")
+	viper.ReadInConfig()
 	err := viper.Unmarshal(cfg)
 	if err != nil {
 		panic(err)
 	}
+	db := config.InitDb()
 	g := config.InitApp(db, cfg)
 
 	srv := http.Server{
