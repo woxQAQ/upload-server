@@ -11,10 +11,11 @@ import (
 
 	"github.com/spf13/viper"
 	"github.com/woxQAQ/upload-server/pkg/config"
+	"github.com/woxQAQ/upload-server/pkg/types"
 )
 
 func main() {
-	cfg := &config.AppConfig{}
+	cfg := &types.AppConfig{}
 	viper.AddConfigPath(".")
 	viper.SetConfigName("local")
 	viper.SetConfigType("env")

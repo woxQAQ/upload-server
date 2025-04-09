@@ -17,7 +17,6 @@ func InitDb(cfg *types.AppConfig) *gorm.DB {
 		panic(err)
 	}
 	driver.AutoMigrate(
-		models.ImportTaskDetail{},
 		models.Progress{},
 		models.User{},
 		models.UserOrg{},

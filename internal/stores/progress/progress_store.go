@@ -37,7 +37,8 @@ type UpdateOption struct {
 }
 
 type ProgressStore interface {
-	ListProgress(ctx context.Context, opt GetOption) ([]models.Progress, error)
+	ListProgressByUser(ctx context.Context, userId string) ([]models.Progress, error)
+	GetProgress(ctx context.Context, taskId string) (models.Progress, error)
 	CreateProgress(ctx context.Context, progress models.Progress) error
 	ApproveProgress(ctx context.Context, opt ApproveOption) error
 	UpdateProgress(ctx context.Context, id *string, opt UpdateOption) error
@@ -45,6 +46,11 @@ type ProgressStore interface {
 
 type store struct {
 	db *gorm.DB
+}
+
+// GetProgress implements ProgressStore.
+func (s store) GetProgress(ctx context.Context, taskId string) (models.Progress, error) {
+	panic("unimplemented")
 }
 
 // ApproveProgress implements ProgressStore.
@@ -58,7 +64,7 @@ func (s store) CreateProgress(ctx context.Context, progress models.Progress) err
 }
 
 // ListProgress implements ProgressStore.
-func (s store) ListProgress(ctx context.Context, opt GetOption) ([]models.Progress, error) {
+func (s store) ListProgressByUser(ctx context.Context, userId string) ([]models.Progress, error) {
 	panic("unimplemented")
 }
 

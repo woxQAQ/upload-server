@@ -7,6 +7,7 @@ import (
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/woxQAQ/upload-server/internal/controller"
+	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
 	"github.com/woxQAQ/upload-server/pkg/types"
 	"gorm.io/gorm"
 )
@@ -32,8 +33,9 @@ func InitApp(db *gorm.DB, cfg *types.AppConfig) *gin.Engine {
 	}
 
 	apiV1 := e.Group("/api/v1")
+	ps := stores.NewProgressStore(db)
 
-	c := controller.NewUploadController(minioCli)
+	c := controller.NewUploadController(minioCli, ps)
 	c.Register(apiV1)
 
 	return e
