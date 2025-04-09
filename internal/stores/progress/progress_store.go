@@ -2,24 +2,15 @@ package stores
 
 import (
 	"context"
-	"errors"
 
 	"github.com/woxQAQ/upload-server/internal/models"
 	"gorm.io/gorm"
 )
 
 type ApproveOption struct {
-	Id       uint
-	TaskId   string
-	Approver *string
-	Opinion  string
-}
-
-func (o *ApproveOption) Validate() error {
-	if o.Approver == nil {
-		return errors.New("approver cannot be empty when approve a progress")
-	}
-	return nil
+	Id       uint64
+	Approver string
+	Opinion  *string
 }
 
 type GetOption struct {
@@ -38,7 +29,7 @@ type UpdateOption struct {
 
 type ProgressStore interface {
 	ListProgressByUser(ctx context.Context, userId string) ([]models.Progress, error)
-	GetProgress(ctx context.Context, taskId string) (models.Progress, error)
+	GetProgress(ctx context.Context, progressId uint64) (models.Progress, error)
 	CreateProgress(ctx context.Context, progress models.Progress) error
 	ApproveProgress(ctx context.Context, opt ApproveOption) error
 	UpdateProgress(ctx context.Context, id *string, opt UpdateOption) error
@@ -49,7 +40,7 @@ type store struct {
 }
 
 // GetProgress implements ProgressStore.
-func (s store) GetProgress(ctx context.Context, taskId string) (models.Progress, error) {
+func (s store) GetProgress(ctx context.Context, progressId uint64) (models.Progress, error) {
 	panic("unimplemented")
 }
 

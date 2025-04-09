@@ -1,15 +1,19 @@
 package controller
 
 import (
+	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
+	"github.com/panjf2000/ants/v2"
 	"github.com/woxQAQ/upload-server/internal/models"
 	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
 	"github.com/woxQAQ/upload-server/internal/types"
+	"github.com/woxQAQ/upload-server/pkg/constants"
 )
 
 type Controller interface {
@@ -17,25 +21,133 @@ type Controller interface {
 }
 
 type uploadController struct {
-	minioClient *minio.Client
-	ps          stores.ProgressStore
+	mc   *minio.Client
+	ps   stores.ProgressStore
+	pool *ants.Pool
 }
 
 func NewUploadController(minio *minio.Client, ps stores.ProgressStore) Controller {
+	pool, err := ants.NewPool(
+		1000,
+		ants.WithPanicHandler(func(a any) {
+			log.Println(a)
+		}))
+	if err != nil {
+		panic(err)
+	}
 	return &uploadController{
 		minio,
 		ps,
+		pool,
 	}
-}
-
-type PresignRequest struct {
-	FileName string `json:"filename"`
-	FileSize string `json:"filesize"`
-	MD5      string `json:"md5"`
 }
 
 func (u *uploadController) Register(e *gin.RouterGroup) {
 	e.GET("/presign", u.Presign)
+	e.POST("/approve", u.Approve)
+	e.POST("/start", u.Start)
+}
+
+func (u *uploadController) Start(c *gin.Context) {
+
+}
+
+func (u *uploadController) Approve(c *gin.Context) {
+	ctx := c.Request.Context()
+	var req ApproveRequest
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
+	err = u.ps.ApproveProgress(ctx, stores.ApproveOption{
+		Id:       req.ProgressId,
+		Approver: req.Approver,
+		Opinion:  req.Opinion,
+	})
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
+	if req.Trigger == TriggerCurrent {
+		execCtx := context.Background()
+		u.pool.Submit(func() {
+			err = Import(execCtx,
+				u.mc, u.ps,
+				req.ProgressId,
+			)
+			if err != nil {
+				panic(err)
+			}
+		})
+	}
+}
+
+func Import(
+	ctx context.Context,
+	mc *minio.Client,
+	ps stores.ProgressStore,
+	progressId uint64,
+) error {
+	pgs, err := ps.GetProgress(ctx, progressId)
+	if err != nil {
+		return err
+	}
+	bytes, err := pgs.TaskDetail.MarshalJSON()
+	if err != nil {
+		return err
+	}
+	var detail types.ImportTaskDetail
+	err = json.Unmarshal(bytes, &detail)
+	if err != nil {
+		return err
+	}
+	sinker := newSinker(detail.DatabaseType)
+	if sinker == nil {
+		panic("db sinker not implement")
+	}
+
+	obj, err := mc.GetObject(
+		ctx,
+		constants.BucketName,
+		detail.FileName,
+		minio.GetObjectOptions{},
+	)
+	if err != nil {
+		return err
+	}
+	extractor, err := newExtractor(detail.FileType, obj)
+	if err != nil {
+		return err
+	}
+
+	defer extractor.Close()
+
+	var buf = make([][]string, 1024)
+	index := 0
+
+	for extractor.Next() {
+		row, err := extractor.Columns()
+		if err != nil {
+			return err
+		}
+		buf[index] = buf[index][:0]
+		buf[index] = append(buf[index], row...)
+		if index == 1023 {
+			err = sinker.Import(ctx,
+				detail.Database,
+				detail.Table,
+				buf,
+			)
+			if err != nil {
+				return err
+			}
+			buf = buf[:0]
+		}
+		index = (index + 1) % 1024
+	}
+
+	return nil
 }
 
 func (u *uploadController) Presign(c *gin.Context) {
@@ -45,9 +157,9 @@ func (u *uploadController) Presign(c *gin.Context) {
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}
-	url, err := u.minioClient.PresignedPutObject(
+	url, err := u.mc.PresignedPutObject(
 		ctx,
-		"file-upload",
+		constants.BucketName,
 		req.FileName,
 		10*time.Minute,
 	)
@@ -59,8 +171,8 @@ func (u *uploadController) Presign(c *gin.Context) {
 
 	detail := &types.ImportTaskDetail{
 		DatabaseType: types.Mysql,
-		Database:     "test",
-		Table:        "test",
+		Database:     req.Database,
+		Table:        req.Table,
 		OSSUrl:       url,
 		MD5:          req.MD5,
 		FileName:     req.FileName,

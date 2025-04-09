@@ -8,6 +8,8 @@ import (
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/woxQAQ/upload-server/internal/controller"
 	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
+	"github.com/woxQAQ/upload-server/pkg/constants"
+	"github.com/woxQAQ/upload-server/pkg/storage"
 	"github.com/woxQAQ/upload-server/pkg/types"
 	"gorm.io/gorm"
 )
@@ -15,7 +17,7 @@ import (
 func InitApp(db *gorm.DB, cfg *types.AppConfig) *gin.Engine {
 	e := gin.New()
 
-	minioCli, err := minio.New(cfg.MinioEndpoint, &minio.Options{
+	mc, err := minio.New(cfg.MinioEndpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(cfg.MinioAccessKeyId, cfg.MinioSecretAccessKey, ""),
 		Secure: false,
 	})
@@ -24,18 +26,14 @@ func InitApp(db *gorm.DB, cfg *types.AppConfig) *gin.Engine {
 		panic(err)
 	}
 
-	ok, err := minioCli.BucketExists(context.Background(), "file-upload")
-	if err != nil {
-		panic(err)
-	}
-	if !ok {
-		minioCli.MakeBucket(context.Background(), "file-upload", minio.MakeBucketOptions{})
-	}
+	ctx := context.Background()
+
+	storage.MustCheckBucket(ctx, mc, constants.BucketName)
 
 	apiV1 := e.Group("/api/v1")
 	ps := stores.NewProgressStore(db)
 
-	c := controller.NewUploadController(minioCli, ps)
+	c := controller.NewUploadController(mc, ps)
 	c.Register(apiV1)
 
 	return e
