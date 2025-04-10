@@ -52,6 +52,15 @@ func (u *uploadController) Start(c *gin.Context) {
 
 }
 
+// Approve godoc
+// @Summary approve a progress
+// @Description approve progresss
+// @Tags upload
+// @Accept json
+// @Produce json
+// @Success 200
+// @Param req body ApproveRequest false "request body"
+// @Router /api/v1/approve [post]
 func (u *uploadController) Approve(c *gin.Context) {
 	ctx := c.Request.Context()
 	var req ApproveRequest
@@ -150,6 +159,15 @@ func Import(
 	return nil
 }
 
+// Presign godoc
+// @Summary presign a data file
+// @Description presign from oss
+// @Tags upload
+// @Accept json
+// @Produce json
+// @Success 200
+// @Param req body PresignRequest false "request body"
+// @Router /api/v1/presign [get]
 func (u *uploadController) Presign(c *gin.Context) {
 	ctx := c.Request.Context()
 	var req PresignRequest

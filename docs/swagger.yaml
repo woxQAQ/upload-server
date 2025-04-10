@@ -1,0 +1,94 @@
+basePath: /api/v1
+definitions:
+  controller.ApproveRequest:
+    properties:
+      approver:
+        type: string
+      id:
+        type: integer
+      opionion:
+        type: string
+      trigger:
+        default: current
+        type: string
+    required:
+    - approver
+    type: object
+  controller.PresignRequest:
+    properties:
+      database:
+        type: string
+      filename:
+        type: string
+      filesize:
+        type: string
+      md5:
+        type: string
+      table:
+        type: string
+    required:
+    - database
+    - filename
+    - filesize
+    - md5
+    - table
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /api/v1/approve:
+    post:
+      consumes:
+      - application/json
+      description: approve progresss
+      parameters:
+      - description: request body
+        in: body
+        name: req
+        schema:
+          $ref: '#/definitions/controller.ApproveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: approve a progress
+      tags:
+      - upload
+  /api/v1/presign:
+    get:
+      consumes:
+      - application/json
+      description: presign from oss
+      parameters:
+      - description: request body
+        in: body
+        name: req
+        schema:
+          $ref: '#/definitions/controller.PresignRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: presign a data file
+      tags:
+      - upload
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
