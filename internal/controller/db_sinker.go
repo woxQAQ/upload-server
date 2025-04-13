@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	"log"
+	"log/slog"
 	"strings"
 	"time"
 
@@ -41,6 +41,7 @@ func (p *pgSinker) Import(ctx context.Context, db string, table string) error {
 	for {
 		select {
 		case <-ctx.Done():
+			slog.Error(ctx.Err().Error())
 			return ctx.Err()
 		default:
 			now := p.rpsLimiter.Take()
@@ -50,16 +51,24 @@ func (p *pgSinker) Import(ctx context.Context, db string, table string) error {
 			}
 			qb.PushRow(row)
 			index++
-			if now.Sub(prev) == time.Second {
-				log.Printf("begin to import, start index %d, end index %d", prevIndex, index)
-				prevIndex = index
-				query := qb.String()
-				_, err = p.connPool.Exec(ctx, query)
-				if err != nil {
-					log.Println("error when import with start index %d, end index %d. error: %e",
-						prevIndex, index, err)
+			if now.Sub(prev) >= time.Second {
+				if index-prevIndex > 0 {
+					slog.Info("begin to import",
+						slog.Int("start index", prevIndex),
+						slog.Int("end index", index),
+					)
+					prevIndex = index
+					query := qb.String()
+					_, err = p.connPool.Exec(ctx, query)
+					if err != nil {
+						slog.Error("error when import",
+							slog.Int("start index", prevIndex),
+							slog.Int("end index", index),
+							slog.String("error", err.Error()),
+						)
+					}
+					qb.Clear()
 				}
-				qb.Clear()
 			}
 		}
 	}
