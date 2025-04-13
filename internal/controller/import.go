@@ -3,8 +3,8 @@ package controller
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
-	"log"
 
 	"github.com/minio/minio-go/v7"
 
@@ -49,25 +49,35 @@ func (u *uploadController) Import(
 	defer extractor.Close()
 
 	var dt_buf = NewDtQueue[[]string](1024, 1024*1024*1024)
-	var buf = make([][]string, 1024)
-	defer clear(buf)
+	defer dt_buf.Close()
 	sinker := newSinker(ctx,
 		detail.DatabaseType,
 		detail.DSN,
 		dt_buf,
 	)
 	if sinker == nil {
-		log.Fatal("db sinker not implement")
+		return errors.New("db sinker not implement")
 	}
 
+	done := make(chan struct{})
+	errChan := make(chan error, 1)
+
 	u.pool.Submit(func() {
+		defer func() {
+			done <- struct{}{}
+		}()
 		err = sinker.Import(ctx, detail.Database, detail.Table)
 		if err != nil {
-			log.Fatal(err)
+			errChan <- err
 		}
 	})
 
 	for extractor.Next() {
+		select {
+		case err := <-errChan:
+			return err
+		default:
+		}
 		row, err := extractor.Columns()
 		if err != nil {
 			if err == io.EOF {
@@ -77,6 +87,8 @@ func (u *uploadController) Import(
 		}
 		dt_buf.Push(row)
 	}
+
+	<-done
 
 	return nil
 }

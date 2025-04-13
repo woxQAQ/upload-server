@@ -64,3 +64,7 @@ func (q *DtQueue[T]) Pop() (T, error) {
 
 	return item, nil
 }
+
+func (q *DtQueue[T]) Close() {
+	close(q.queue)
+}
