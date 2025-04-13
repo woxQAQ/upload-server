@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
+
 	"github.com/woxQAQ/upload-server/pkg/config"
 	"github.com/woxQAQ/upload-server/pkg/types"
 )

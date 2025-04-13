@@ -2,9 +2,10 @@ package config
 
 import (
 	"github.com/glebarez/sqlite"
+	"gorm.io/gorm"
+
 	"github.com/woxQAQ/upload-server/internal/models"
 	"github.com/woxQAQ/upload-server/pkg/types"
-	"gorm.io/gorm"
 )
 
 func InitDb(cfg *types.AppConfig) *gorm.DB {

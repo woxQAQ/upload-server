@@ -6,12 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
+	"gorm.io/gorm"
+
 	"github.com/woxQAQ/upload-server/internal/controller"
 	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
 	"github.com/woxQAQ/upload-server/pkg/constants"
 	"github.com/woxQAQ/upload-server/pkg/storage"
 	"github.com/woxQAQ/upload-server/pkg/types"
-	"gorm.io/gorm"
 )
 
 func InitApp(db *gorm.DB, cfg *types.AppConfig) *gin.Engine {

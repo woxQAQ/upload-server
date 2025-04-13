@@ -3,8 +3,9 @@ package stores
 import (
 	"context"
 
-	"github.com/woxQAQ/upload-server/internal/models"
 	"gorm.io/gorm"
+
+	"github.com/woxQAQ/upload-server/internal/models"
 )
 
 type ApproveOption struct {

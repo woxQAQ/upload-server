@@ -9,6 +9,7 @@ const (
 )
 
 type ImportTaskDetail struct {
+	DSN          string   `json:"dsn"`
 	DatabaseType string   `json:"databaseType"`
 	Database     string   `json:"db"`
 	Table        string   `json:"table"`
