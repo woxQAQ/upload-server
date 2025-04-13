@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
 	"github.com/panjf2000/ants/v2"
+
 	"github.com/woxQAQ/upload-server/internal/models"
 	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
 	"github.com/woxQAQ/upload-server/internal/types"
@@ -81,8 +82,8 @@ func (u *uploadController) Approve(c *gin.Context) {
 	if req.Trigger == TriggerCurrent {
 		execCtx := context.Background()
 		u.pool.Submit(func() {
-			err = Import(execCtx,
-				u.mc, u.ps,
+			err = u.Import(execCtx,
+				u.mc,
 				req.ProgressId,
 			)
 			if err != nil {
@@ -90,73 +91,6 @@ func (u *uploadController) Approve(c *gin.Context) {
 			}
 		})
 	}
-}
-
-func Import(
-	ctx context.Context,
-	mc *minio.Client,
-	ps stores.ProgressStore,
-	progressId uint64,
-) error {
-	pgs, err := ps.GetProgress(ctx, progressId)
-	if err != nil {
-		return err
-	}
-	bytes, err := pgs.TaskDetail.MarshalJSON()
-	if err != nil {
-		return err
-	}
-	var detail types.ImportTaskDetail
-	err = json.Unmarshal(bytes, &detail)
-	if err != nil {
-		return err
-	}
-	sinker := newSinker(detail.DatabaseType)
-	if sinker == nil {
-		panic("db sinker not implement")
-	}
-
-	obj, err := mc.GetObject(
-		ctx,
-		constants.BucketName,
-		detail.FileName,
-		minio.GetObjectOptions{},
-	)
-	if err != nil {
-		return err
-	}
-	extractor, err := newExtractor(detail.FileType, obj)
-	if err != nil {
-		return err
-	}
-
-	defer extractor.Close()
-
-	var buf = make([][]string, 1024)
-	index := 0
-
-	for extractor.Next() {
-		row, err := extractor.Columns()
-		if err != nil {
-			return err
-		}
-		buf[index] = buf[index][:0]
-		buf[index] = append(buf[index], row...)
-		if index == 1023 {
-			err = sinker.Import(ctx,
-				detail.Database,
-				detail.Table,
-				buf,
-			)
-			if err != nil {
-				return err
-			}
-			buf = buf[:0]
-		}
-		index = (index + 1) % 1024
-	}
-
-	return nil
 }
 
 // Presign godoc

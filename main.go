@@ -4,14 +4,14 @@ import (
 	"context"
 	"errors"
 	"log"
+	"log/slog"
 	"net/http"
 	"os/signal"
 	"syscall"
 	"time"
 
-	"github.com/spf13/viper"
 	"github.com/woxQAQ/upload-server/pkg/config"
-	"github.com/woxQAQ/upload-server/pkg/types"
+	"github.com/woxQAQ/upload-server/pkg/logx"
 )
 
 // @title           Swagger Example API
@@ -35,15 +35,9 @@ import (
 // @externalDocs.url          https://swagger.io/resources/open-api/
 
 func main() {
-	cfg := &types.AppConfig{}
-	viper.AddConfigPath(".")
-	viper.SetConfigName("local")
-	viper.SetConfigType("env")
-	viper.ReadInConfig()
-	err := viper.Unmarshal(cfg)
-	if err != nil {
-		panic(err)
-	}
+	cfg := config.GetConfig()
+
+	slog.SetDefault(logx.Logger())
 	db := config.InitDb(cfg)
 	g := config.InitApp(db, cfg)
 

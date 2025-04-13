@@ -3,8 +3,9 @@ package models
 import (
 	"time"
 
-	"github.com/woxQAQ/upload-server/pkg/snowflake"
 	"gorm.io/gorm"
+
+	"github.com/woxQAQ/upload-server/pkg/snowflake"
 )
 
 type Model struct {
