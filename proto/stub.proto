@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package woxQAQ.v1;
+option go_package = "generated/v1";
+
+import "google/api/annotations.proto";
+import "./enum.proto";
+
+message PreSignRequest {}
+
+message PreSignResponse {
+    string url = 1;
+}
+
+message DataExportDetail {
+    string database = 1;
+    
+}
+
+message SubmitTaskRequest {
+    string name = 1;
+    TaskKind kind = 2;
+    //TODO: datasource abstract
+    string dsn = 3;
+    oneof TaskDetail{
+        DataExportDetail ded = 4;
+    };
+}
+
+
+message ApproveRequest {
+    uint64 progressId = 1;
+    string approver = 2;
+    string option = 3;
+    Exec exector = 4;
+}
+
+service UploadService {
+    rpc GetDataFilePreSignUrl(PreSignRequest) returns (PreSignResponse) {
+        option (google.api.http) = {
+            get: "/v1/presign",
+        };
+    };
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package woxQAQ.v1;
+option go_package = "generated/v1";
+
+enum TaskKind {
+    TASK_KIND_DATA_IMPORT =0;
+    TASK_KIND_DATA_EXPORT =1;
+    TASK_KIND_DATA_GENERATE=2;
+};
+
+enum Exec {
+    EXEC_APPROVER = 0;
+    EXEC_COMMITTER = 1;
+    EXEC_AUTO = 2;
+}
+
+enum TriggerKind {
+    current = 0;
+    cron = 1;
+}
