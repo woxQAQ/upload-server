@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: stub.proto
+// source: v1/upload_service.proto
 
 package v1
 
@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UploadService_GetDataFilePreSignUrl_FullMethodName = "/woxQAQ.v1.UploadService/GetDataFilePreSignUrl"
+	UploadService_PreSign_FullMethodName = "/woxqaq.v1.UploadService/PreSign"
 )
 
 // UploadServiceClient is the client API for UploadService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UploadServiceClient interface {
-	GetDataFilePreSignUrl(ctx context.Context, in *PreSignRequest, opts ...grpc.CallOption) (*PreSignResponse, error)
+	PreSign(ctx context.Context, in *PreSignRequest, opts ...grpc.CallOption) (*PreSignResponse, error)
 }
 
 type uploadServiceClient struct {
@@ -37,10 +37,10 @@ func NewUploadServiceClient(cc grpc.ClientConnInterface) UploadServiceClient {
 	return &uploadServiceClient{cc}
 }
 
-func (c *uploadServiceClient) GetDataFilePreSignUrl(ctx context.Context, in *PreSignRequest, opts ...grpc.CallOption) (*PreSignResponse, error) {
+func (c *uploadServiceClient) PreSign(ctx context.Context, in *PreSignRequest, opts ...grpc.CallOption) (*PreSignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PreSignResponse)
-	err := c.cc.Invoke(ctx, UploadService_GetDataFilePreSignUrl_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UploadService_PreSign_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *uploadServiceClient) GetDataFilePreSignUrl(ctx context.Context, in *Pre
 // All implementations must embed UnimplementedUploadServiceServer
 // for forward compatibility.
 type UploadServiceServer interface {
-	GetDataFilePreSignUrl(context.Context, *PreSignRequest) (*PreSignResponse, error)
+	PreSign(context.Context, *PreSignRequest) (*PreSignResponse, error)
 	mustEmbedUnimplementedUploadServiceServer()
 }
 
@@ -62,8 +62,8 @@ type UploadServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUploadServiceServer struct{}
 
-func (UnimplementedUploadServiceServer) GetDataFilePreSignUrl(context.Context, *PreSignRequest) (*PreSignResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDataFilePreSignUrl not implemented")
+func (UnimplementedUploadServiceServer) PreSign(context.Context, *PreSignRequest) (*PreSignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreSign not implemented")
 }
 func (UnimplementedUploadServiceServer) mustEmbedUnimplementedUploadServiceServer() {}
 func (UnimplementedUploadServiceServer) testEmbeddedByValue()                       {}
@@ -86,20 +86,20 @@ func RegisterUploadServiceServer(s grpc.ServiceRegistrar, srv UploadServiceServe
 	s.RegisterService(&UploadService_ServiceDesc, srv)
 }
 
-func _UploadService_GetDataFilePreSignUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UploadService_PreSign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PreSignRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UploadServiceServer).GetDataFilePreSignUrl(ctx, in)
+		return srv.(UploadServiceServer).PreSign(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UploadService_GetDataFilePreSignUrl_FullMethodName,
+		FullMethod: UploadService_PreSign_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UploadServiceServer).GetDataFilePreSignUrl(ctx, req.(*PreSignRequest))
+		return srv.(UploadServiceServer).PreSign(ctx, req.(*PreSignRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -108,14 +108,14 @@ func _UploadService_GetDataFilePreSignUrl_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UploadService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "woxQAQ.v1.UploadService",
+	ServiceName: "woxqaq.v1.UploadService",
 	HandlerType: (*UploadServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetDataFilePreSignUrl",
-			Handler:    _UploadService_GetDataFilePreSignUrl_Handler,
+			MethodName: "PreSign",
+			Handler:    _UploadService_PreSign_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "stub.proto",
+	Metadata: "v1/upload_service.proto",
 }

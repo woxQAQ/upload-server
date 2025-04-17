@@ -3,14 +3,14 @@
 
 openapi: 3.0.3
 info:
-    title: UploadService API
+    title: ""
     version: 0.0.1
 paths:
     /v1/presign:
         get:
             tags:
                 - UploadService
-            operationId: UploadService_GetDataFilePreSignUrl
+            operationId: UploadService_PreSign
             responses:
                 "200":
                     description: OK
@@ -24,8 +24,198 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1/task/detail:
+        get:
+            tags:
+                - ProgressService
+            operationId: ProgressService_GetTaskDetail
+            parameters:
+                - name: taskId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/task/submit:
+        post:
+            tags:
+                - ProgressService
+            operationId: ProgressService_SubmitTask
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+                - name: dsn
+                  in: query
+                  description: 'TODO: datasource abstract'
+                  schema:
+                    type: string
+                - name: ded.database
+                  in: query
+                  schema:
+                    type: string
+                - name: ded.ebs.statement
+                  in: query
+                  schema:
+                    type: string
+                - name: ded.eatt.exportAll
+                  in: query
+                  schema:
+                    type: boolean
+                - name: ded.eatt.content
+                  in: query
+                  schema:
+                    enum:
+                        - EXPORT_CONTENT_UNSPECIFIED
+                        - EXPORT_CONTENT_DATA
+                        - EXPORT_CONTENT_STRUCT
+                        - EXPORT_CONTENT_ALL
+                    type: string
+                    format: enum
+                - name: ded.type
+                  in: query
+                  schema:
+                    enum:
+                        - EXPORT_TYPE_UNSPECIFIED
+                        - EXPORT_TYPE_CSV
+                        - EXPORT_TYPE_EXCEL
+                    type: string
+                    format: enum
+                - name: ded.encoding
+                  in: query
+                  schema:
+                    enum:
+                        - ENCODING_UNSPECIFIED
+                        - ENCODING_UTF8
+                        - ENCODING_GBK
+                    type: string
+                    format: enum
+                - name: ded.exportReason
+                  in: query
+                  schema:
+                    type: string
+                - name: ded.exector
+                  in: query
+                  schema:
+                    enum:
+                        - EXEC_UNSPECIFIED
+                        - EXEC_APPROVER
+                        - EXEC_COMMITTER
+                        - EXEC_AUTO
+                    type: string
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubmitTaskResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
+        DataExportDetail:
+            type: object
+            properties:
+                database:
+                    type: string
+                ebs:
+                    $ref: '#/components/schemas/ExportBySQL'
+                eatt:
+                    $ref: '#/components/schemas/ExportAccordingToTable'
+                type:
+                    enum:
+                        - EXPORT_TYPE_UNSPECIFIED
+                        - EXPORT_TYPE_CSV
+                        - EXPORT_TYPE_EXCEL
+                    type: string
+                    format: enum
+                encoding:
+                    enum:
+                        - ENCODING_UNSPECIFIED
+                        - ENCODING_UTF8
+                        - ENCODING_GBK
+                    type: string
+                    format: enum
+                exportReason:
+                    type: string
+                exector:
+                    enum:
+                        - EXEC_UNSPECIFIED
+                        - EXEC_APPROVER
+                        - EXEC_COMMITTER
+                        - EXEC_AUTO
+                    type: string
+                    format: enum
+        ExportAccordingToTable:
+            type: object
+            properties:
+                exportAll:
+                    type: boolean
+                content:
+                    enum:
+                        - EXPORT_CONTENT_UNSPECIFIED
+                        - EXPORT_CONTENT_DATA
+                        - EXPORT_CONTENT_STRUCT
+                        - EXPORT_CONTENT_ALL
+                    type: string
+                    format: enum
+                option:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ExportAccordingToTable_TableOption'
+        ExportAccordingToTable_TableOption:
+            type: object
+            properties:
+                table:
+                    type: string
+                allField:
+                    type: boolean
+                fields:
+                    type: array
+                    items:
+                        type: string
+                filter:
+                    type: string
+        ExportBySQL:
+            type: object
+            properties:
+                statement:
+                    type: string
+        GetTaskDetailResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                ded:
+                    $ref: '#/components/schemas/DataExportDetail'
         GoogleProtobufAny:
             type: object
             properties:
@@ -55,5 +245,13 @@ components:
                         $ref: '#/components/schemas/GoogleProtobufAny'
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        SubmitTaskResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                taskId:
+                    type: string
 tags:
+    - name: ProgressService
     - name: UploadService
