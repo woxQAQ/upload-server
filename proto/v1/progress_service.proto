@@ -3,6 +3,8 @@ syntax = "proto3";
 package woxqaq.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
 
 option go_package = "generated/v1";
 
@@ -43,6 +45,47 @@ enum Exec {
     EXEC_AUTO = 3;
 }
 
+enum TaskKind {
+    TASK_KIND_UNSPECIFIED = 0;
+    TASK_KIND_DATA_IMPORT = 1;
+    TASK_KIND_DATA_EXPORT = 2;
+    TASK_KIND_DATA_GENERATE= 3;
+};
+
+enum TaskStatus{
+    TASK_STATUS_UNSPECIFIED = 0;
+    TASK_STATUS_NOT_START = 1;
+    TASK_STATUS_PRE_CHECK = 2;
+    TASK_STATUS_PRE_CHECK_SUCCESS = 3;
+    TASK_STATUS_PRE_CHECK_FAILED = 4;
+    TASK_STATUS_APPROVING = 5;
+    TASK_STATUS_APPROVED = 6;
+    TASK_STATUS_NOT_APPROVED = 7;
+}
+
+enum TaskRole {
+    TASK_ROLE_UNSPECIFIED = 0;
+    TASK_ROLE_COMMITTER = 1;
+    TASK_ROLE_TO_APPROVE = 2;
+    TASK_ROLE_TO_EXECUTE = 3;
+    TASK_ROLE_APPROVED = 4;
+    TASK_ROLE_EXECUTED = 5;
+}
+
+message TaskListData {
+    string id = 1;
+    string dsn = 2;
+    TaskKind kind = 3;
+    string database = 4;
+    google.protobuf.Timestamp create_time = 5;
+    google.protobuf.Timestamp update_time = 6;
+    string submitter = 7;
+    TaskStatus status = 8;
+    oneof task_detail {
+        DataExportDetail ded = 9;
+    };
+}
+
 message ExportBySQL {
     string statement = 1;
 }
@@ -74,17 +117,11 @@ message DataExportDetail {
 }
 
 message SubmitTaskRequest {
-    enum TaskKind {
-        TASK_KIND_UNSPECIFIED = 0;
-        TASK_KIND_DATA_IMPORT = 1;
-        TASK_KIND_DATA_EXPORT = 2;
-        TASK_KIND_DATA_GENERATE= 3;
-    };
     string name = 1;
     TaskKind kind = 2;
     //TODO: datasource abstract
     string dsn = 3;
-    oneof task_detail{
+    oneof data {
         DataExportDetail ded = 4;
     };
 }
@@ -100,16 +137,46 @@ message GetTaskDetailRequest {
 
 message GetTaskDetailResponse {
     bool ok = 1;
-    oneof task_detail{
+    oneof data{
         DataExportDetail ded = 4;
     }; 
 }
 
 message ApproveRequest {
-
-    uint64 progress_id = 1;
+    uint64 task_id = 1;
     string approver = 2;
-    string option = 3;
+    string comment = 3;
+}
+
+message ApproveResponse {
+    bool ok = 1;
+}
+
+message RejectRequest {
+    uint64 task_id = 1;
+    string approver = 2;
+    string comment = 3;
+}
+
+message RejectResponse {
+    bool ok = 1;
+}
+
+message ListTaskRequest {
+    TaskKind kind = 1;
+    int32 current = 2;
+    int32 page_size = 3;
+    TaskStatus status = 4;
+    string dsn = 5;
+    TaskRole role = 6;
+    string task_id = 7;
+}
+
+message ListTaskResponse {
+    bool ok = 1;
+    repeated TaskListData data = 2;
+    int32 page_size = 3;
+    int32 total = 4;
 }
 
 service ProgressService { 
@@ -118,9 +185,26 @@ service ProgressService {
             get: "/v1/task/detail",
         }; 
     }
+    rpc ListTaskDetail(ListTaskRequest) returns (ListTaskResponse) {
+        option (google.api.http) = {
+            get: "/v1/tasks",
+        }; 
+    }
     rpc SubmitTask(SubmitTaskRequest) returns (SubmitTaskResponse) {
         option (google.api.http) = {
             post: "/v1/task/submit",
+        }; 
+    }
+
+    rpc Approve(ApproveRequest) returns(ApproveResponse) {
+        option (google.api.http) = {
+            put: "/v1/task/approve",
+        }; 
+    }
+
+    rpc Reject(RejectRequest) returns(RejectResponse) {
+        option (google.api.http) = {
+            put: "/v1/task/reject",
         }; 
     }
 }

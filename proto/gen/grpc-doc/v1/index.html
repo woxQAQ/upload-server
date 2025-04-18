@@ -183,6 +183,10 @@
                 </li>
               
                 <li>
+                  <a href="#woxqaq.v1.ApproveResponse"><span class="badge">M</span>ApproveResponse</a>
+                </li>
+              
+                <li>
                   <a href="#woxqaq.v1.DataExportDetail"><span class="badge">M</span>DataExportDetail</a>
                 </li>
               
@@ -207,11 +211,31 @@
                 </li>
               
                 <li>
+                  <a href="#woxqaq.v1.ListTaskRequest"><span class="badge">M</span>ListTaskRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListTaskResponse"><span class="badge">M</span>ListTaskResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RejectRequest"><span class="badge">M</span>RejectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RejectResponse"><span class="badge">M</span>RejectResponse</a>
+                </li>
+              
+                <li>
                   <a href="#woxqaq.v1.SubmitTaskRequest"><span class="badge">M</span>SubmitTaskRequest</a>
                 </li>
               
                 <li>
                   <a href="#woxqaq.v1.SubmitTaskResponse"><span class="badge">M</span>SubmitTaskResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.TaskListData"><span class="badge">M</span>TaskListData</a>
                 </li>
               
               
@@ -236,7 +260,15 @@
                 </li>
               
                 <li>
-                  <a href="#woxqaq.v1.SubmitTaskRequest.TaskKind"><span class="badge">E</span>SubmitTaskRequest.TaskKind</a>
+                  <a href="#woxqaq.v1.TaskKind"><span class="badge">E</span>TaskKind</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.TaskRole"><span class="badge">E</span>TaskRole</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.TaskStatus"><span class="badge">E</span>TaskStatus</a>
                 </li>
               
                 <li>
@@ -298,7 +330,7 @@
             <tbody>
               
                 <tr>
-                  <td>progress_id</td>
+                  <td>task_id</td>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -312,8 +344,32 @@
                 </tr>
               
                 <tr>
-                  <td>option</td>
+                  <td>comment</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApproveResponse">ApproveResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -553,6 +609,179 @@
 
         
       
+        <h3 id="woxqaq.v1.ListTaskRequest">ListTaskRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#woxqaq.v1.TaskKind">TaskKind</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>current</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#woxqaq.v1.TaskStatus">TaskStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dsn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#woxqaq.v1.TaskRole">TaskRole</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>task_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListTaskResponse">ListTaskResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#woxqaq.v1.TaskListData">TaskListData</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.RejectRequest">RejectRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>task_id</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approver</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comment</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.RejectResponse">RejectResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="woxqaq.v1.SubmitTaskRequest">SubmitTaskRequest</h3>
         <p></p>
 
@@ -572,7 +801,7 @@
               
                 <tr>
                   <td>kind</td>
-                  <td><a href="#woxqaq.v1.SubmitTaskRequest.TaskKind">SubmitTaskRequest.TaskKind</a></td>
+                  <td><a href="#woxqaq.v1.TaskKind">TaskKind</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -618,6 +847,86 @@
                 <tr>
                   <td>task_id</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.TaskListData">TaskListData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dsn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#woxqaq.v1.TaskKind">TaskKind</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>database</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>create_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>submitter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#woxqaq.v1.TaskStatus">TaskStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ded</td>
+                  <td><a href="#woxqaq.v1.DataExportDetail">DataExportDetail</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -788,7 +1097,7 @@
           </tbody>
         </table>
       
-        <h3 id="woxqaq.v1.SubmitTaskRequest.TaskKind">SubmitTaskRequest.TaskKind</h3>
+        <h3 id="woxqaq.v1.TaskKind">TaskKind</h3>
         <p></p>
         <table class="enum-table">
           <thead>
@@ -817,6 +1126,112 @@
               <tr>
                 <td>TASK_KIND_DATA_GENERATE</td>
                 <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.TaskRole">TaskRole</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TASK_ROLE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_ROLE_COMMITTER</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_ROLE_TO_APPROVE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_ROLE_TO_EXECUTE</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_ROLE_APPROVED</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_ROLE_EXECUTED</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.TaskStatus">TaskStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TASK_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_NOT_START</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_PRE_CHECK</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_PRE_CHECK_SUCCESS</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_PRE_CHECK_FAILED</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_APPROVING</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_APPROVED</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TASK_STATUS_NOT_APPROVED</td>
+                <td>7</td>
                 <td><p></p></td>
               </tr>
             
@@ -872,9 +1287,30 @@
               </tr>
             
               <tr>
+                <td>ListTaskDetail</td>
+                <td><a href="#woxqaq.v1.ListTaskRequest">ListTaskRequest</a></td>
+                <td><a href="#woxqaq.v1.ListTaskResponse">ListTaskResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>SubmitTask</td>
                 <td><a href="#woxqaq.v1.SubmitTaskRequest">SubmitTaskRequest</a></td>
                 <td><a href="#woxqaq.v1.SubmitTaskResponse">SubmitTaskResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>Approve</td>
+                <td><a href="#woxqaq.v1.ApproveRequest">ApproveRequest</a></td>
+                <td><a href="#woxqaq.v1.ApproveResponse">ApproveResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>Reject</td>
+                <td><a href="#woxqaq.v1.RejectRequest">RejectRequest</a></td>
+                <td><a href="#woxqaq.v1.RejectResponse">RejectResponse</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -909,9 +1345,39 @@
               
               
               <tr>
+                <td>ListTaskDetail</td>
+                <td>GET</td>
+                <td>/v1/tasks</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
                 <td>SubmitTask</td>
                 <td>POST</td>
                 <td>/v1/task/submit</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>Approve</td>
+                <td>PUT</td>
+                <td>/v1/task/approve</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>Reject</td>
+                <td>PUT</td>
+                <td>/v1/task/reject</td>
                 <td></td>
               </tr>
               

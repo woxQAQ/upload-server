@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -322,24 +323,24 @@ func (Exec) EnumDescriptor() ([]byte, []int) {
 	return file_v1_progress_service_proto_rawDescGZIP(), []int{5}
 }
 
-type SubmitTaskRequest_TaskKind int32
+type TaskKind int32
 
 const (
-	SubmitTaskRequest_TASK_KIND_UNSPECIFIED   SubmitTaskRequest_TaskKind = 0
-	SubmitTaskRequest_TASK_KIND_DATA_IMPORT   SubmitTaskRequest_TaskKind = 1
-	SubmitTaskRequest_TASK_KIND_DATA_EXPORT   SubmitTaskRequest_TaskKind = 2
-	SubmitTaskRequest_TASK_KIND_DATA_GENERATE SubmitTaskRequest_TaskKind = 3
+	TaskKind_TASK_KIND_UNSPECIFIED   TaskKind = 0
+	TaskKind_TASK_KIND_DATA_IMPORT   TaskKind = 1
+	TaskKind_TASK_KIND_DATA_EXPORT   TaskKind = 2
+	TaskKind_TASK_KIND_DATA_GENERATE TaskKind = 3
 )
 
-// Enum value maps for SubmitTaskRequest_TaskKind.
+// Enum value maps for TaskKind.
 var (
-	SubmitTaskRequest_TaskKind_name = map[int32]string{
+	TaskKind_name = map[int32]string{
 		0: "TASK_KIND_UNSPECIFIED",
 		1: "TASK_KIND_DATA_IMPORT",
 		2: "TASK_KIND_DATA_EXPORT",
 		3: "TASK_KIND_DATA_GENERATE",
 	}
-	SubmitTaskRequest_TaskKind_value = map[string]int32{
+	TaskKind_value = map[string]int32{
 		"TASK_KIND_UNSPECIFIED":   0,
 		"TASK_KIND_DATA_IMPORT":   1,
 		"TASK_KIND_DATA_EXPORT":   2,
@@ -347,32 +348,284 @@ var (
 	}
 )
 
-func (x SubmitTaskRequest_TaskKind) Enum() *SubmitTaskRequest_TaskKind {
-	p := new(SubmitTaskRequest_TaskKind)
+func (x TaskKind) Enum() *TaskKind {
+	p := new(TaskKind)
 	*p = x
 	return p
 }
 
-func (x SubmitTaskRequest_TaskKind) String() string {
+func (x TaskKind) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SubmitTaskRequest_TaskKind) Descriptor() protoreflect.EnumDescriptor {
+func (TaskKind) Descriptor() protoreflect.EnumDescriptor {
 	return file_v1_progress_service_proto_enumTypes[6].Descriptor()
 }
 
-func (SubmitTaskRequest_TaskKind) Type() protoreflect.EnumType {
+func (TaskKind) Type() protoreflect.EnumType {
 	return &file_v1_progress_service_proto_enumTypes[6]
 }
 
-func (x SubmitTaskRequest_TaskKind) Number() protoreflect.EnumNumber {
+func (x TaskKind) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SubmitTaskRequest_TaskKind.Descriptor instead.
-func (SubmitTaskRequest_TaskKind) EnumDescriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{3, 0}
+// Deprecated: Use TaskKind.Descriptor instead.
+func (TaskKind) EnumDescriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{6}
 }
+
+type TaskStatus int32
+
+const (
+	TaskStatus_TASK_STATUS_UNSPECIFIED       TaskStatus = 0
+	TaskStatus_TASK_STATUS_NOT_START         TaskStatus = 1
+	TaskStatus_TASK_STATUS_PRE_CHECK         TaskStatus = 2
+	TaskStatus_TASK_STATUS_PRE_CHECK_SUCCESS TaskStatus = 3
+	TaskStatus_TASK_STATUS_PRE_CHECK_FAILED  TaskStatus = 4
+	TaskStatus_TASK_STATUS_APPROVING         TaskStatus = 5
+	TaskStatus_TASK_STATUS_APPROVED          TaskStatus = 6
+	TaskStatus_TASK_STATUS_NOT_APPROVED      TaskStatus = 7
+)
+
+// Enum value maps for TaskStatus.
+var (
+	TaskStatus_name = map[int32]string{
+		0: "TASK_STATUS_UNSPECIFIED",
+		1: "TASK_STATUS_NOT_START",
+		2: "TASK_STATUS_PRE_CHECK",
+		3: "TASK_STATUS_PRE_CHECK_SUCCESS",
+		4: "TASK_STATUS_PRE_CHECK_FAILED",
+		5: "TASK_STATUS_APPROVING",
+		6: "TASK_STATUS_APPROVED",
+		7: "TASK_STATUS_NOT_APPROVED",
+	}
+	TaskStatus_value = map[string]int32{
+		"TASK_STATUS_UNSPECIFIED":       0,
+		"TASK_STATUS_NOT_START":         1,
+		"TASK_STATUS_PRE_CHECK":         2,
+		"TASK_STATUS_PRE_CHECK_SUCCESS": 3,
+		"TASK_STATUS_PRE_CHECK_FAILED":  4,
+		"TASK_STATUS_APPROVING":         5,
+		"TASK_STATUS_APPROVED":          6,
+		"TASK_STATUS_NOT_APPROVED":      7,
+	}
+)
+
+func (x TaskStatus) Enum() *TaskStatus {
+	p := new(TaskStatus)
+	*p = x
+	return p
+}
+
+func (x TaskStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TaskStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_v1_progress_service_proto_enumTypes[7].Descriptor()
+}
+
+func (TaskStatus) Type() protoreflect.EnumType {
+	return &file_v1_progress_service_proto_enumTypes[7]
+}
+
+func (x TaskStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TaskStatus.Descriptor instead.
+func (TaskStatus) EnumDescriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{7}
+}
+
+type TaskRole int32
+
+const (
+	TaskRole_TASK_ROLE_UNSPECIFIED TaskRole = 0
+	TaskRole_TASK_ROLE_COMMITTER   TaskRole = 1
+	TaskRole_TASK_ROLE_TO_APPROVE  TaskRole = 2
+	TaskRole_TASK_ROLE_TO_EXECUTE  TaskRole = 3
+	TaskRole_TASK_ROLE_APPROVED    TaskRole = 4
+	TaskRole_TASK_ROLE_EXECUTED    TaskRole = 5
+)
+
+// Enum value maps for TaskRole.
+var (
+	TaskRole_name = map[int32]string{
+		0: "TASK_ROLE_UNSPECIFIED",
+		1: "TASK_ROLE_COMMITTER",
+		2: "TASK_ROLE_TO_APPROVE",
+		3: "TASK_ROLE_TO_EXECUTE",
+		4: "TASK_ROLE_APPROVED",
+		5: "TASK_ROLE_EXECUTED",
+	}
+	TaskRole_value = map[string]int32{
+		"TASK_ROLE_UNSPECIFIED": 0,
+		"TASK_ROLE_COMMITTER":   1,
+		"TASK_ROLE_TO_APPROVE":  2,
+		"TASK_ROLE_TO_EXECUTE":  3,
+		"TASK_ROLE_APPROVED":    4,
+		"TASK_ROLE_EXECUTED":    5,
+	}
+)
+
+func (x TaskRole) Enum() *TaskRole {
+	p := new(TaskRole)
+	*p = x
+	return p
+}
+
+func (x TaskRole) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TaskRole) Descriptor() protoreflect.EnumDescriptor {
+	return file_v1_progress_service_proto_enumTypes[8].Descriptor()
+}
+
+func (TaskRole) Type() protoreflect.EnumType {
+	return &file_v1_progress_service_proto_enumTypes[8]
+}
+
+func (x TaskRole) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TaskRole.Descriptor instead.
+func (TaskRole) EnumDescriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{8}
+}
+
+type TaskListData struct {
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Id         string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Dsn        string                 `protobuf:"bytes,2,opt,name=dsn,proto3" json:"dsn,omitempty"`
+	Kind       TaskKind               `protobuf:"varint,3,opt,name=kind,proto3,enum=woxqaq.v1.TaskKind" json:"kind,omitempty"`
+	Database   string                 `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	Submitter  string                 `protobuf:"bytes,7,opt,name=submitter,proto3" json:"submitter,omitempty"`
+	Status     TaskStatus             `protobuf:"varint,8,opt,name=status,proto3,enum=woxqaq.v1.TaskStatus" json:"status,omitempty"`
+	// Types that are valid to be assigned to TaskDetail:
+	//
+	//	*TaskListData_Ded
+	TaskDetail    isTaskListData_TaskDetail `protobuf_oneof:"task_detail"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskListData) Reset() {
+	*x = TaskListData{}
+	mi := &file_v1_progress_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskListData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskListData) ProtoMessage() {}
+
+func (x *TaskListData) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TaskListData.ProtoReflect.Descriptor instead.
+func (*TaskListData) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TaskListData) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TaskListData) GetDsn() string {
+	if x != nil {
+		return x.Dsn
+	}
+	return ""
+}
+
+func (x *TaskListData) GetKind() TaskKind {
+	if x != nil {
+		return x.Kind
+	}
+	return TaskKind_TASK_KIND_UNSPECIFIED
+}
+
+func (x *TaskListData) GetDatabase() string {
+	if x != nil {
+		return x.Database
+	}
+	return ""
+}
+
+func (x *TaskListData) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *TaskListData) GetUpdateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdateTime
+	}
+	return nil
+}
+
+func (x *TaskListData) GetSubmitter() string {
+	if x != nil {
+		return x.Submitter
+	}
+	return ""
+}
+
+func (x *TaskListData) GetStatus() TaskStatus {
+	if x != nil {
+		return x.Status
+	}
+	return TaskStatus_TASK_STATUS_UNSPECIFIED
+}
+
+func (x *TaskListData) GetTaskDetail() isTaskListData_TaskDetail {
+	if x != nil {
+		return x.TaskDetail
+	}
+	return nil
+}
+
+func (x *TaskListData) GetDed() *DataExportDetail {
+	if x != nil {
+		if x, ok := x.TaskDetail.(*TaskListData_Ded); ok {
+			return x.Ded
+		}
+	}
+	return nil
+}
+
+type isTaskListData_TaskDetail interface {
+	isTaskListData_TaskDetail()
+}
+
+type TaskListData_Ded struct {
+	Ded *DataExportDetail `protobuf:"bytes,9,opt,name=ded,proto3,oneof"`
+}
+
+func (*TaskListData_Ded) isTaskListData_TaskDetail() {}
 
 type ExportBySQL struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -383,7 +636,7 @@ type ExportBySQL struct {
 
 func (x *ExportBySQL) Reset() {
 	*x = ExportBySQL{}
-	mi := &file_v1_progress_service_proto_msgTypes[0]
+	mi := &file_v1_progress_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -395,7 +648,7 @@ func (x *ExportBySQL) String() string {
 func (*ExportBySQL) ProtoMessage() {}
 
 func (x *ExportBySQL) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[0]
+	mi := &file_v1_progress_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -408,7 +661,7 @@ func (x *ExportBySQL) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportBySQL.ProtoReflect.Descriptor instead.
 func (*ExportBySQL) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{0}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ExportBySQL) GetStatement() string {
@@ -429,7 +682,7 @@ type ExportAccordingToTable struct {
 
 func (x *ExportAccordingToTable) Reset() {
 	*x = ExportAccordingToTable{}
-	mi := &file_v1_progress_service_proto_msgTypes[1]
+	mi := &file_v1_progress_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -441,7 +694,7 @@ func (x *ExportAccordingToTable) String() string {
 func (*ExportAccordingToTable) ProtoMessage() {}
 
 func (x *ExportAccordingToTable) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[1]
+	mi := &file_v1_progress_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -454,7 +707,7 @@ func (x *ExportAccordingToTable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportAccordingToTable.ProtoReflect.Descriptor instead.
 func (*ExportAccordingToTable) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{1}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ExportAccordingToTable) GetExportAll() bool {
@@ -496,7 +749,7 @@ type DataExportDetail struct {
 
 func (x *DataExportDetail) Reset() {
 	*x = DataExportDetail{}
-	mi := &file_v1_progress_service_proto_msgTypes[2]
+	mi := &file_v1_progress_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -508,7 +761,7 @@ func (x *DataExportDetail) String() string {
 func (*DataExportDetail) ProtoMessage() {}
 
 func (x *DataExportDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[2]
+	mi := &file_v1_progress_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -521,7 +774,7 @@ func (x *DataExportDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataExportDetail.ProtoReflect.Descriptor instead.
 func (*DataExportDetail) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{2}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DataExportDetail) GetDatabase() string {
@@ -601,22 +854,22 @@ func (*DataExportDetail_Ebs) isDataExportDetail_ExportDetail() {}
 func (*DataExportDetail_Eatt) isDataExportDetail_ExportDetail() {}
 
 type SubmitTaskRequest struct {
-	state protoimpl.MessageState     `protogen:"open.v1"`
-	Name  string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Kind  SubmitTaskRequest_TaskKind `protobuf:"varint,2,opt,name=kind,proto3,enum=woxqaq.v1.SubmitTaskRequest_TaskKind" json:"kind,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Kind  TaskKind               `protobuf:"varint,2,opt,name=kind,proto3,enum=woxqaq.v1.TaskKind" json:"kind,omitempty"`
 	// TODO: datasource abstract
 	Dsn string `protobuf:"bytes,3,opt,name=dsn,proto3" json:"dsn,omitempty"`
-	// Types that are valid to be assigned to TaskDetail:
+	// Types that are valid to be assigned to Data:
 	//
 	//	*SubmitTaskRequest_Ded
-	TaskDetail    isSubmitTaskRequest_TaskDetail `protobuf_oneof:"task_detail"`
+	Data          isSubmitTaskRequest_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SubmitTaskRequest) Reset() {
 	*x = SubmitTaskRequest{}
-	mi := &file_v1_progress_service_proto_msgTypes[3]
+	mi := &file_v1_progress_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -628,7 +881,7 @@ func (x *SubmitTaskRequest) String() string {
 func (*SubmitTaskRequest) ProtoMessage() {}
 
 func (x *SubmitTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[3]
+	mi := &file_v1_progress_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -641,7 +894,7 @@ func (x *SubmitTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTaskRequest.ProtoReflect.Descriptor instead.
 func (*SubmitTaskRequest) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{3}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SubmitTaskRequest) GetName() string {
@@ -651,11 +904,11 @@ func (x *SubmitTaskRequest) GetName() string {
 	return ""
 }
 
-func (x *SubmitTaskRequest) GetKind() SubmitTaskRequest_TaskKind {
+func (x *SubmitTaskRequest) GetKind() TaskKind {
 	if x != nil {
 		return x.Kind
 	}
-	return SubmitTaskRequest_TASK_KIND_UNSPECIFIED
+	return TaskKind_TASK_KIND_UNSPECIFIED
 }
 
 func (x *SubmitTaskRequest) GetDsn() string {
@@ -665,31 +918,31 @@ func (x *SubmitTaskRequest) GetDsn() string {
 	return ""
 }
 
-func (x *SubmitTaskRequest) GetTaskDetail() isSubmitTaskRequest_TaskDetail {
+func (x *SubmitTaskRequest) GetData() isSubmitTaskRequest_Data {
 	if x != nil {
-		return x.TaskDetail
+		return x.Data
 	}
 	return nil
 }
 
 func (x *SubmitTaskRequest) GetDed() *DataExportDetail {
 	if x != nil {
-		if x, ok := x.TaskDetail.(*SubmitTaskRequest_Ded); ok {
+		if x, ok := x.Data.(*SubmitTaskRequest_Ded); ok {
 			return x.Ded
 		}
 	}
 	return nil
 }
 
-type isSubmitTaskRequest_TaskDetail interface {
-	isSubmitTaskRequest_TaskDetail()
+type isSubmitTaskRequest_Data interface {
+	isSubmitTaskRequest_Data()
 }
 
 type SubmitTaskRequest_Ded struct {
 	Ded *DataExportDetail `protobuf:"bytes,4,opt,name=ded,proto3,oneof"`
 }
 
-func (*SubmitTaskRequest_Ded) isSubmitTaskRequest_TaskDetail() {}
+func (*SubmitTaskRequest_Ded) isSubmitTaskRequest_Data() {}
 
 type SubmitTaskResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -701,7 +954,7 @@ type SubmitTaskResponse struct {
 
 func (x *SubmitTaskResponse) Reset() {
 	*x = SubmitTaskResponse{}
-	mi := &file_v1_progress_service_proto_msgTypes[4]
+	mi := &file_v1_progress_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -713,7 +966,7 @@ func (x *SubmitTaskResponse) String() string {
 func (*SubmitTaskResponse) ProtoMessage() {}
 
 func (x *SubmitTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[4]
+	mi := &file_v1_progress_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -726,7 +979,7 @@ func (x *SubmitTaskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTaskResponse.ProtoReflect.Descriptor instead.
 func (*SubmitTaskResponse) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{4}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SubmitTaskResponse) GetOk() bool {
@@ -752,7 +1005,7 @@ type GetTaskDetailRequest struct {
 
 func (x *GetTaskDetailRequest) Reset() {
 	*x = GetTaskDetailRequest{}
-	mi := &file_v1_progress_service_proto_msgTypes[5]
+	mi := &file_v1_progress_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -764,7 +1017,7 @@ func (x *GetTaskDetailRequest) String() string {
 func (*GetTaskDetailRequest) ProtoMessage() {}
 
 func (x *GetTaskDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[5]
+	mi := &file_v1_progress_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -777,7 +1030,7 @@ func (x *GetTaskDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskDetailRequest.ProtoReflect.Descriptor instead.
 func (*GetTaskDetailRequest) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{5}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetTaskDetailRequest) GetTaskId() string {
@@ -790,17 +1043,17 @@ func (x *GetTaskDetailRequest) GetTaskId() string {
 type GetTaskDetailResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Ok    bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
-	// Types that are valid to be assigned to TaskDetail:
+	// Types that are valid to be assigned to Data:
 	//
 	//	*GetTaskDetailResponse_Ded
-	TaskDetail    isGetTaskDetailResponse_TaskDetail `protobuf_oneof:"task_detail"`
+	Data          isGetTaskDetailResponse_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetTaskDetailResponse) Reset() {
 	*x = GetTaskDetailResponse{}
-	mi := &file_v1_progress_service_proto_msgTypes[6]
+	mi := &file_v1_progress_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +1065,7 @@ func (x *GetTaskDetailResponse) String() string {
 func (*GetTaskDetailResponse) ProtoMessage() {}
 
 func (x *GetTaskDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[6]
+	mi := &file_v1_progress_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +1078,7 @@ func (x *GetTaskDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaskDetailResponse.ProtoReflect.Descriptor instead.
 func (*GetTaskDetailResponse) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{6}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetTaskDetailResponse) GetOk() bool {
@@ -835,44 +1088,44 @@ func (x *GetTaskDetailResponse) GetOk() bool {
 	return false
 }
 
-func (x *GetTaskDetailResponse) GetTaskDetail() isGetTaskDetailResponse_TaskDetail {
+func (x *GetTaskDetailResponse) GetData() isGetTaskDetailResponse_Data {
 	if x != nil {
-		return x.TaskDetail
+		return x.Data
 	}
 	return nil
 }
 
 func (x *GetTaskDetailResponse) GetDed() *DataExportDetail {
 	if x != nil {
-		if x, ok := x.TaskDetail.(*GetTaskDetailResponse_Ded); ok {
+		if x, ok := x.Data.(*GetTaskDetailResponse_Ded); ok {
 			return x.Ded
 		}
 	}
 	return nil
 }
 
-type isGetTaskDetailResponse_TaskDetail interface {
-	isGetTaskDetailResponse_TaskDetail()
+type isGetTaskDetailResponse_Data interface {
+	isGetTaskDetailResponse_Data()
 }
 
 type GetTaskDetailResponse_Ded struct {
 	Ded *DataExportDetail `protobuf:"bytes,4,opt,name=ded,proto3,oneof"`
 }
 
-func (*GetTaskDetailResponse_Ded) isGetTaskDetailResponse_TaskDetail() {}
+func (*GetTaskDetailResponse_Ded) isGetTaskDetailResponse_Data() {}
 
 type ApproveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProgressId    uint64                 `protobuf:"varint,1,opt,name=progress_id,json=progressId,proto3" json:"progress_id,omitempty"`
+	TaskId        uint64                 `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	Approver      string                 `protobuf:"bytes,2,opt,name=approver,proto3" json:"approver,omitempty"`
-	Option        string                 `protobuf:"bytes,3,opt,name=option,proto3" json:"option,omitempty"`
+	Comment       string                 `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ApproveRequest) Reset() {
 	*x = ApproveRequest{}
-	mi := &file_v1_progress_service_proto_msgTypes[7]
+	mi := &file_v1_progress_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -884,7 +1137,7 @@ func (x *ApproveRequest) String() string {
 func (*ApproveRequest) ProtoMessage() {}
 
 func (x *ApproveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[7]
+	mi := &file_v1_progress_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -897,12 +1150,12 @@ func (x *ApproveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveRequest.ProtoReflect.Descriptor instead.
 func (*ApproveRequest) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{7}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ApproveRequest) GetProgressId() uint64 {
+func (x *ApproveRequest) GetTaskId() uint64 {
 	if x != nil {
-		return x.ProgressId
+		return x.TaskId
 	}
 	return 0
 }
@@ -914,11 +1167,319 @@ func (x *ApproveRequest) GetApprover() string {
 	return ""
 }
 
-func (x *ApproveRequest) GetOption() string {
+func (x *ApproveRequest) GetComment() string {
 	if x != nil {
-		return x.Option
+		return x.Comment
 	}
 	return ""
+}
+
+type ApproveResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ApproveResponse) Reset() {
+	*x = ApproveResponse{}
+	mi := &file_v1_progress_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApproveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApproveResponse) ProtoMessage() {}
+
+func (x *ApproveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApproveResponse.ProtoReflect.Descriptor instead.
+func (*ApproveResponse) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ApproveResponse) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+type RejectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        uint64                 `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Approver      string                 `protobuf:"bytes,2,opt,name=approver,proto3" json:"approver,omitempty"`
+	Comment       string                 `protobuf:"bytes,3,opt,name=comment,proto3" json:"comment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RejectRequest) Reset() {
+	*x = RejectRequest{}
+	mi := &file_v1_progress_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RejectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RejectRequest) ProtoMessage() {}
+
+func (x *RejectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RejectRequest.ProtoReflect.Descriptor instead.
+func (*RejectRequest) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RejectRequest) GetTaskId() uint64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *RejectRequest) GetApprover() string {
+	if x != nil {
+		return x.Approver
+	}
+	return ""
+}
+
+func (x *RejectRequest) GetComment() string {
+	if x != nil {
+		return x.Comment
+	}
+	return ""
+}
+
+type RejectResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RejectResponse) Reset() {
+	*x = RejectResponse{}
+	mi := &file_v1_progress_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RejectResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RejectResponse) ProtoMessage() {}
+
+func (x *RejectResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RejectResponse.ProtoReflect.Descriptor instead.
+func (*RejectResponse) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RejectResponse) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+type ListTaskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Kind          TaskKind               `protobuf:"varint,1,opt,name=kind,proto3,enum=woxqaq.v1.TaskKind" json:"kind,omitempty"`
+	Current       int32                  `protobuf:"varint,2,opt,name=current,proto3" json:"current,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Status        TaskStatus             `protobuf:"varint,4,opt,name=status,proto3,enum=woxqaq.v1.TaskStatus" json:"status,omitempty"`
+	Dsn           string                 `protobuf:"bytes,5,opt,name=dsn,proto3" json:"dsn,omitempty"`
+	Role          TaskRole               `protobuf:"varint,6,opt,name=role,proto3,enum=woxqaq.v1.TaskRole" json:"role,omitempty"`
+	TaskId        string                 `protobuf:"bytes,7,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTaskRequest) Reset() {
+	*x = ListTaskRequest{}
+	mi := &file_v1_progress_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTaskRequest) ProtoMessage() {}
+
+func (x *ListTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTaskRequest.ProtoReflect.Descriptor instead.
+func (*ListTaskRequest) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListTaskRequest) GetKind() TaskKind {
+	if x != nil {
+		return x.Kind
+	}
+	return TaskKind_TASK_KIND_UNSPECIFIED
+}
+
+func (x *ListTaskRequest) GetCurrent() int32 {
+	if x != nil {
+		return x.Current
+	}
+	return 0
+}
+
+func (x *ListTaskRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTaskRequest) GetStatus() TaskStatus {
+	if x != nil {
+		return x.Status
+	}
+	return TaskStatus_TASK_STATUS_UNSPECIFIED
+}
+
+func (x *ListTaskRequest) GetDsn() string {
+	if x != nil {
+		return x.Dsn
+	}
+	return ""
+}
+
+func (x *ListTaskRequest) GetRole() TaskRole {
+	if x != nil {
+		return x.Role
+	}
+	return TaskRole_TASK_ROLE_UNSPECIFIED
+}
+
+func (x *ListTaskRequest) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+type ListTaskResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	Data          []*TaskListData        `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTaskResponse) Reset() {
+	*x = ListTaskResponse{}
+	mi := &file_v1_progress_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTaskResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTaskResponse) ProtoMessage() {}
+
+func (x *ListTaskResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_progress_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTaskResponse.ProtoReflect.Descriptor instead.
+func (*ListTaskResponse) Descriptor() ([]byte, []int) {
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListTaskResponse) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+func (x *ListTaskResponse) GetData() []*TaskListData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ListTaskResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTaskResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type ExportAccordingToTable_TableOption struct {
@@ -933,7 +1494,7 @@ type ExportAccordingToTable_TableOption struct {
 
 func (x *ExportAccordingToTable_TableOption) Reset() {
 	*x = ExportAccordingToTable_TableOption{}
-	mi := &file_v1_progress_service_proto_msgTypes[8]
+	mi := &file_v1_progress_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -945,7 +1506,7 @@ func (x *ExportAccordingToTable_TableOption) String() string {
 func (*ExportAccordingToTable_TableOption) ProtoMessage() {}
 
 func (x *ExportAccordingToTable_TableOption) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_progress_service_proto_msgTypes[8]
+	mi := &file_v1_progress_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,7 +1519,7 @@ func (x *ExportAccordingToTable_TableOption) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ExportAccordingToTable_TableOption.ProtoReflect.Descriptor instead.
 func (*ExportAccordingToTable_TableOption) Descriptor() ([]byte, []int) {
-	return file_v1_progress_service_proto_rawDescGZIP(), []int{1, 0}
+	return file_v1_progress_service_proto_rawDescGZIP(), []int{2, 0}
 }
 
 func (x *ExportAccordingToTable_TableOption) GetTable() string {
@@ -993,7 +1554,20 @@ var File_v1_progress_service_proto protoreflect.FileDescriptor
 
 const file_v1_progress_service_proto_rawDesc = "" +
 	"\n" +
-	"\x19v1/progress_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\"+\n" +
+	"\x19v1/progress_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\x02\n" +
+	"\fTaskListData\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
+	"\x03dsn\x18\x02 \x01(\tR\x03dsn\x12'\n" +
+	"\x04kind\x18\x03 \x01(\x0e2\x13.woxqaq.v1.TaskKindR\x04kind\x12\x1a\n" +
+	"\bdatabase\x18\x04 \x01(\tR\bdatabase\x12;\n" +
+	"\vcreate_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12;\n" +
+	"\vupdate_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"updateTime\x12\x1c\n" +
+	"\tsubmitter\x18\a \x01(\tR\tsubmitter\x12-\n" +
+	"\x06status\x18\b \x01(\x0e2\x15.woxqaq.v1.TaskStatusR\x06status\x12/\n" +
+	"\x03ded\x18\t \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03dedB\r\n" +
+	"\vtask_detail\"+\n" +
 	"\vExportBySQL\x12\x1c\n" +
 	"\tstatement\x18\x01 \x01(\tR\tstatement\"\xa4\x02\n" +
 	"\x16ExportAccordingToTable\x12\x1d\n" +
@@ -1014,32 +1588,47 @@ const file_v1_progress_service_proto_rawDesc = "" +
 	"\bencoding\x18\x05 \x01(\x0e2\x13.woxqaq.v1.EncodingR\bencoding\x12#\n" +
 	"\rexport_reason\x18\x06 \x01(\tR\fexportReason\x12)\n" +
 	"\aexector\x18\a \x01(\x0e2\x0f.woxqaq.v1.ExecR\aexectorB\x0f\n" +
-	"\rexport_detail\"\xae\x02\n" +
+	"\rexport_detail\"\x9b\x01\n" +
 	"\x11SubmitTaskRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x129\n" +
-	"\x04kind\x18\x02 \x01(\x0e2%.woxqaq.v1.SubmitTaskRequest.TaskKindR\x04kind\x12\x10\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12'\n" +
+	"\x04kind\x18\x02 \x01(\x0e2\x13.woxqaq.v1.TaskKindR\x04kind\x12\x10\n" +
 	"\x03dsn\x18\x03 \x01(\tR\x03dsn\x12/\n" +
-	"\x03ded\x18\x04 \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03ded\"x\n" +
-	"\bTaskKind\x12\x19\n" +
-	"\x15TASK_KIND_UNSPECIFIED\x10\x00\x12\x19\n" +
-	"\x15TASK_KIND_DATA_IMPORT\x10\x01\x12\x19\n" +
-	"\x15TASK_KIND_DATA_EXPORT\x10\x02\x12\x1b\n" +
-	"\x17TASK_KIND_DATA_GENERATE\x10\x03B\r\n" +
-	"\vtask_detail\"=\n" +
+	"\x03ded\x18\x04 \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03dedB\x06\n" +
+	"\x04data\"=\n" +
 	"\x12SubmitTaskResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12\x17\n" +
 	"\atask_id\x18\x02 \x01(\tR\x06taskId\"/\n" +
 	"\x14GetTaskDetailRequest\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\"g\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\"`\n" +
 	"\x15GetTaskDetailResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12/\n" +
-	"\x03ded\x18\x04 \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03dedB\r\n" +
-	"\vtask_detail\"e\n" +
-	"\x0eApproveRequest\x12\x1f\n" +
-	"\vprogress_id\x18\x01 \x01(\x04R\n" +
-	"progressId\x12\x1a\n" +
-	"\bapprover\x18\x02 \x01(\tR\bapprover\x12\x16\n" +
-	"\x06option\x18\x03 \x01(\tR\x06option*I\n" +
+	"\x03ded\x18\x04 \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03dedB\x06\n" +
+	"\x04data\"_\n" +
+	"\x0eApproveRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x04R\x06taskId\x12\x1a\n" +
+	"\bapprover\x18\x02 \x01(\tR\bapprover\x12\x18\n" +
+	"\acomment\x18\x03 \x01(\tR\acomment\"!\n" +
+	"\x0fApproveResponse\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"^\n" +
+	"\rRejectRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x04R\x06taskId\x12\x1a\n" +
+	"\bapprover\x18\x02 \x01(\tR\bapprover\x12\x18\n" +
+	"\acomment\x18\x03 \x01(\tR\acomment\" \n" +
+	"\x0eRejectResponse\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"\xf4\x01\n" +
+	"\x0fListTaskRequest\x12'\n" +
+	"\x04kind\x18\x01 \x01(\x0e2\x13.woxqaq.v1.TaskKindR\x04kind\x12\x18\n" +
+	"\acurrent\x18\x02 \x01(\x05R\acurrent\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12-\n" +
+	"\x06status\x18\x04 \x01(\x0e2\x15.woxqaq.v1.TaskStatusR\x06status\x12\x10\n" +
+	"\x03dsn\x18\x05 \x01(\tR\x03dsn\x12'\n" +
+	"\x04role\x18\x06 \x01(\x0e2\x13.woxqaq.v1.TaskRoleR\x04role\x12\x17\n" +
+	"\atask_id\x18\a \x01(\tR\x06taskId\"\x82\x01\n" +
+	"\x10ListTaskResponse\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\x12+\n" +
+	"\x04data\x18\x02 \x03(\v2\x17.woxqaq.v1.TaskListDataR\x04data\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total*I\n" +
 	"\bEncoding\x12\x18\n" +
 	"\x14ENCODING_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rENCODING_UTF8\x10\x01\x12\x10\n" +
@@ -1066,11 +1655,36 @@ const file_v1_progress_service_proto_rawDesc = "" +
 	"\x10EXEC_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rEXEC_APPROVER\x10\x01\x12\x12\n" +
 	"\x0eEXEC_COMMITTER\x10\x02\x12\r\n" +
-	"\tEXEC_AUTO\x10\x032\xe2\x01\n" +
-	"\x0fProgressService\x12k\n" +
-	"\rGetTaskDetail\x12\x1f.woxqaq.v1.GetTaskDetailRequest\x1a .woxqaq.v1.GetTaskDetailResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/task/detail\x12b\n" +
+	"\tEXEC_AUTO\x10\x03*x\n" +
+	"\bTaskKind\x12\x19\n" +
+	"\x15TASK_KIND_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15TASK_KIND_DATA_IMPORT\x10\x01\x12\x19\n" +
+	"\x15TASK_KIND_DATA_EXPORT\x10\x02\x12\x1b\n" +
+	"\x17TASK_KIND_DATA_GENERATE\x10\x03*\xf7\x01\n" +
 	"\n" +
-	"SubmitTask\x12\x1c.woxqaq.v1.SubmitTaskRequest\x1a\x1d.woxqaq.v1.SubmitTaskResponse\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/v1/task/submitB\x0eZ\fgenerated/v1b\x06proto3"
+	"TaskStatus\x12\x1b\n" +
+	"\x17TASK_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15TASK_STATUS_NOT_START\x10\x01\x12\x19\n" +
+	"\x15TASK_STATUS_PRE_CHECK\x10\x02\x12!\n" +
+	"\x1dTASK_STATUS_PRE_CHECK_SUCCESS\x10\x03\x12 \n" +
+	"\x1cTASK_STATUS_PRE_CHECK_FAILED\x10\x04\x12\x19\n" +
+	"\x15TASK_STATUS_APPROVING\x10\x05\x12\x18\n" +
+	"\x14TASK_STATUS_APPROVED\x10\x06\x12\x1c\n" +
+	"\x18TASK_STATUS_NOT_APPROVED\x10\a*\xa2\x01\n" +
+	"\bTaskRole\x12\x19\n" +
+	"\x15TASK_ROLE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13TASK_ROLE_COMMITTER\x10\x01\x12\x18\n" +
+	"\x14TASK_ROLE_TO_APPROVE\x10\x02\x12\x18\n" +
+	"\x14TASK_ROLE_TO_EXECUTE\x10\x03\x12\x16\n" +
+	"\x12TASK_ROLE_APPROVED\x10\x04\x12\x16\n" +
+	"\x12TASK_ROLE_EXECUTED\x10\x052\xf4\x03\n" +
+	"\x0fProgressService\x12k\n" +
+	"\rGetTaskDetail\x12\x1f.woxqaq.v1.GetTaskDetailRequest\x1a .woxqaq.v1.GetTaskDetailResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/task/detail\x12\\\n" +
+	"\x0eListTaskDetail\x12\x1a.woxqaq.v1.ListTaskRequest\x1a\x1b.woxqaq.v1.ListTaskResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/tasks\x12b\n" +
+	"\n" +
+	"SubmitTask\x12\x1c.woxqaq.v1.SubmitTaskRequest\x1a\x1d.woxqaq.v1.SubmitTaskResponse\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/v1/task/submit\x12Z\n" +
+	"\aApprove\x12\x19.woxqaq.v1.ApproveRequest\x1a\x1a.woxqaq.v1.ApproveResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x1a\x10/v1/task/approve\x12V\n" +
+	"\x06Reject\x12\x18.woxqaq.v1.RejectRequest\x1a\x19.woxqaq.v1.RejectResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x1a\x0f/v1/task/rejectB\x0eZ\fgenerated/v1b\x06proto3"
 
 var (
 	file_v1_progress_service_proto_rawDescOnce sync.Once
@@ -1084,8 +1698,8 @@ func file_v1_progress_service_proto_rawDescGZIP() []byte {
 	return file_v1_progress_service_proto_rawDescData
 }
 
-var file_v1_progress_service_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_v1_progress_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_v1_progress_service_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_v1_progress_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_v1_progress_service_proto_goTypes = []any{
 	(Encoding)(0),                              // 0: woxqaq.v1.Encoding
 	(TriggerKind)(0),                           // 1: woxqaq.v1.TriggerKind
@@ -1093,37 +1707,61 @@ var file_v1_progress_service_proto_goTypes = []any{
 	(ExportContent)(0),                         // 3: woxqaq.v1.ExportContent
 	(ExportType)(0),                            // 4: woxqaq.v1.ExportType
 	(Exec)(0),                                  // 5: woxqaq.v1.Exec
-	(SubmitTaskRequest_TaskKind)(0),            // 6: woxqaq.v1.SubmitTaskRequest.TaskKind
-	(*ExportBySQL)(nil),                        // 7: woxqaq.v1.ExportBySQL
-	(*ExportAccordingToTable)(nil),             // 8: woxqaq.v1.ExportAccordingToTable
-	(*DataExportDetail)(nil),                   // 9: woxqaq.v1.DataExportDetail
-	(*SubmitTaskRequest)(nil),                  // 10: woxqaq.v1.SubmitTaskRequest
-	(*SubmitTaskResponse)(nil),                 // 11: woxqaq.v1.SubmitTaskResponse
-	(*GetTaskDetailRequest)(nil),               // 12: woxqaq.v1.GetTaskDetailRequest
-	(*GetTaskDetailResponse)(nil),              // 13: woxqaq.v1.GetTaskDetailResponse
-	(*ApproveRequest)(nil),                     // 14: woxqaq.v1.ApproveRequest
-	(*ExportAccordingToTable_TableOption)(nil), // 15: woxqaq.v1.ExportAccordingToTable.TableOption
+	(TaskKind)(0),                              // 6: woxqaq.v1.TaskKind
+	(TaskStatus)(0),                            // 7: woxqaq.v1.TaskStatus
+	(TaskRole)(0),                              // 8: woxqaq.v1.TaskRole
+	(*TaskListData)(nil),                       // 9: woxqaq.v1.TaskListData
+	(*ExportBySQL)(nil),                        // 10: woxqaq.v1.ExportBySQL
+	(*ExportAccordingToTable)(nil),             // 11: woxqaq.v1.ExportAccordingToTable
+	(*DataExportDetail)(nil),                   // 12: woxqaq.v1.DataExportDetail
+	(*SubmitTaskRequest)(nil),                  // 13: woxqaq.v1.SubmitTaskRequest
+	(*SubmitTaskResponse)(nil),                 // 14: woxqaq.v1.SubmitTaskResponse
+	(*GetTaskDetailRequest)(nil),               // 15: woxqaq.v1.GetTaskDetailRequest
+	(*GetTaskDetailResponse)(nil),              // 16: woxqaq.v1.GetTaskDetailResponse
+	(*ApproveRequest)(nil),                     // 17: woxqaq.v1.ApproveRequest
+	(*ApproveResponse)(nil),                    // 18: woxqaq.v1.ApproveResponse
+	(*RejectRequest)(nil),                      // 19: woxqaq.v1.RejectRequest
+	(*RejectResponse)(nil),                     // 20: woxqaq.v1.RejectResponse
+	(*ListTaskRequest)(nil),                    // 21: woxqaq.v1.ListTaskRequest
+	(*ListTaskResponse)(nil),                   // 22: woxqaq.v1.ListTaskResponse
+	(*ExportAccordingToTable_TableOption)(nil), // 23: woxqaq.v1.ExportAccordingToTable.TableOption
+	(*timestamppb.Timestamp)(nil),              // 24: google.protobuf.Timestamp
 }
 var file_v1_progress_service_proto_depIdxs = []int32{
-	3,  // 0: woxqaq.v1.ExportAccordingToTable.content:type_name -> woxqaq.v1.ExportContent
-	15, // 1: woxqaq.v1.ExportAccordingToTable.option:type_name -> woxqaq.v1.ExportAccordingToTable.TableOption
-	7,  // 2: woxqaq.v1.DataExportDetail.ebs:type_name -> woxqaq.v1.ExportBySQL
-	8,  // 3: woxqaq.v1.DataExportDetail.eatt:type_name -> woxqaq.v1.ExportAccordingToTable
-	4,  // 4: woxqaq.v1.DataExportDetail.type:type_name -> woxqaq.v1.ExportType
-	0,  // 5: woxqaq.v1.DataExportDetail.encoding:type_name -> woxqaq.v1.Encoding
-	5,  // 6: woxqaq.v1.DataExportDetail.exector:type_name -> woxqaq.v1.Exec
-	6,  // 7: woxqaq.v1.SubmitTaskRequest.kind:type_name -> woxqaq.v1.SubmitTaskRequest.TaskKind
-	9,  // 8: woxqaq.v1.SubmitTaskRequest.ded:type_name -> woxqaq.v1.DataExportDetail
-	9,  // 9: woxqaq.v1.GetTaskDetailResponse.ded:type_name -> woxqaq.v1.DataExportDetail
-	12, // 10: woxqaq.v1.ProgressService.GetTaskDetail:input_type -> woxqaq.v1.GetTaskDetailRequest
-	10, // 11: woxqaq.v1.ProgressService.SubmitTask:input_type -> woxqaq.v1.SubmitTaskRequest
-	13, // 12: woxqaq.v1.ProgressService.GetTaskDetail:output_type -> woxqaq.v1.GetTaskDetailResponse
-	11, // 13: woxqaq.v1.ProgressService.SubmitTask:output_type -> woxqaq.v1.SubmitTaskResponse
-	12, // [12:14] is the sub-list for method output_type
-	10, // [10:12] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	6,  // 0: woxqaq.v1.TaskListData.kind:type_name -> woxqaq.v1.TaskKind
+	24, // 1: woxqaq.v1.TaskListData.create_time:type_name -> google.protobuf.Timestamp
+	24, // 2: woxqaq.v1.TaskListData.update_time:type_name -> google.protobuf.Timestamp
+	7,  // 3: woxqaq.v1.TaskListData.status:type_name -> woxqaq.v1.TaskStatus
+	12, // 4: woxqaq.v1.TaskListData.ded:type_name -> woxqaq.v1.DataExportDetail
+	3,  // 5: woxqaq.v1.ExportAccordingToTable.content:type_name -> woxqaq.v1.ExportContent
+	23, // 6: woxqaq.v1.ExportAccordingToTable.option:type_name -> woxqaq.v1.ExportAccordingToTable.TableOption
+	10, // 7: woxqaq.v1.DataExportDetail.ebs:type_name -> woxqaq.v1.ExportBySQL
+	11, // 8: woxqaq.v1.DataExportDetail.eatt:type_name -> woxqaq.v1.ExportAccordingToTable
+	4,  // 9: woxqaq.v1.DataExportDetail.type:type_name -> woxqaq.v1.ExportType
+	0,  // 10: woxqaq.v1.DataExportDetail.encoding:type_name -> woxqaq.v1.Encoding
+	5,  // 11: woxqaq.v1.DataExportDetail.exector:type_name -> woxqaq.v1.Exec
+	6,  // 12: woxqaq.v1.SubmitTaskRequest.kind:type_name -> woxqaq.v1.TaskKind
+	12, // 13: woxqaq.v1.SubmitTaskRequest.ded:type_name -> woxqaq.v1.DataExportDetail
+	12, // 14: woxqaq.v1.GetTaskDetailResponse.ded:type_name -> woxqaq.v1.DataExportDetail
+	6,  // 15: woxqaq.v1.ListTaskRequest.kind:type_name -> woxqaq.v1.TaskKind
+	7,  // 16: woxqaq.v1.ListTaskRequest.status:type_name -> woxqaq.v1.TaskStatus
+	8,  // 17: woxqaq.v1.ListTaskRequest.role:type_name -> woxqaq.v1.TaskRole
+	9,  // 18: woxqaq.v1.ListTaskResponse.data:type_name -> woxqaq.v1.TaskListData
+	15, // 19: woxqaq.v1.ProgressService.GetTaskDetail:input_type -> woxqaq.v1.GetTaskDetailRequest
+	21, // 20: woxqaq.v1.ProgressService.ListTaskDetail:input_type -> woxqaq.v1.ListTaskRequest
+	13, // 21: woxqaq.v1.ProgressService.SubmitTask:input_type -> woxqaq.v1.SubmitTaskRequest
+	17, // 22: woxqaq.v1.ProgressService.Approve:input_type -> woxqaq.v1.ApproveRequest
+	19, // 23: woxqaq.v1.ProgressService.Reject:input_type -> woxqaq.v1.RejectRequest
+	16, // 24: woxqaq.v1.ProgressService.GetTaskDetail:output_type -> woxqaq.v1.GetTaskDetailResponse
+	22, // 25: woxqaq.v1.ProgressService.ListTaskDetail:output_type -> woxqaq.v1.ListTaskResponse
+	14, // 26: woxqaq.v1.ProgressService.SubmitTask:output_type -> woxqaq.v1.SubmitTaskResponse
+	18, // 27: woxqaq.v1.ProgressService.Approve:output_type -> woxqaq.v1.ApproveResponse
+	20, // 28: woxqaq.v1.ProgressService.Reject:output_type -> woxqaq.v1.RejectResponse
+	24, // [24:29] is the sub-list for method output_type
+	19, // [19:24] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_v1_progress_service_proto_init() }
@@ -1131,14 +1769,17 @@ func file_v1_progress_service_proto_init() {
 	if File_v1_progress_service_proto != nil {
 		return
 	}
-	file_v1_progress_service_proto_msgTypes[2].OneofWrappers = []any{
+	file_v1_progress_service_proto_msgTypes[0].OneofWrappers = []any{
+		(*TaskListData_Ded)(nil),
+	}
+	file_v1_progress_service_proto_msgTypes[3].OneofWrappers = []any{
 		(*DataExportDetail_Ebs)(nil),
 		(*DataExportDetail_Eatt)(nil),
 	}
-	file_v1_progress_service_proto_msgTypes[3].OneofWrappers = []any{
+	file_v1_progress_service_proto_msgTypes[4].OneofWrappers = []any{
 		(*SubmitTaskRequest_Ded)(nil),
 	}
-	file_v1_progress_service_proto_msgTypes[6].OneofWrappers = []any{
+	file_v1_progress_service_proto_msgTypes[7].OneofWrappers = []any{
 		(*GetTaskDetailResponse_Ded)(nil),
 	}
 	type x struct{}
@@ -1146,8 +1787,8 @@ func file_v1_progress_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_progress_service_proto_rawDesc), len(file_v1_progress_service_proto_rawDesc)),
-			NumEnums:      7,
-			NumMessages:   9,
+			NumEnums:      9,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -5,21 +5,29 @@
 
 - [v1/progress_service.proto](#v1_progress_service-proto)
     - [ApproveRequest](#woxqaq-v1-ApproveRequest)
+    - [ApproveResponse](#woxqaq-v1-ApproveResponse)
     - [DataExportDetail](#woxqaq-v1-DataExportDetail)
     - [ExportAccordingToTable](#woxqaq-v1-ExportAccordingToTable)
     - [ExportAccordingToTable.TableOption](#woxqaq-v1-ExportAccordingToTable-TableOption)
     - [ExportBySQL](#woxqaq-v1-ExportBySQL)
     - [GetTaskDetailRequest](#woxqaq-v1-GetTaskDetailRequest)
     - [GetTaskDetailResponse](#woxqaq-v1-GetTaskDetailResponse)
+    - [ListTaskRequest](#woxqaq-v1-ListTaskRequest)
+    - [ListTaskResponse](#woxqaq-v1-ListTaskResponse)
+    - [RejectRequest](#woxqaq-v1-RejectRequest)
+    - [RejectResponse](#woxqaq-v1-RejectResponse)
     - [SubmitTaskRequest](#woxqaq-v1-SubmitTaskRequest)
     - [SubmitTaskResponse](#woxqaq-v1-SubmitTaskResponse)
+    - [TaskListData](#woxqaq-v1-TaskListData)
   
     - [Encoding](#woxqaq-v1-Encoding)
     - [Exec](#woxqaq-v1-Exec)
     - [ExportContent](#woxqaq-v1-ExportContent)
     - [ExportMethod](#woxqaq-v1-ExportMethod)
     - [ExportType](#woxqaq-v1-ExportType)
-    - [SubmitTaskRequest.TaskKind](#woxqaq-v1-SubmitTaskRequest-TaskKind)
+    - [TaskKind](#woxqaq-v1-TaskKind)
+    - [TaskRole](#woxqaq-v1-TaskRole)
+    - [TaskStatus](#woxqaq-v1-TaskStatus)
     - [TriggerKind](#woxqaq-v1-TriggerKind)
   
     - [ProgressService](#woxqaq-v1-ProgressService)
@@ -49,9 +57,24 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| progress_id | [uint64](#uint64) |  |  |
+| task_id | [uint64](#uint64) |  |  |
 | approver | [string](#string) |  |  |
-| option | [string](#string) |  |  |
+| comment | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-ApproveResponse"></a>
+
+### ApproveResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
 
 
 
@@ -160,6 +183,77 @@
 
 
 
+<a name="woxqaq-v1-ListTaskRequest"></a>
+
+### ListTaskRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| kind | [TaskKind](#woxqaq-v1-TaskKind) |  |  |
+| current | [int32](#int32) |  |  |
+| page_size | [int32](#int32) |  |  |
+| status | [TaskStatus](#woxqaq-v1-TaskStatus) |  |  |
+| dsn | [string](#string) |  |  |
+| role | [TaskRole](#woxqaq-v1-TaskRole) |  |  |
+| task_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-ListTaskResponse"></a>
+
+### ListTaskResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+| data | [TaskListData](#woxqaq-v1-TaskListData) | repeated |  |
+| page_size | [int32](#int32) |  |  |
+| total | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-RejectRequest"></a>
+
+### RejectRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [uint64](#uint64) |  |  |
+| approver | [string](#string) |  |  |
+| comment | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-RejectResponse"></a>
+
+### RejectResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="woxqaq-v1-SubmitTaskRequest"></a>
 
 ### SubmitTaskRequest
@@ -169,7 +263,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
-| kind | [SubmitTaskRequest.TaskKind](#woxqaq-v1-SubmitTaskRequest-TaskKind) |  |  |
+| kind | [TaskKind](#woxqaq-v1-TaskKind) |  |  |
 | dsn | [string](#string) |  | TODO: datasource abstract |
 | ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
 
@@ -188,6 +282,29 @@
 | ----- | ---- | ----- | ----------- |
 | ok | [bool](#bool) |  |  |
 | task_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-TaskListData"></a>
+
+### TaskListData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
+| dsn | [string](#string) |  |  |
+| kind | [TaskKind](#woxqaq-v1-TaskKind) |  |  |
+| database | [string](#string) |  |  |
+| create_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| update_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| submitter | [string](#string) |  |  |
+| status | [TaskStatus](#woxqaq-v1-TaskStatus) |  |  |
+| ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
 
 
 
@@ -263,9 +380,9 @@
 
 
 
-<a name="woxqaq-v1-SubmitTaskRequest-TaskKind"></a>
+<a name="woxqaq-v1-TaskKind"></a>
 
-### SubmitTaskRequest.TaskKind
+### TaskKind
 
 
 | Name | Number | Description |
@@ -274,6 +391,40 @@
 | TASK_KIND_DATA_IMPORT | 1 |  |
 | TASK_KIND_DATA_EXPORT | 2 |  |
 | TASK_KIND_DATA_GENERATE | 3 |  |
+
+
+
+<a name="woxqaq-v1-TaskRole"></a>
+
+### TaskRole
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TASK_ROLE_UNSPECIFIED | 0 |  |
+| TASK_ROLE_COMMITTER | 1 |  |
+| TASK_ROLE_TO_APPROVE | 2 |  |
+| TASK_ROLE_TO_EXECUTE | 3 |  |
+| TASK_ROLE_APPROVED | 4 |  |
+| TASK_ROLE_EXECUTED | 5 |  |
+
+
+
+<a name="woxqaq-v1-TaskStatus"></a>
+
+### TaskStatus
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TASK_STATUS_UNSPECIFIED | 0 |  |
+| TASK_STATUS_NOT_START | 1 |  |
+| TASK_STATUS_PRE_CHECK | 2 |  |
+| TASK_STATUS_PRE_CHECK_SUCCESS | 3 |  |
+| TASK_STATUS_PRE_CHECK_FAILED | 4 |  |
+| TASK_STATUS_APPROVING | 5 |  |
+| TASK_STATUS_APPROVED | 6 |  |
+| TASK_STATUS_NOT_APPROVED | 7 |  |
 
 
 
@@ -302,7 +453,10 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetTaskDetail | [GetTaskDetailRequest](#woxqaq-v1-GetTaskDetailRequest) | [GetTaskDetailResponse](#woxqaq-v1-GetTaskDetailResponse) |  |
+| ListTaskDetail | [ListTaskRequest](#woxqaq-v1-ListTaskRequest) | [ListTaskResponse](#woxqaq-v1-ListTaskResponse) |  |
 | SubmitTask | [SubmitTaskRequest](#woxqaq-v1-SubmitTaskRequest) | [SubmitTaskResponse](#woxqaq-v1-SubmitTaskResponse) |  |
+| Approve | [ApproveRequest](#woxqaq-v1-ApproveRequest) | [ApproveResponse](#woxqaq-v1-ApproveResponse) |  |
+| Reject | [RejectRequest](#woxqaq-v1-RejectRequest) | [RejectResponse](#woxqaq-v1-RejectResponse) |  |
 
  
 

@@ -19,8 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProgressService_GetTaskDetail_FullMethodName = "/woxqaq.v1.ProgressService/GetTaskDetail"
-	ProgressService_SubmitTask_FullMethodName    = "/woxqaq.v1.ProgressService/SubmitTask"
+	ProgressService_GetTaskDetail_FullMethodName  = "/woxqaq.v1.ProgressService/GetTaskDetail"
+	ProgressService_ListTaskDetail_FullMethodName = "/woxqaq.v1.ProgressService/ListTaskDetail"
+	ProgressService_SubmitTask_FullMethodName     = "/woxqaq.v1.ProgressService/SubmitTask"
+	ProgressService_Approve_FullMethodName        = "/woxqaq.v1.ProgressService/Approve"
+	ProgressService_Reject_FullMethodName         = "/woxqaq.v1.ProgressService/Reject"
 )
 
 // ProgressServiceClient is the client API for ProgressService service.
@@ -28,7 +31,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProgressServiceClient interface {
 	GetTaskDetail(ctx context.Context, in *GetTaskDetailRequest, opts ...grpc.CallOption) (*GetTaskDetailResponse, error)
+	ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
 	SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error)
+	Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error)
+	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error)
 }
 
 type progressServiceClient struct {
@@ -49,10 +55,40 @@ func (c *progressServiceClient) GetTaskDetail(ctx context.Context, in *GetTaskDe
 	return out, nil
 }
 
+func (c *progressServiceClient) ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaskResponse)
+	err := c.cc.Invoke(ctx, ProgressService_ListTaskDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *progressServiceClient) SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SubmitTaskResponse)
 	err := c.cc.Invoke(ctx, ProgressService_SubmitTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *progressServiceClient) Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveResponse)
+	err := c.cc.Invoke(ctx, ProgressService_Approve_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *progressServiceClient) Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RejectResponse)
+	err := c.cc.Invoke(ctx, ProgressService_Reject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +100,10 @@ func (c *progressServiceClient) SubmitTask(ctx context.Context, in *SubmitTaskRe
 // for forward compatibility.
 type ProgressServiceServer interface {
 	GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error)
+	ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
 	SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error)
+	Approve(context.Context, *ApproveRequest) (*ApproveResponse, error)
+	Reject(context.Context, *RejectRequest) (*RejectResponse, error)
 	mustEmbedUnimplementedProgressServiceServer()
 }
 
@@ -78,8 +117,17 @@ type UnimplementedProgressServiceServer struct{}
 func (UnimplementedProgressServiceServer) GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskDetail not implemented")
 }
+func (UnimplementedProgressServiceServer) ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTaskDetail not implemented")
+}
 func (UnimplementedProgressServiceServer) SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitTask not implemented")
+}
+func (UnimplementedProgressServiceServer) Approve(context.Context, *ApproveRequest) (*ApproveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Approve not implemented")
+}
+func (UnimplementedProgressServiceServer) Reject(context.Context, *RejectRequest) (*RejectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Reject not implemented")
 }
 func (UnimplementedProgressServiceServer) mustEmbedUnimplementedProgressServiceServer() {}
 func (UnimplementedProgressServiceServer) testEmbeddedByValue()                         {}
@@ -120,6 +168,24 @@ func _ProgressService_GetTaskDetail_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProgressService_ListTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProgressServiceServer).ListTaskDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProgressService_ListTaskDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProgressServiceServer).ListTaskDetail(ctx, req.(*ListTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProgressService_SubmitTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SubmitTaskRequest)
 	if err := dec(in); err != nil {
@@ -138,6 +204,42 @@ func _ProgressService_SubmitTask_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProgressService_Approve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProgressServiceServer).Approve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProgressService_Approve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProgressServiceServer).Approve(ctx, req.(*ApproveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProgressService_Reject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProgressServiceServer).Reject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProgressService_Reject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProgressServiceServer).Reject(ctx, req.(*RejectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProgressService_ServiceDesc is the grpc.ServiceDesc for ProgressService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -150,8 +252,20 @@ var ProgressService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProgressService_GetTaskDetail_Handler,
 		},
 		{
+			MethodName: "ListTaskDetail",
+			Handler:    _ProgressService_ListTaskDetail_Handler,
+		},
+		{
 			MethodName: "SubmitTask",
 			Handler:    _ProgressService_SubmitTask_Handler,
+		},
+		{
+			MethodName: "Approve",
+			Handler:    _ProgressService_Approve_Handler,
+		},
+		{
+			MethodName: "Reject",
+			Handler:    _ProgressService_Reject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

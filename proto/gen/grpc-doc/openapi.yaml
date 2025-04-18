@@ -24,6 +24,37 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1/task/approve:
+        put:
+            tags:
+                - ProgressService
+            operationId: ProgressService_Approve
+            parameters:
+                - name: taskId
+                  in: query
+                  schema:
+                    type: string
+                - name: approver
+                  in: query
+                  schema:
+                    type: string
+                - name: comment
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApproveResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /v1/task/detail:
         get:
             tags:
@@ -41,6 +72,37 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/GetTaskDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/task/reject:
+        put:
+            tags:
+                - ProgressService
+            operationId: ProgressService_Reject
+            parameters:
+                - name: taskId
+                  in: query
+                  schema:
+                    type: string
+                - name: approver
+                  in: query
+                  schema:
+                    type: string
+                - name: comment
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RejectResponse'
                 default:
                     description: Default error response
                     content:
@@ -139,8 +201,86 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1/tasks:
+        get:
+            tags:
+                - ProgressService
+            operationId: ProgressService_ListTaskDetail
+            parameters:
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+                - name: current
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: status
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_STATUS_UNSPECIFIED
+                        - TASK_STATUS_NOT_START
+                        - TASK_STATUS_PRE_CHECK
+                        - TASK_STATUS_PRE_CHECK_SUCCESS
+                        - TASK_STATUS_PRE_CHECK_FAILED
+                        - TASK_STATUS_APPROVING
+                        - TASK_STATUS_APPROVED
+                        - TASK_STATUS_NOT_APPROVED
+                    type: string
+                    format: enum
+                - name: dsn
+                  in: query
+                  schema:
+                    type: string
+                - name: role
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_ROLE_UNSPECIFIED
+                        - TASK_ROLE_COMMITTER
+                        - TASK_ROLE_TO_APPROVE
+                        - TASK_ROLE_TO_EXECUTE
+                        - TASK_ROLE_APPROVED
+                        - TASK_ROLE_EXECUTED
+                    type: string
+                    format: enum
+                - name: taskId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListTaskResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
+        ApproveResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
         DataExportDetail:
             type: object
             properties:
@@ -224,11 +364,31 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        ListTaskResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TaskListData'
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
         PreSignResponse:
             type: object
             properties:
                 url:
                     type: string
+        RejectResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
         Status:
             type: object
             properties:
@@ -252,6 +412,45 @@ components:
                     type: boolean
                 taskId:
                     type: string
+        TaskListData:
+            type: object
+            properties:
+                id:
+                    type: string
+                dsn:
+                    type: string
+                kind:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+                database:
+                    type: string
+                createTime:
+                    type: string
+                    format: date-time
+                updateTime:
+                    type: string
+                    format: date-time
+                submitter:
+                    type: string
+                status:
+                    enum:
+                        - TASK_STATUS_UNSPECIFIED
+                        - TASK_STATUS_NOT_START
+                        - TASK_STATUS_PRE_CHECK
+                        - TASK_STATUS_PRE_CHECK_SUCCESS
+                        - TASK_STATUS_PRE_CHECK_FAILED
+                        - TASK_STATUS_APPROVING
+                        - TASK_STATUS_APPROVED
+                        - TASK_STATUS_NOT_APPROVED
+                    type: string
+                    format: enum
+                ded:
+                    $ref: '#/components/schemas/DataExportDetail'
 tags:
     - name: ProgressService
     - name: UploadService
