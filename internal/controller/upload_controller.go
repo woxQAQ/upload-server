@@ -12,22 +12,18 @@ import (
 	"github.com/panjf2000/ants/v2"
 
 	"github.com/woxQAQ/upload-server/internal/models"
-	stores "github.com/woxQAQ/upload-server/internal/stores/progress"
+	"github.com/woxQAQ/upload-server/internal/stores/progress"
 	"github.com/woxQAQ/upload-server/internal/types"
 	"github.com/woxQAQ/upload-server/pkg/constants"
 )
 
-type Controller interface {
-	Register(g *gin.RouterGroup)
-}
-
 type uploadController struct {
 	mc   *minio.Client
-	ps   stores.ProgressStore
+	ps   progress.ProgressStore
 	pool *ants.Pool
 }
 
-func NewUploadController(minio *minio.Client, ps stores.ProgressStore) Controller {
+func NewUploadController(minio *minio.Client, ps progress.ProgressStore) Controller {
 	pool, err := ants.NewPool(
 		1000,
 		ants.WithPanicHandler(func(a any) {
@@ -46,22 +42,28 @@ func NewUploadController(minio *minio.Client, ps stores.ProgressStore) Controlle
 func (u *uploadController) Register(e *gin.RouterGroup) {
 	e.GET("/presign", u.Presign)
 	e.POST("/approve", u.Approve)
-	e.POST("/start", u.Start)
+	e.POST("/exec", u.Exec)
 }
 
-func (u *uploadController) Start(c *gin.Context) {
-
+func (u *uploadController) Exec(c *gin.Context) {
+	ctx := c.Request.Context()
+	var req ExecRequest
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
 }
 
 // Approve godoc
-// @Summary approve a progress
-// @Description approve progresss
-// @Tags upload
-// @Accept json
-// @Produce json
-// @Success 200
-// @Param req body ApproveRequest false "request body"
-// @Router /api/v1/approve [post]
+//
+//	@Summary		approve a progress
+//	@Description	approve progresss
+//	@Tags			upload
+//	@Accept			json
+//	@Produce		json
+//	@Success		200
+//	@Param			req	body	ApproveRequest	false	"request body"
+//	@Router			/api/v1/approve [post]
 func (u *uploadController) Approve(c *gin.Context) {
 	ctx := c.Request.Context()
 	var req ApproveRequest
@@ -70,7 +72,7 @@ func (u *uploadController) Approve(c *gin.Context) {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}
 
-	err = u.ps.ApproveProgress(ctx, stores.ApproveOption{
+	err = u.ps.ApproveProgress(ctx, progress.ApproveOption{
 		Id:       req.ProgressId,
 		Approver: req.Approver,
 		Opinion:  req.Opinion,
@@ -94,14 +96,15 @@ func (u *uploadController) Approve(c *gin.Context) {
 }
 
 // Presign godoc
-// @Summary presign a data file
-// @Description presign from oss
-// @Tags upload
-// @Accept json
-// @Produce json
-// @Success 200
-// @Param req body PresignRequest false "request body"
-// @Router /api/v1/presign [get]
+//
+//	@Summary		presign a data file
+//	@Description	presign from oss
+//	@Tags			upload
+//	@Accept			json
+//	@Produce		json
+//	@Success		200
+//	@Param			req	body	PresignRequest	false	"request body"
+//	@Router			/api/v1/presign [get]
 func (u *uploadController) Presign(c *gin.Context) {
 	ctx := c.Request.Context()
 	var req PresignRequest

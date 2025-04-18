@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package woxqaq.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "generated/v1";
+
+message PreSignRequest {}
+
+message PreSignResponse {
+    string url = 1;
+}
+
+service UploadService {
+    rpc PreSign(PreSignRequest) returns (PreSignResponse) {
+        option (google.api.http) = {
+            get: "/v1/presign",
+        };
+    };
+}
