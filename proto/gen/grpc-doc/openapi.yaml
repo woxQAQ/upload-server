@@ -27,8 +27,8 @@ paths:
     /v1/task/approve:
         put:
             tags:
-                - ProgressService
-            operationId: ProgressService_Approve
+                - TaskService
+            operationId: TaskService_Approve
             parameters:
                 - name: taskId
                   in: query
@@ -58,8 +58,8 @@ paths:
     /v1/task/detail:
         get:
             tags:
-                - ProgressService
-            operationId: ProgressService_GetTaskDetail
+                - TaskService
+            operationId: TaskService_GetTaskDetail
             parameters:
                 - name: taskId
                   in: query
@@ -81,8 +81,8 @@ paths:
     /v1/task/reject:
         put:
             tags:
-                - ProgressService
-            operationId: ProgressService_Reject
+                - TaskService
+            operationId: TaskService_Reject
             parameters:
                 - name: taskId
                   in: query
@@ -112,8 +112,8 @@ paths:
     /v1/task/submit:
         post:
             tags:
-                - ProgressService
-            operationId: ProgressService_SubmitTask
+                - TaskService
+            operationId: TaskService_SubmitTask
             parameters:
                 - name: name
                   in: query
@@ -204,8 +204,8 @@ paths:
     /v1/tasks:
         get:
             tags:
-                - ProgressService
-            operationId: ProgressService_ListTaskDetail
+                - TaskService
+            operationId: TaskService_ListTaskDetail
             parameters:
                 - name: kind
                   in: query
@@ -452,5 +452,5 @@ components:
                 ded:
                     $ref: '#/components/schemas/DataExportDetail'
 tags:
-    - name: ProgressService
+    - name: TaskService
     - name: UploadService

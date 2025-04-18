@@ -30,7 +30,7 @@
     - [TaskStatus](#woxqaq-v1-TaskStatus)
     - [TriggerKind](#woxqaq-v1-TriggerKind)
   
-    - [ProgressService](#woxqaq-v1-ProgressService)
+    - [TaskService](#woxqaq-v1-TaskService)
   
 - [v1/upload_service.proto](#v1_upload_service-proto)
     - [PreSignRequest](#woxqaq-v1-PreSignRequest)
@@ -445,9 +445,9 @@
  
 
 
-<a name="woxqaq-v1-ProgressService"></a>
+<a name="woxqaq-v1-TaskService"></a>
 
-### ProgressService
+### TaskService
 
 
 | Method Name | Request Type | Response Type | Description |

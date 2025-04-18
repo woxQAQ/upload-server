@@ -179,7 +179,7 @@ message ListTaskResponse {
     int32 total = 4;
 }
 
-service ProgressService { 
+service TaskService { 
     rpc GetTaskDetail(GetTaskDetailRequest) returns (GetTaskDetailResponse) {
         option (google.api.http) = {
             get: "/v1/task/detail",

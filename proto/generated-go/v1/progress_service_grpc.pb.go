@@ -19,17 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProgressService_GetTaskDetail_FullMethodName  = "/woxqaq.v1.ProgressService/GetTaskDetail"
-	ProgressService_ListTaskDetail_FullMethodName = "/woxqaq.v1.ProgressService/ListTaskDetail"
-	ProgressService_SubmitTask_FullMethodName     = "/woxqaq.v1.ProgressService/SubmitTask"
-	ProgressService_Approve_FullMethodName        = "/woxqaq.v1.ProgressService/Approve"
-	ProgressService_Reject_FullMethodName         = "/woxqaq.v1.ProgressService/Reject"
+	TaskService_GetTaskDetail_FullMethodName  = "/woxqaq.v1.TaskService/GetTaskDetail"
+	TaskService_ListTaskDetail_FullMethodName = "/woxqaq.v1.TaskService/ListTaskDetail"
+	TaskService_SubmitTask_FullMethodName     = "/woxqaq.v1.TaskService/SubmitTask"
+	TaskService_Approve_FullMethodName        = "/woxqaq.v1.TaskService/Approve"
+	TaskService_Reject_FullMethodName         = "/woxqaq.v1.TaskService/Reject"
 )
 
-// ProgressServiceClient is the client API for ProgressService service.
+// TaskServiceClient is the client API for TaskService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProgressServiceClient interface {
+type TaskServiceClient interface {
 	GetTaskDetail(ctx context.Context, in *GetTaskDetailRequest, opts ...grpc.CallOption) (*GetTaskDetailResponse, error)
 	ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
 	SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error)
@@ -37,235 +37,235 @@ type ProgressServiceClient interface {
 	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error)
 }
 
-type progressServiceClient struct {
+type taskServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewProgressServiceClient(cc grpc.ClientConnInterface) ProgressServiceClient {
-	return &progressServiceClient{cc}
+func NewTaskServiceClient(cc grpc.ClientConnInterface) TaskServiceClient {
+	return &taskServiceClient{cc}
 }
 
-func (c *progressServiceClient) GetTaskDetail(ctx context.Context, in *GetTaskDetailRequest, opts ...grpc.CallOption) (*GetTaskDetailResponse, error) {
+func (c *taskServiceClient) GetTaskDetail(ctx context.Context, in *GetTaskDetailRequest, opts ...grpc.CallOption) (*GetTaskDetailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTaskDetailResponse)
-	err := c.cc.Invoke(ctx, ProgressService_GetTaskDetail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_GetTaskDetail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *progressServiceClient) ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
+func (c *taskServiceClient) ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTaskResponse)
-	err := c.cc.Invoke(ctx, ProgressService_ListTaskDetail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_ListTaskDetail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *progressServiceClient) SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error) {
+func (c *taskServiceClient) SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SubmitTaskResponse)
-	err := c.cc.Invoke(ctx, ProgressService_SubmitTask_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_SubmitTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *progressServiceClient) Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error) {
+func (c *taskServiceClient) Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ApproveResponse)
-	err := c.cc.Invoke(ctx, ProgressService_Approve_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_Approve_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *progressServiceClient) Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error) {
+func (c *taskServiceClient) Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RejectResponse)
-	err := c.cc.Invoke(ctx, ProgressService_Reject_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_Reject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ProgressServiceServer is the server API for ProgressService service.
-// All implementations must embed UnimplementedProgressServiceServer
+// TaskServiceServer is the server API for TaskService service.
+// All implementations must embed UnimplementedTaskServiceServer
 // for forward compatibility.
-type ProgressServiceServer interface {
+type TaskServiceServer interface {
 	GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error)
 	ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
 	SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error)
 	Approve(context.Context, *ApproveRequest) (*ApproveResponse, error)
 	Reject(context.Context, *RejectRequest) (*RejectResponse, error)
-	mustEmbedUnimplementedProgressServiceServer()
+	mustEmbedUnimplementedTaskServiceServer()
 }
 
-// UnimplementedProgressServiceServer must be embedded to have
+// UnimplementedTaskServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedProgressServiceServer struct{}
+type UnimplementedTaskServiceServer struct{}
 
-func (UnimplementedProgressServiceServer) GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error) {
+func (UnimplementedTaskServiceServer) GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskDetail not implemented")
 }
-func (UnimplementedProgressServiceServer) ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
+func (UnimplementedTaskServiceServer) ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTaskDetail not implemented")
 }
-func (UnimplementedProgressServiceServer) SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error) {
+func (UnimplementedTaskServiceServer) SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitTask not implemented")
 }
-func (UnimplementedProgressServiceServer) Approve(context.Context, *ApproveRequest) (*ApproveResponse, error) {
+func (UnimplementedTaskServiceServer) Approve(context.Context, *ApproveRequest) (*ApproveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Approve not implemented")
 }
-func (UnimplementedProgressServiceServer) Reject(context.Context, *RejectRequest) (*RejectResponse, error) {
+func (UnimplementedTaskServiceServer) Reject(context.Context, *RejectRequest) (*RejectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Reject not implemented")
 }
-func (UnimplementedProgressServiceServer) mustEmbedUnimplementedProgressServiceServer() {}
-func (UnimplementedProgressServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
+func (UnimplementedTaskServiceServer) testEmbeddedByValue()                     {}
 
-// UnsafeProgressServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProgressServiceServer will
+// UnsafeTaskServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TaskServiceServer will
 // result in compilation errors.
-type UnsafeProgressServiceServer interface {
-	mustEmbedUnimplementedProgressServiceServer()
+type UnsafeTaskServiceServer interface {
+	mustEmbedUnimplementedTaskServiceServer()
 }
 
-func RegisterProgressServiceServer(s grpc.ServiceRegistrar, srv ProgressServiceServer) {
-	// If the following call pancis, it indicates UnimplementedProgressServiceServer was
+func RegisterTaskServiceServer(s grpc.ServiceRegistrar, srv TaskServiceServer) {
+	// If the following call pancis, it indicates UnimplementedTaskServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ProgressService_ServiceDesc, srv)
+	s.RegisterService(&TaskService_ServiceDesc, srv)
 }
 
-func _ProgressService_GetTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_GetTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTaskDetailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProgressServiceServer).GetTaskDetail(ctx, in)
+		return srv.(TaskServiceServer).GetTaskDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProgressService_GetTaskDetail_FullMethodName,
+		FullMethod: TaskService_GetTaskDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProgressServiceServer).GetTaskDetail(ctx, req.(*GetTaskDetailRequest))
+		return srv.(TaskServiceServer).GetTaskDetail(ctx, req.(*GetTaskDetailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProgressService_ListTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_ListTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProgressServiceServer).ListTaskDetail(ctx, in)
+		return srv.(TaskServiceServer).ListTaskDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProgressService_ListTaskDetail_FullMethodName,
+		FullMethod: TaskService_ListTaskDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProgressServiceServer).ListTaskDetail(ctx, req.(*ListTaskRequest))
+		return srv.(TaskServiceServer).ListTaskDetail(ctx, req.(*ListTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProgressService_SubmitTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_SubmitTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SubmitTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProgressServiceServer).SubmitTask(ctx, in)
+		return srv.(TaskServiceServer).SubmitTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProgressService_SubmitTask_FullMethodName,
+		FullMethod: TaskService_SubmitTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProgressServiceServer).SubmitTask(ctx, req.(*SubmitTaskRequest))
+		return srv.(TaskServiceServer).SubmitTask(ctx, req.(*SubmitTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProgressService_Approve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_Approve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ApproveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProgressServiceServer).Approve(ctx, in)
+		return srv.(TaskServiceServer).Approve(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProgressService_Approve_FullMethodName,
+		FullMethod: TaskService_Approve_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProgressServiceServer).Approve(ctx, req.(*ApproveRequest))
+		return srv.(TaskServiceServer).Approve(ctx, req.(*ApproveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProgressService_Reject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_Reject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RejectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProgressServiceServer).Reject(ctx, in)
+		return srv.(TaskServiceServer).Reject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProgressService_Reject_FullMethodName,
+		FullMethod: TaskService_Reject_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProgressServiceServer).Reject(ctx, req.(*RejectRequest))
+		return srv.(TaskServiceServer).Reject(ctx, req.(*RejectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ProgressService_ServiceDesc is the grpc.ServiceDesc for ProgressService service.
+// TaskService_ServiceDesc is the grpc.ServiceDesc for TaskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ProgressService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "woxqaq.v1.ProgressService",
-	HandlerType: (*ProgressServiceServer)(nil),
+var TaskService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "woxqaq.v1.TaskService",
+	HandlerType: (*TaskServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetTaskDetail",
-			Handler:    _ProgressService_GetTaskDetail_Handler,
+			Handler:    _TaskService_GetTaskDetail_Handler,
 		},
 		{
 			MethodName: "ListTaskDetail",
-			Handler:    _ProgressService_ListTaskDetail_Handler,
+			Handler:    _TaskService_ListTaskDetail_Handler,
 		},
 		{
 			MethodName: "SubmitTask",
-			Handler:    _ProgressService_SubmitTask_Handler,
+			Handler:    _TaskService_SubmitTask_Handler,
 		},
 		{
 			MethodName: "Approve",
-			Handler:    _ProgressService_Approve_Handler,
+			Handler:    _TaskService_Approve_Handler,
 		},
 		{
 			MethodName: "Reject",
-			Handler:    _ProgressService_Reject_Handler,
+			Handler:    _TaskService_Reject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

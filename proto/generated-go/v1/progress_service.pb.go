@@ -1677,8 +1677,8 @@ const file_v1_progress_service_proto_rawDesc = "" +
 	"\x14TASK_ROLE_TO_APPROVE\x10\x02\x12\x18\n" +
 	"\x14TASK_ROLE_TO_EXECUTE\x10\x03\x12\x16\n" +
 	"\x12TASK_ROLE_APPROVED\x10\x04\x12\x16\n" +
-	"\x12TASK_ROLE_EXECUTED\x10\x052\xf4\x03\n" +
-	"\x0fProgressService\x12k\n" +
+	"\x12TASK_ROLE_EXECUTED\x10\x052\xf0\x03\n" +
+	"\vTaskService\x12k\n" +
 	"\rGetTaskDetail\x12\x1f.woxqaq.v1.GetTaskDetailRequest\x1a .woxqaq.v1.GetTaskDetailResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/task/detail\x12\\\n" +
 	"\x0eListTaskDetail\x12\x1a.woxqaq.v1.ListTaskRequest\x1a\x1b.woxqaq.v1.ListTaskResponse\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/v1/tasks\x12b\n" +
 	"\n" +
@@ -1747,16 +1747,16 @@ var file_v1_progress_service_proto_depIdxs = []int32{
 	7,  // 16: woxqaq.v1.ListTaskRequest.status:type_name -> woxqaq.v1.TaskStatus
 	8,  // 17: woxqaq.v1.ListTaskRequest.role:type_name -> woxqaq.v1.TaskRole
 	9,  // 18: woxqaq.v1.ListTaskResponse.data:type_name -> woxqaq.v1.TaskListData
-	15, // 19: woxqaq.v1.ProgressService.GetTaskDetail:input_type -> woxqaq.v1.GetTaskDetailRequest
-	21, // 20: woxqaq.v1.ProgressService.ListTaskDetail:input_type -> woxqaq.v1.ListTaskRequest
-	13, // 21: woxqaq.v1.ProgressService.SubmitTask:input_type -> woxqaq.v1.SubmitTaskRequest
-	17, // 22: woxqaq.v1.ProgressService.Approve:input_type -> woxqaq.v1.ApproveRequest
-	19, // 23: woxqaq.v1.ProgressService.Reject:input_type -> woxqaq.v1.RejectRequest
-	16, // 24: woxqaq.v1.ProgressService.GetTaskDetail:output_type -> woxqaq.v1.GetTaskDetailResponse
-	22, // 25: woxqaq.v1.ProgressService.ListTaskDetail:output_type -> woxqaq.v1.ListTaskResponse
-	14, // 26: woxqaq.v1.ProgressService.SubmitTask:output_type -> woxqaq.v1.SubmitTaskResponse
-	18, // 27: woxqaq.v1.ProgressService.Approve:output_type -> woxqaq.v1.ApproveResponse
-	20, // 28: woxqaq.v1.ProgressService.Reject:output_type -> woxqaq.v1.RejectResponse
+	15, // 19: woxqaq.v1.TaskService.GetTaskDetail:input_type -> woxqaq.v1.GetTaskDetailRequest
+	21, // 20: woxqaq.v1.TaskService.ListTaskDetail:input_type -> woxqaq.v1.ListTaskRequest
+	13, // 21: woxqaq.v1.TaskService.SubmitTask:input_type -> woxqaq.v1.SubmitTaskRequest
+	17, // 22: woxqaq.v1.TaskService.Approve:input_type -> woxqaq.v1.ApproveRequest
+	19, // 23: woxqaq.v1.TaskService.Reject:input_type -> woxqaq.v1.RejectRequest
+	16, // 24: woxqaq.v1.TaskService.GetTaskDetail:output_type -> woxqaq.v1.GetTaskDetailResponse
+	22, // 25: woxqaq.v1.TaskService.ListTaskDetail:output_type -> woxqaq.v1.ListTaskResponse
+	14, // 26: woxqaq.v1.TaskService.SubmitTask:output_type -> woxqaq.v1.SubmitTaskResponse
+	18, // 27: woxqaq.v1.TaskService.Approve:output_type -> woxqaq.v1.ApproveResponse
+	20, // 28: woxqaq.v1.TaskService.Reject:output_type -> woxqaq.v1.RejectResponse
 	24, // [24:29] is the sub-list for method output_type
 	19, // [19:24] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
