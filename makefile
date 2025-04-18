@@ -12,3 +12,7 @@ vet: ## Run go vet against code.
 module: ## Run go mod tidy->verify against go modules.
 	go mod tidy
 	go mod verify
+
+.PHONY: generate
+generate:
+	cd proto && buf generate 
