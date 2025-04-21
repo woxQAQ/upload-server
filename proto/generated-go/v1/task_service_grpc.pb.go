@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TaskService_GetTaskDetail_FullMethodName  = "/woxqaq.v1.TaskService/GetTaskDetail"
-	TaskService_ListTaskDetail_FullMethodName = "/woxqaq.v1.TaskService/ListTaskDetail"
-	TaskService_SubmitTask_FullMethodName     = "/woxqaq.v1.TaskService/SubmitTask"
-	TaskService_Approve_FullMethodName        = "/woxqaq.v1.TaskService/Approve"
-	TaskService_Reject_FullMethodName         = "/woxqaq.v1.TaskService/Reject"
+	TaskService_GetTaskDetail_FullMethodName = "/woxqaq.v1.TaskService/GetTaskDetail"
+	TaskService_ListTask_FullMethodName      = "/woxqaq.v1.TaskService/ListTask"
+	TaskService_SubmitTask_FullMethodName    = "/woxqaq.v1.TaskService/SubmitTask"
+	TaskService_Approve_FullMethodName       = "/woxqaq.v1.TaskService/Approve"
+	TaskService_Reject_FullMethodName        = "/woxqaq.v1.TaskService/Reject"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -31,7 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TaskServiceClient interface {
 	GetTaskDetail(ctx context.Context, in *GetTaskDetailRequest, opts ...grpc.CallOption) (*GetTaskDetailResponse, error)
-	ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
+	ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
 	SubmitTask(ctx context.Context, in *SubmitTaskRequest, opts ...grpc.CallOption) (*SubmitTaskResponse, error)
 	Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error)
 	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error)
@@ -55,10 +55,10 @@ func (c *taskServiceClient) GetTaskDetail(ctx context.Context, in *GetTaskDetail
 	return out, nil
 }
 
-func (c *taskServiceClient) ListTaskDetail(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
+func (c *taskServiceClient) ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTaskResponse)
-	err := c.cc.Invoke(ctx, TaskService_ListTaskDetail_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_ListTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (c *taskServiceClient) Reject(ctx context.Context, in *RejectRequest, opts 
 // for forward compatibility.
 type TaskServiceServer interface {
 	GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error)
-	ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
+	ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
 	SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error)
 	Approve(context.Context, *ApproveRequest) (*ApproveResponse, error)
 	Reject(context.Context, *RejectRequest) (*RejectResponse, error)
@@ -117,8 +117,8 @@ type UnimplementedTaskServiceServer struct{}
 func (UnimplementedTaskServiceServer) GetTaskDetail(context.Context, *GetTaskDetailRequest) (*GetTaskDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskDetail not implemented")
 }
-func (UnimplementedTaskServiceServer) ListTaskDetail(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTaskDetail not implemented")
+func (UnimplementedTaskServiceServer) ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTask not implemented")
 }
 func (UnimplementedTaskServiceServer) SubmitTask(context.Context, *SubmitTaskRequest) (*SubmitTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitTask not implemented")
@@ -168,20 +168,20 @@ func _TaskService_GetTaskDetail_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_ListTaskDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_ListTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).ListTaskDetail(ctx, in)
+		return srv.(TaskServiceServer).ListTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_ListTaskDetail_FullMethodName,
+		FullMethod: TaskService_ListTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).ListTaskDetail(ctx, req.(*ListTaskRequest))
+		return srv.(TaskServiceServer).ListTask(ctx, req.(*ListTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -252,8 +252,8 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_GetTaskDetail_Handler,
 		},
 		{
-			MethodName: "ListTaskDetail",
-			Handler:    _TaskService_ListTaskDetail_Handler,
+			MethodName: "ListTask",
+			Handler:    _TaskService_ListTask_Handler,
 		},
 		{
 			MethodName: "SubmitTask",

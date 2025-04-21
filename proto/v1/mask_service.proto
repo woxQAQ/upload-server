@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package woxqaq.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "generated/v1";
+
+
+

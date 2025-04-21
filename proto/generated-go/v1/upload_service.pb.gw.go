@@ -39,8 +39,25 @@ func request_UploadService_PreSign_0(ctx context.Context, marshaler runtime.Mars
 	var (
 		protoReq PreSignRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	io.Copy(io.Discard, req.Body)
+	val, ok := pathParams["org_name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "org_name")
+	}
+	protoReq.OrgName, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "org_name", err)
+	}
+	val, ok = pathParams["instance_name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "instance_name")
+	}
+	protoReq.InstanceName, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "instance_name", err)
+	}
 	msg, err := client.PreSign(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -49,7 +66,24 @@ func local_request_UploadService_PreSign_0(ctx context.Context, marshaler runtim
 	var (
 		protoReq PreSignRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
+	val, ok := pathParams["org_name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "org_name")
+	}
+	protoReq.OrgName, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "org_name", err)
+	}
+	val, ok = pathParams["instance_name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "instance_name")
+	}
+	protoReq.InstanceName, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "instance_name", err)
+	}
 	msg, err := server.PreSign(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -66,7 +100,7 @@ func RegisterUploadServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/woxqaq.v1.UploadService/PreSign", runtime.WithHTTPPathPattern("/v1/presign"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/woxqaq.v1.UploadService/PreSign", runtime.WithHTTPPathPattern("/v1/org/{org_name}/instance/{instance_name}/presign"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -124,7 +158,7 @@ func RegisterUploadServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/woxqaq.v1.UploadService/PreSign", runtime.WithHTTPPathPattern("/v1/presign"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/woxqaq.v1.UploadService/PreSign", runtime.WithHTTPPathPattern("/v1/org/{org_name}/instance/{instance_name}/presign"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -141,7 +175,7 @@ func RegisterUploadServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_UploadService_PreSign_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "presign"}, ""))
+	pattern_UploadService_PreSign_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "org", "org_name", "instance", "instance_name", "presign"}, ""))
 )
 
 var (

@@ -1,7 +1,11 @@
 syntax = "proto3";
 package woxqaq.v1;
+
 import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/protobuf/timestamp.proto";
+
 option go_package = "generated/v1";
 
 enum Encoding {
@@ -68,7 +72,18 @@ enum TaskRole {
   TASK_ROLE_EXECUTED = 5;
 }
 
-message TaskListData {
+message TaskDetail {
+  DataExportDetail ded = 1;
+}
+
+message Task {
+  option (google.api.resource) = {
+    type: "woxQAQ/Issue"
+    pattern: "org/{orgName}/instance/{instanceName}/task/{taskId}"
+    pattern: "org/{orgName}/instance/{instanceName}"
+    pattern: "org/{orgName}/task/{taskId}"
+    pattern: "org/{orgName}"
+  };
   string id = 1;
   string dsn = 2;
   TaskKind kind = 3;
@@ -77,9 +92,7 @@ message TaskListData {
   google.protobuf.Timestamp update_time = 6;
   string submitter = 7;
   TaskStatus status = 8;
-  oneof task_detail {
-    DataExportDetail ded = 9;
-  }
+  TaskDetail detail = 9;
 }
 
 message ExportBySQL {
@@ -115,11 +128,7 @@ message DataExportDetail {
 message SubmitTaskRequest {
   string name = 1;
   TaskKind kind = 2;
-  //TODO: datasource abstract
-  string dsn = 3;
-  oneof data {
-    DataExportDetail ded = 4;
-  }
+  TaskDetail detail = 3;
 }
 
 message SubmitTaskResponse {
@@ -128,7 +137,10 @@ message SubmitTaskResponse {
 }
 
 message GetTaskDetailRequest {
-  string task_id = 1;
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
 }
 
 message GetTaskDetailResponse {
@@ -139,9 +151,15 @@ message GetTaskDetailResponse {
 }
 
 message ApproveRequest {
-  uint64 task_id = 1;
-  string approver = 2;
-  string comment = 3;
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
+  message approveMeta {
+    string approver = 1;
+    string comment = 2;
+  }
+  approveMeta meta = 2;
 }
 
 message ApproveResponse {
@@ -149,9 +167,15 @@ message ApproveResponse {
 }
 
 message RejectRequest {
-  uint64 task_id = 1;
-  string approver = 2;
-  string comment = 3;
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
+  message approveMeta {
+    string approver = 1;
+    string comment = 2;
+  }
+  approveMeta meta = 2;
 }
 
 message RejectResponse {
@@ -159,38 +183,71 @@ message RejectResponse {
 }
 
 message ListTaskRequest {
-  TaskKind kind = 1;
-  int32 current = 2;
-  int32 page_size = 3;
-  TaskStatus status = 4;
-  string dsn = 5;
-  TaskRole role = 6;
-  string task_id = 7;
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Instance"}
+  ];
+  TaskKind kind = 2;
+  int32 current = 3;
+  int32 page_size = 4;
+  TaskStatus status = 5;
+  TaskRole role = 7;
 }
 
 message ListTaskResponse {
   bool ok = 1;
-  repeated TaskListData data = 2;
+  repeated Task data = 2;
   int32 page_size = 3;
   int32 total = 4;
 }
 
 service TaskService {
   rpc GetTaskDetail(GetTaskDetailRequest) returns (GetTaskDetailResponse) {
-    option (google.api.http) = {get: "/v1/task/detail"};
+    option (google.api.http) = {
+      get: "/v1/{name=org/*/instance/*/task/*}"
+
+      additional_bindings: {get: "/v1/{name=org/*/task/*}"}
+    };
   }
   rpc ListTask(ListTaskRequest) returns (ListTaskResponse) {
-    option (google.api.http) = {get: "/v1/tasks"};
+    option (google.api.http) = {
+      get: "/v1/{name=org/*/instance/*}"
+
+      additional_bindings: {get: "/v1/{name=org/*}"}
+    };
   }
   rpc SubmitTask(SubmitTaskRequest) returns (SubmitTaskResponse) {
-    option (google.api.http) = {post: "/v1/task/submit"};
+    option (google.api.http) = {
+      post: "/v1/{name=org/*/instance/*/task/*}/submit"
+      body: "detail"
+
+      additional_bindings: {
+        post: "/v1/{name=org/*/task/*}/submit"
+        body: "detail"
+      }
+    };
   }
 
   rpc Approve(ApproveRequest) returns (ApproveResponse) {
-    option (google.api.http) = {put: "/v1/task/approve"};
+    option (google.api.http) = {
+      put: "/v1/{name=org/*/task/*}/approve"
+      body: "meta"
+
+      additional_bindings: {
+        put: "/v1/{name=org/*/instance/*/task/*}/approve"
+        body: "meta"
+      }
+    };
   }
 
   rpc Reject(RejectRequest) returns (RejectResponse) {
-    option (google.api.http) = {put: "/v1/task/reject"};
+    option (google.api.http) = {
+      put: "/v1/{name=org/*/task/*}/reject"
+      body: "meta"
+      additional_bindings: {
+        put: "/v1/{name=org/*/instance/*/task/*}/reject"
+        body: "meta"
+      }
+    };
   }
 }

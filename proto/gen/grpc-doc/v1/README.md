@@ -3,8 +3,45 @@
 
 ## Table of Contents
 
+- [v1/generate_service.proto](#v1_generate_service-proto)
+    - [AddRuleCatagoryRequest](#woxqaq-v1-AddRuleCatagoryRequest)
+    - [AddRuleCatagoryRequest.RuleCatagoryMeta](#woxqaq-v1-AddRuleCatagoryRequest-RuleCatagoryMeta)
+    - [AddRuleCatagoryResponse](#woxqaq-v1-AddRuleCatagoryResponse)
+    - [AlgoValue](#woxqaq-v1-AlgoValue)
+    - [CreateRuleRequest](#woxqaq-v1-CreateRuleRequest)
+    - [CreateRuleResponse](#woxqaq-v1-CreateRuleResponse)
+    - [DeleteRuleRequest](#woxqaq-v1-DeleteRuleRequest)
+    - [DeleteRuleResponse](#woxqaq-v1-DeleteRuleResponse)
+    - [GetRuleRequest](#woxqaq-v1-GetRuleRequest)
+    - [GetRuleResponse](#woxqaq-v1-GetRuleResponse)
+    - [ListRuleRequest](#woxqaq-v1-ListRuleRequest)
+    - [ListRuleResponse](#woxqaq-v1-ListRuleResponse)
+    - [PreviewRuleGenerateRequest](#woxqaq-v1-PreviewRuleGenerateRequest)
+    - [PreviewRuleGenerateRequest.algoMeta](#woxqaq-v1-PreviewRuleGenerateRequest-algoMeta)
+    - [PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry](#woxqaq-v1-PreviewRuleGenerateRequest-algoMeta-AlgoMetaEntry)
+    - [PreviewRuleGenerateResponse](#woxqaq-v1-PreviewRuleGenerateResponse)
+    - [Rule](#woxqaq-v1-Rule)
+    - [Rule.AlgoMetaEntry](#woxqaq-v1-Rule-AlgoMetaEntry)
+    - [StringList](#woxqaq-v1-StringList)
+    - [UpdateRuleRequest](#woxqaq-v1-UpdateRuleRequest)
+    - [UpdateRuleResponse](#woxqaq-v1-UpdateRuleResponse)
+  
+    - [GenerateAlgorithm](#woxqaq-v1-GenerateAlgorithm)
+    - [RuleCategory](#woxqaq-v1-RuleCategory)
+  
+    - [RuleService](#woxqaq-v1-RuleService)
+  
+- [v1/mask_service.proto](#v1_mask_service-proto)
+- [v1/notify_service.proto](#v1_notify_service-proto)
+    - [NotifyRequest](#woxqaq-v1-NotifyRequest)
+    - [NotifyResponse](#woxqaq-v1-NotifyResponse)
+  
+    - [NotifyServices](#woxqaq-v1-NotifyServices)
+  
+- [v1/review_service.proto](#v1_review_service-proto)
 - [v1/task_service.proto](#v1_task_service-proto)
     - [ApproveRequest](#woxqaq-v1-ApproveRequest)
+    - [ApproveRequest.approveMeta](#woxqaq-v1-ApproveRequest-approveMeta)
     - [ApproveResponse](#woxqaq-v1-ApproveResponse)
     - [DataExportDetail](#woxqaq-v1-DataExportDetail)
     - [ExportAccordingToTable](#woxqaq-v1-ExportAccordingToTable)
@@ -15,10 +52,12 @@
     - [ListTaskRequest](#woxqaq-v1-ListTaskRequest)
     - [ListTaskResponse](#woxqaq-v1-ListTaskResponse)
     - [RejectRequest](#woxqaq-v1-RejectRequest)
+    - [RejectRequest.approveMeta](#woxqaq-v1-RejectRequest-approveMeta)
     - [RejectResponse](#woxqaq-v1-RejectResponse)
     - [SubmitTaskRequest](#woxqaq-v1-SubmitTaskRequest)
     - [SubmitTaskResponse](#woxqaq-v1-SubmitTaskResponse)
-    - [TaskListData](#woxqaq-v1-TaskListData)
+    - [Task](#woxqaq-v1-Task)
+    - [TaskDetail](#woxqaq-v1-TaskDetail)
   
     - [Encoding](#woxqaq-v1-Encoding)
     - [Exec](#woxqaq-v1-Exec)
@@ -42,6 +81,483 @@
 
 
 
+<a name="v1_generate_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/generate_service.proto
+
+
+
+<a name="woxqaq-v1-AddRuleCatagoryRequest"></a>
+
+### AddRuleCatagoryRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| meta | [AddRuleCatagoryRequest.RuleCatagoryMeta](#woxqaq-v1-AddRuleCatagoryRequest-RuleCatagoryMeta) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-AddRuleCatagoryRequest-RuleCatagoryMeta"></a>
+
+### AddRuleCatagoryRequest.RuleCatagoryMeta
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-AddRuleCatagoryResponse"></a>
+
+### AddRuleCatagoryResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-AlgoValue"></a>
+
+### AlgoValue
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| single_string | [string](#string) |  |  |
+| string_list | [StringList](#woxqaq-v1-StringList) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-CreateRuleRequest"></a>
+
+### CreateRuleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| rule | [Rule](#woxqaq-v1-Rule) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-CreateRuleResponse"></a>
+
+### CreateRuleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-DeleteRuleRequest"></a>
+
+### DeleteRuleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-DeleteRuleResponse"></a>
+
+### DeleteRuleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-GetRuleRequest"></a>
+
+### GetRuleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-GetRuleResponse"></a>
+
+### GetRuleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| rule | [Rule](#woxqaq-v1-Rule) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-ListRuleRequest"></a>
+
+### ListRuleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-ListRuleResponse"></a>
+
+### ListRuleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| rules | [Rule](#woxqaq-v1-Rule) | repeated |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-PreviewRuleGenerateRequest"></a>
+
+### PreviewRuleGenerateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| meta | [PreviewRuleGenerateRequest.algoMeta](#woxqaq-v1-PreviewRuleGenerateRequest-algoMeta) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-PreviewRuleGenerateRequest-algoMeta"></a>
+
+### PreviewRuleGenerateRequest.algoMeta
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| algo | [GenerateAlgorithm](#woxqaq-v1-GenerateAlgorithm) |  |  |
+| algo_meta | [PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry](#woxqaq-v1-PreviewRuleGenerateRequest-algoMeta-AlgoMetaEntry) | repeated |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-PreviewRuleGenerateRequest-algoMeta-AlgoMetaEntry"></a>
+
+### PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [AlgoValue](#woxqaq-v1-AlgoValue) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-PreviewRuleGenerateResponse"></a>
+
+### PreviewRuleGenerateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-Rule"></a>
+
+### Rule
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| category | [RuleCategory](#woxqaq-v1-RuleCategory) |  |  |
+| enable | [bool](#bool) |  |  |
+| column_condition | [string](#string) |  |  |
+| empty_ratio | [float](#float) |  |  |
+| algorithm | [GenerateAlgorithm](#woxqaq-v1-GenerateAlgorithm) |  |  |
+| algo_meta | [Rule.AlgoMetaEntry](#woxqaq-v1-Rule-AlgoMetaEntry) | repeated |  |
+| internal | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-Rule-AlgoMetaEntry"></a>
+
+### Rule.AlgoMetaEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [AlgoValue](#woxqaq-v1-AlgoValue) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-StringList"></a>
+
+### StringList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| values | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-UpdateRuleRequest"></a>
+
+### UpdateRuleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| rule | [Rule](#woxqaq-v1-Rule) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-UpdateRuleResponse"></a>
+
+### UpdateRuleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="woxqaq-v1-GenerateAlgorithm"></a>
+
+### GenerateAlgorithm
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| GENERATE_ALGORITHM_UNSPECIFIED | 0 |  |
+| GENERATE_ALGORITHM_TIME | 1 |  |
+| GENERATE_ALGORITHM_TIME_DATE | 2 |  |
+| GENERATE_ALGORITHM_DEPARTMENT | 3 |  |
+| GENERATE_ALGORITHM_COMPANY | 4 |  |
+| GENERATE_ALGORITHM_SCRIPT | 5 |  |
+
+
+
+<a name="woxqaq-v1-RuleCategory"></a>
+
+### RuleCategory
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RULE_CATEGORY_UNSPECIFIED | 0 |  |
+| RULE_CATEGORY_PERSONAL | 1 |  |
+| RULE_CATEGORY_PRODUCT | 2 |  |
+| RULE_CATEGORY_COMMERCE | 3 |  |
+| RULE_CATEGORY_COMMON | 4 |  |
+| RULE_CATEGORY_POSITION | 5 |  |
+| RULE_CATEGORY_CUSTOM | 6 |  |
+
+
+ 
+
+ 
+
+
+<a name="woxqaq-v1-RuleService"></a>
+
+### RuleService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetRule | [GetRuleRequest](#woxqaq-v1-GetRuleRequest) | [GetRuleResponse](#woxqaq-v1-GetRuleResponse) |  |
+| ListRule | [ListRuleRequest](#woxqaq-v1-ListRuleRequest) | [ListRuleResponse](#woxqaq-v1-ListRuleResponse) |  |
+| CreateRule | [CreateRuleRequest](#woxqaq-v1-CreateRuleRequest) | [CreateRuleResponse](#woxqaq-v1-CreateRuleResponse) |  |
+| UpdateRule | [UpdateRuleRequest](#woxqaq-v1-UpdateRuleRequest) | [UpdateRuleResponse](#woxqaq-v1-UpdateRuleResponse) |  |
+| DeleteRule | [DeleteRuleRequest](#woxqaq-v1-DeleteRuleRequest) | [DeleteRuleResponse](#woxqaq-v1-DeleteRuleResponse) |  |
+| AddRuleCatagory | [AddRuleCatagoryRequest](#woxqaq-v1-AddRuleCatagoryRequest) | [AddRuleCatagoryResponse](#woxqaq-v1-AddRuleCatagoryResponse) |  |
+| PreviewRuleGenerate | [PreviewRuleGenerateRequest](#woxqaq-v1-PreviewRuleGenerateRequest) | [PreviewRuleGenerateResponse](#woxqaq-v1-PreviewRuleGenerateResponse) |  |
+
+ 
+
+
+
+<a name="v1_mask_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/mask_service.proto
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="v1_notify_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/notify_service.proto
+
+
+
+<a name="woxqaq-v1-NotifyRequest"></a>
+
+### NotifyRequest
+
+
+
+
+
+
+
+<a name="woxqaq-v1-NotifyResponse"></a>
+
+### NotifyResponse
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="woxqaq-v1-NotifyServices"></a>
+
+### NotifyServices
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Notify | [NotifyRequest](#woxqaq-v1-NotifyRequest) | [NotifyResponse](#woxqaq-v1-NotifyResponse) |  |
+
+ 
+
+
+
+<a name="v1_review_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/review_service.proto
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="v1_task_service-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -57,7 +573,22 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| task_id | [uint64](#uint64) |  |  |
+| name | [string](#string) |  |  |
+| meta | [ApproveRequest.approveMeta](#woxqaq-v1-ApproveRequest-approveMeta) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-ApproveRequest-approveMeta"></a>
+
+### ApproveRequest.approveMeta
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | approver | [string](#string) |  |  |
 | comment | [string](#string) |  |  |
 
@@ -160,7 +691,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| task_id | [string](#string) |  |  |
+| name | [string](#string) |  |  |
 
 
 
@@ -191,13 +722,12 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
 | kind | [TaskKind](#woxqaq-v1-TaskKind) |  |  |
 | current | [int32](#int32) |  |  |
 | page_size | [int32](#int32) |  |  |
 | status | [TaskStatus](#woxqaq-v1-TaskStatus) |  |  |
-| dsn | [string](#string) |  |  |
 | role | [TaskRole](#woxqaq-v1-TaskRole) |  |  |
-| task_id | [string](#string) |  |  |
 
 
 
@@ -213,7 +743,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ok | [bool](#bool) |  |  |
-| data | [TaskListData](#woxqaq-v1-TaskListData) | repeated |  |
+| data | [Task](#woxqaq-v1-Task) | repeated |  |
 | page_size | [int32](#int32) |  |  |
 | total | [int32](#int32) |  |  |
 
@@ -230,7 +760,22 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| task_id | [uint64](#uint64) |  |  |
+| name | [string](#string) |  |  |
+| meta | [RejectRequest.approveMeta](#woxqaq-v1-RejectRequest-approveMeta) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-RejectRequest-approveMeta"></a>
+
+### RejectRequest.approveMeta
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | approver | [string](#string) |  |  |
 | comment | [string](#string) |  |  |
 
@@ -264,8 +809,7 @@
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
 | kind | [TaskKind](#woxqaq-v1-TaskKind) |  |  |
-| dsn | [string](#string) |  | TODO: datasource abstract |
-| ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
+| detail | [TaskDetail](#woxqaq-v1-TaskDetail) |  |  |
 
 
 
@@ -288,9 +832,9 @@
 
 
 
-<a name="woxqaq-v1-TaskListData"></a>
+<a name="woxqaq-v1-Task"></a>
 
-### TaskListData
+### Task
 
 
 
@@ -304,6 +848,21 @@
 | update_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | submitter | [string](#string) |  |  |
 | status | [TaskStatus](#woxqaq-v1-TaskStatus) |  |  |
+| detail | [TaskDetail](#woxqaq-v1-TaskDetail) |  |  |
+
+
+
+
+
+
+<a name="woxqaq-v1-TaskDetail"></a>
+
+### TaskDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
 
 
@@ -453,7 +1012,7 @@
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetTaskDetail | [GetTaskDetailRequest](#woxqaq-v1-GetTaskDetailRequest) | [GetTaskDetailResponse](#woxqaq-v1-GetTaskDetailResponse) |  |
-| ListTaskDetail | [ListTaskRequest](#woxqaq-v1-ListTaskRequest) | [ListTaskResponse](#woxqaq-v1-ListTaskResponse) |  |
+| ListTask | [ListTaskRequest](#woxqaq-v1-ListTaskRequest) | [ListTaskResponse](#woxqaq-v1-ListTaskResponse) |  |
 | SubmitTask | [SubmitTaskRequest](#woxqaq-v1-SubmitTaskRequest) | [SubmitTaskResponse](#woxqaq-v1-SubmitTaskResponse) |  |
 | Approve | [ApproveRequest](#woxqaq-v1-ApproveRequest) | [ApproveResponse](#woxqaq-v1-ApproveResponse) |  |
 | Reject | [RejectRequest](#woxqaq-v1-RejectRequest) | [RejectResponse](#woxqaq-v1-RejectResponse) |  |
@@ -473,6 +1032,12 @@
 
 ### PreSignRequest
 
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| org_name | [string](#string) |  |  |
+| instance_name | [string](#string) |  |  |
 
 
 

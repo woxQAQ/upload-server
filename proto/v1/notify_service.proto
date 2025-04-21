@@ -1,7 +1,9 @@
 syntax = "proto3";
 package woxqaq.v1;
+
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+
 option go_package = "generated/v1";
 
 message NotifyRequest {}
@@ -9,9 +11,7 @@ message NotifyRequest {}
 message NotifyResponse {}
 
 service NotifyServices {
-    rpc Notify(NotifyRequest) returns (NotifyResponse) {
-        option (google.api.http) = {
-            get: "/v1/notification",
-        };
-    }
+  rpc Notify(NotifyRequest) returns (NotifyResponse) {
+    option (google.api.http) = {get: "/v1/notification"};
+  }
 }

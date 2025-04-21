@@ -6,11 +6,40 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /v1/presign:
+    /v1/notification:
+        get:
+            tags:
+                - NotifyServices
+            operationId: NotifyServices_Notify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotifyResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{orgName}/instance/{instanceName}/presign:
         get:
             tags:
                 - UploadService
             operationId: UploadService_PreSign
+            parameters:
+                - name: orgName
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: instanceName
+                  in: path
+                  required: true
+                  schema:
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -24,189 +53,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/task/approve:
-        put:
-            tags:
-                - TaskService
-            operationId: TaskService_Approve
-            parameters:
-                - name: taskId
-                  in: query
-                  schema:
-                    type: string
-                - name: approver
-                  in: query
-                  schema:
-                    type: string
-                - name: comment
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ApproveResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /v1/task/detail:
+    /v1/org/{org}:
         get:
             tags:
                 - TaskService
-            operationId: TaskService_GetTaskDetail
+            operationId: TaskService_ListTask
             parameters:
-                - name: taskId
-                  in: query
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
                   schema:
                     type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetTaskDetailResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /v1/task/reject:
-        put:
-            tags:
-                - TaskService
-            operationId: TaskService_Reject
-            parameters:
-                - name: taskId
-                  in: query
-                  schema:
-                    type: string
-                - name: approver
-                  in: query
-                  schema:
-                    type: string
-                - name: comment
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/RejectResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /v1/task/submit:
-        post:
-            tags:
-                - TaskService
-            operationId: TaskService_SubmitTask
-            parameters:
-                - name: name
-                  in: query
-                  schema:
-                    type: string
-                - name: kind
-                  in: query
-                  schema:
-                    enum:
-                        - TASK_KIND_UNSPECIFIED
-                        - TASK_KIND_DATA_IMPORT
-                        - TASK_KIND_DATA_EXPORT
-                        - TASK_KIND_DATA_GENERATE
-                    type: string
-                    format: enum
-                - name: dsn
-                  in: query
-                  description: 'TODO: datasource abstract'
-                  schema:
-                    type: string
-                - name: ded.database
-                  in: query
-                  schema:
-                    type: string
-                - name: ded.ebs.statement
-                  in: query
-                  schema:
-                    type: string
-                - name: ded.eatt.exportAll
-                  in: query
-                  schema:
-                    type: boolean
-                - name: ded.eatt.content
-                  in: query
-                  schema:
-                    enum:
-                        - EXPORT_CONTENT_UNSPECIFIED
-                        - EXPORT_CONTENT_DATA
-                        - EXPORT_CONTENT_STRUCT
-                        - EXPORT_CONTENT_ALL
-                    type: string
-                    format: enum
-                - name: ded.type
-                  in: query
-                  schema:
-                    enum:
-                        - EXPORT_TYPE_UNSPECIFIED
-                        - EXPORT_TYPE_CSV
-                        - EXPORT_TYPE_EXCEL
-                    type: string
-                    format: enum
-                - name: ded.encoding
-                  in: query
-                  schema:
-                    enum:
-                        - ENCODING_UNSPECIFIED
-                        - ENCODING_UTF8
-                        - ENCODING_GBK
-                    type: string
-                    format: enum
-                - name: ded.exportReason
-                  in: query
-                  schema:
-                    type: string
-                - name: ded.exector
-                  in: query
-                  schema:
-                    enum:
-                        - EXEC_UNSPECIFIED
-                        - EXEC_APPROVER
-                        - EXEC_COMMITTER
-                        - EXEC_AUTO
-                    type: string
-                    format: enum
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SubmitTaskResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /v1/tasks:
-        get:
-            tags:
-                - TaskService
-            operationId: TaskService_ListTaskDetail
-            parameters:
                 - name: kind
                   in: query
                   schema:
@@ -241,10 +99,6 @@ paths:
                         - TASK_STATUS_NOT_APPROVED
                     type: string
                     format: enum
-                - name: dsn
-                  in: query
-                  schema:
-                    type: string
                 - name: role
                   in: query
                   schema:
@@ -257,10 +111,6 @@ paths:
                         - TASK_ROLE_EXECUTED
                     type: string
                     format: enum
-                - name: taskId
-                  in: query
-                  schema:
-                    type: string
             responses:
                 "200":
                     description: OK
@@ -274,9 +124,659 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}:
+        get:
+            tags:
+                - TaskService
+            operationId: TaskService_ListTask
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+                - name: current
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: status
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_STATUS_UNSPECIFIED
+                        - TASK_STATUS_NOT_START
+                        - TASK_STATUS_PRE_CHECK
+                        - TASK_STATUS_PRE_CHECK_SUCCESS
+                        - TASK_STATUS_PRE_CHECK_FAILED
+                        - TASK_STATUS_APPROVING
+                        - TASK_STATUS_APPROVED
+                        - TASK_STATUS_NOT_APPROVED
+                    type: string
+                    format: enum
+                - name: role
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_ROLE_UNSPECIFIED
+                        - TASK_ROLE_COMMITTER
+                        - TASK_ROLE_TO_APPROVE
+                        - TASK_ROLE_TO_EXECUTE
+                        - TASK_ROLE_APPROVED
+                        - TASK_ROLE_EXECUTED
+                    type: string
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListTaskResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/task/{task}:
+        get:
+            tags:
+                - TaskService
+            operationId: TaskService_GetTaskDetail
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/task/{task}/approve:
+        put:
+            tags:
+                - TaskService
+            operationId: TaskService_Approve
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApproveRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApproveResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/task/{task}/reject:
+        put:
+            tags:
+                - TaskService
+            operationId: TaskService_Reject
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RejectRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RejectResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/task/{task}/submit:
+        post:
+            tags:
+                - TaskService
+            operationId: TaskService_SubmitTask
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TaskDetail'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubmitTaskResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rule/{rule}:
+        get:
+            tags:
+                - RuleService
+            operationId: RuleService_GetRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - RuleService
+            operationId: RuleService_UpdateRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Rule'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - RuleService
+            operationId: RuleService_DeleteRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules:
+        get:
+            tags:
+                - RuleService
+            operationId: RuleService_ListRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_CreateRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Rule'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules/catagory:
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_AddRuleCatagory
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddRuleCatagoryRequest_RuleCatagoryMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AddRuleCatagoryResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules/preview:
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_PreviewRuleGenerate
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PreviewRuleGenerateRequest_algoMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PreviewRuleGenerateResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/task/{task}:
+        get:
+            tags:
+                - TaskService
+            operationId: TaskService_GetTaskDetail
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTaskDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/task/{task}/approve:
+        put:
+            tags:
+                - TaskService
+            operationId: TaskService_Approve
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApproveRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApproveResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/task/{task}/reject:
+        put:
+            tags:
+                - TaskService
+            operationId: TaskService_Reject
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RejectRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RejectResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/task/{task}/submit:
+        post:
+            tags:
+                - TaskService
+            operationId: TaskService_SubmitTask
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: task
+                  in: path
+                  description: The task id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - TASK_KIND_UNSPECIFIED
+                        - TASK_KIND_DATA_IMPORT
+                        - TASK_KIND_DATA_EXPORT
+                        - TASK_KIND_DATA_GENERATE
+                    type: string
+                    format: enum
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TaskDetail'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubmitTaskResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
+        AddRuleCatagoryRequest_RuleCatagoryMeta:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+        AddRuleCatagoryResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        AlgoValue:
+            type: object
+            properties:
+                singleString:
+                    type: string
+                stringList:
+                    $ref: '#/components/schemas/StringList'
+        ApproveRequest_approveMeta:
+            type: object
+            properties:
+                approver:
+                    type: string
+                comment:
+                    type: string
         ApproveResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        CreateRuleResponse:
             type: object
             properties:
                 ok:
@@ -314,6 +814,11 @@ components:
                         - EXEC_AUTO
                     type: string
                     format: enum
+        DeleteRuleResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
         ExportAccordingToTable:
             type: object
             properties:
@@ -349,6 +854,11 @@ components:
             properties:
                 statement:
                     type: string
+        GetRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/Rule'
         GetTaskDetailResponse:
             type: object
             properties:
@@ -364,6 +874,13 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        ListRuleResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Rule'
         ListTaskResponse:
             type: object
             properties:
@@ -372,22 +889,99 @@ components:
                 data:
                     type: array
                     items:
-                        $ref: '#/components/schemas/TaskListData'
+                        $ref: '#/components/schemas/Task'
                 pageSize:
                     type: integer
                     format: int32
                 total:
                     type: integer
                     format: int32
+        NotifyResponse:
+            type: object
+            properties: {}
         PreSignResponse:
             type: object
             properties:
                 url:
                     type: string
+        PreviewRuleGenerateRequest_algoMeta:
+            type: object
+            properties:
+                algo:
+                    enum:
+                        - GENERATE_ALGORITHM_UNSPECIFIED
+                        - GENERATE_ALGORITHM_TIME
+                        - GENERATE_ALGORITHM_TIME_DATE
+                        - GENERATE_ALGORITHM_DEPARTMENT
+                        - GENERATE_ALGORITHM_COMPANY
+                        - GENERATE_ALGORITHM_SCRIPT
+                    type: string
+                    format: enum
+                algoMeta:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/AlgoValue'
+        PreviewRuleGenerateResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                value:
+                    type: string
+        RejectRequest_approveMeta:
+            type: object
+            properties:
+                approver:
+                    type: string
+                comment:
+                    type: string
         RejectResponse:
             type: object
             properties:
                 ok:
+                    type: boolean
+        Rule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                category:
+                    enum:
+                        - RULE_CATEGORY_UNSPECIFIED
+                        - RULE_CATEGORY_PERSONAL
+                        - RULE_CATEGORY_PRODUCT
+                        - RULE_CATEGORY_COMMERCE
+                        - RULE_CATEGORY_COMMON
+                        - RULE_CATEGORY_POSITION
+                        - RULE_CATEGORY_CUSTOM
+                    type: string
+                    format: enum
+                enable:
+                    type: boolean
+                columnCondition:
+                    type: string
+                emptyRatio:
+                    type: number
+                    format: float
+                algorithm:
+                    enum:
+                        - GENERATE_ALGORITHM_UNSPECIFIED
+                        - GENERATE_ALGORITHM_TIME
+                        - GENERATE_ALGORITHM_TIME_DATE
+                        - GENERATE_ALGORITHM_DEPARTMENT
+                        - GENERATE_ALGORITHM_COMPANY
+                        - GENERATE_ALGORITHM_SCRIPT
+                    type: string
+                    format: enum
+                algoMeta:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/AlgoValue'
+                internal:
                     type: boolean
         Status:
             type: object
@@ -405,6 +999,13 @@ components:
                         $ref: '#/components/schemas/GoogleProtobufAny'
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        StringList:
+            type: object
+            properties:
+                values:
+                    type: array
+                    items:
+                        type: string
         SubmitTaskResponse:
             type: object
             properties:
@@ -412,7 +1013,7 @@ components:
                     type: boolean
                 taskId:
                     type: string
-        TaskListData:
+        Task:
             type: object
             properties:
                 id:
@@ -449,8 +1050,20 @@ components:
                         - TASK_STATUS_NOT_APPROVED
                     type: string
                     format: enum
+                detail:
+                    $ref: '#/components/schemas/TaskDetail'
+        TaskDetail:
+            type: object
+            properties:
                 ded:
                     $ref: '#/components/schemas/DataExportDetail'
+        UpdateRuleResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
 tags:
+    - name: NotifyServices
+    - name: RuleService
     - name: TaskService
     - name: UploadService

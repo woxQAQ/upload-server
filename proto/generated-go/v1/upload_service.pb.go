@@ -24,6 +24,8 @@ const (
 
 type PreSignRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrgName       string                 `protobuf:"bytes,1,opt,name=org_name,json=orgName,proto3" json:"org_name,omitempty"`
+	InstanceName  string                 `protobuf:"bytes,2,opt,name=instance_name,json=instanceName,proto3" json:"instance_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -56,6 +58,20 @@ func (x *PreSignRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use PreSignRequest.ProtoReflect.Descriptor instead.
 func (*PreSignRequest) Descriptor() ([]byte, []int) {
 	return file_v1_upload_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PreSignRequest) GetOrgName() string {
+	if x != nil {
+		return x.OrgName
+	}
+	return ""
+}
+
+func (x *PreSignRequest) GetInstanceName() string {
+	if x != nil {
+		return x.InstanceName
+	}
+	return ""
 }
 
 type PreSignResponse struct {
@@ -106,12 +122,14 @@ var File_v1_upload_service_proto protoreflect.FileDescriptor
 
 const file_v1_upload_service_proto_rawDesc = "" +
 	"\n" +
-	"\x17v1/upload_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\"\x10\n" +
-	"\x0ePreSignRequest\"#\n" +
+	"\x17v1/upload_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\"P\n" +
+	"\x0ePreSignRequest\x12\x19\n" +
+	"\borg_name\x18\x01 \x01(\tR\aorgName\x12#\n" +
+	"\rinstance_name\x18\x02 \x01(\tR\finstanceName\"#\n" +
 	"\x0fPreSignResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url2f\n" +
-	"\rUploadService\x12U\n" +
-	"\aPreSign\x12\x19.woxqaq.v1.PreSignRequest\x1a\x1a.woxqaq.v1.PreSignResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v1/presignB\x0eZ\fgenerated/v1b\x06proto3"
+	"\x03url\x18\x01 \x01(\tR\x03url2\x8e\x01\n" +
+	"\rUploadService\x12}\n" +
+	"\aPreSign\x12\x19.woxqaq.v1.PreSignRequest\x1a\x1a.woxqaq.v1.PreSignResponse\";\x82\xd3\xe4\x93\x025\x123/v1/org/{org_name}/instance/{instance_name}/presignB\x0eZ\fgenerated/v1b\x06proto3"
 
 var (
 	file_v1_upload_service_proto_rawDescOnce sync.Once
