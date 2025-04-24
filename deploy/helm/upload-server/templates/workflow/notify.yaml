@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: notify-template
+spec:
+  templates:
+    inputs:
+    parameters:
+      - name: workflow_type
+      - name: step
+      - name: condition
+    script:
+      image: argoproj/argoexec:v2.12.0
+      command: [sh]
+      source: |
+        # 读取 ConfigMap 中的通知策略
+        STRATEGY=$(kubectl -n argo get configmap {{inputs.parameters.workflow_type}}_notification-strategy -o jsonpath="{.data.{{inputs.parameters.step}}}")
+        if [ -z "$STRATEGY" ]; then
+          echo "No notification strategy found for step: {{inputs.parameters.step}}"
+          exit 1
+        fi
+        CONDITION={{inputs.parameters.condition}}
+        CHANNEL=$(echo $STRATEGY | jq -r ".triggers[] | select(.condition==\"$CONDITION\") | .channel")
+        RECIPIENTS=$(echo $STRATEGY | jq -r ".triggers[] | select(.condition==\"$CONDITION\") | .recipients")
+        MESSAGE=$(echo $STRATEGY | jq -r ".triggers[] | select(.condition==\"$CONDITION\") | .message")
+
+        # 根据渠道发送通知
+        if [ "$CHANNEL" == "slack" ]; then
+          curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"$MESSAGE\"}" \
+            $SLACK_WEBHOOK_URL
+        elif [ "$CHANNEL" == "email" ]; then
+          curl -X POST -H 'Content-type: application/json' \
+            --data "{\"to\":\"$RECIPIENTS\",\"subject\":\"Approval Notification\",\"body\":\"$MESSAGE\"}" \
+            $EMAIL_SERVICE_URL
+        fi
+      env:
+      - name: SLACK_WEBHOOK_URL
+        valueFrom:
+          secretKeyRef:
+            name: {{inputs.parameters.workflow_type}}_notification-secrets
+            key: SLACK_WEBHOOK_URL
+      - name: EMAIL_SERVICE_URL
+        valueFrom:
+          secretKeyRef:
+            name: {{inputs.parameters.workflow_type}}_notification-secrets
+            key: EMAIL_SERVICE_URL

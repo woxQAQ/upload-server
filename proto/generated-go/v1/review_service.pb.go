@@ -10,7 +10,9 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -21,19 +23,486 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ReviewRuleLevel int32
+
+const (
+	ReviewRuleLevel_LEVEL_UNSPECIFIED ReviewRuleLevel = 0
+	ReviewRuleLevel_ERROR             ReviewRuleLevel = 1
+	ReviewRuleLevel_WARNING           ReviewRuleLevel = 2
+	ReviewRuleLevel_DISABLED          ReviewRuleLevel = 3
+)
+
+// Enum value maps for ReviewRuleLevel.
+var (
+	ReviewRuleLevel_name = map[int32]string{
+		0: "LEVEL_UNSPECIFIED",
+		1: "ERROR",
+		2: "WARNING",
+		3: "DISABLED",
+	}
+	ReviewRuleLevel_value = map[string]int32{
+		"LEVEL_UNSPECIFIED": 0,
+		"ERROR":             1,
+		"WARNING":           2,
+		"DISABLED":          3,
+	}
+)
+
+func (x ReviewRuleLevel) Enum() *ReviewRuleLevel {
+	p := new(ReviewRuleLevel)
+	*p = x
+	return p
+}
+
+func (x ReviewRuleLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ReviewRuleLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_v1_review_service_proto_enumTypes[0].Descriptor()
+}
+
+func (ReviewRuleLevel) Type() protoreflect.EnumType {
+	return &file_v1_review_service_proto_enumTypes[0]
+}
+
+func (x ReviewRuleLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ReviewRuleLevel.Descriptor instead.
+func (ReviewRuleLevel) EnumDescriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{0}
+}
+
+type ReviewRule struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Level         ReviewRuleLevel        `protobuf:"varint,2,opt,name=level,proto3,enum=woxqaq.v1.ReviewRuleLevel" json:"level,omitempty"`
+	Payload       string                 `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
+	Engine        Engine                 `protobuf:"varint,4,opt,name=engine,proto3,enum=woxqaq.v1.Engine" json:"engine,omitempty"`
+	Comment       string                 `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReviewRule) Reset() {
+	*x = ReviewRule{}
+	mi := &file_v1_review_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReviewRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReviewRule) ProtoMessage() {}
+
+func (x *ReviewRule) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReviewRule.ProtoReflect.Descriptor instead.
+func (*ReviewRule) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ReviewRule) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ReviewRule) GetLevel() ReviewRuleLevel {
+	if x != nil {
+		return x.Level
+	}
+	return ReviewRuleLevel_LEVEL_UNSPECIFIED
+}
+
+func (x *ReviewRule) GetPayload() string {
+	if x != nil {
+		return x.Payload
+	}
+	return ""
+}
+
+func (x *ReviewRule) GetEngine() Engine {
+	if x != nil {
+		return x.Engine
+	}
+	return Engine_ENGINE_UNSPECIFIED
+}
+
+func (x *ReviewRule) GetComment() string {
+	if x != nil {
+		return x.Comment
+	}
+	return ""
+}
+
+type ReviewGroup struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Org           string                 `protobuf:"bytes,2,opt,name=org,proto3" json:"org,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Enabled       bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Rules         []*ReviewRule          `protobuf:"bytes,7,rep,name=rules,proto3" json:"rules,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReviewGroup) Reset() {
+	*x = ReviewGroup{}
+	mi := &file_v1_review_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReviewGroup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReviewGroup) ProtoMessage() {}
+
+func (x *ReviewGroup) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReviewGroup.ProtoReflect.Descriptor instead.
+func (*ReviewGroup) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReviewGroup) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ReviewGroup) GetOrg() string {
+	if x != nil {
+		return x.Org
+	}
+	return ""
+}
+
+func (x *ReviewGroup) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ReviewGroup) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *ReviewGroup) GetRules() []*ReviewRule {
+	if x != nil {
+		return x.Rules
+	}
+	return nil
+}
+
+type ListReviewGroupsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Org           string                 `protobuf:"bytes,2,opt,name=org,proto3" json:"org,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReviewGroupsRequest) Reset() {
+	*x = ListReviewGroupsRequest{}
+	mi := &file_v1_review_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReviewGroupsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReviewGroupsRequest) ProtoMessage() {}
+
+func (x *ListReviewGroupsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReviewGroupsRequest.ProtoReflect.Descriptor instead.
+func (*ListReviewGroupsRequest) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListReviewGroupsRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ListReviewGroupsRequest) GetOrg() string {
+	if x != nil {
+		return x.Org
+	}
+	return ""
+}
+
+type ListReviewGroupsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReviewGroups  []*ReviewGroup         `protobuf:"bytes,1,rep,name=review_groups,json=reviewGroups,proto3" json:"review_groups,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReviewGroupsResponse) Reset() {
+	*x = ListReviewGroupsResponse{}
+	mi := &file_v1_review_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReviewGroupsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReviewGroupsResponse) ProtoMessage() {}
+
+func (x *ListReviewGroupsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReviewGroupsResponse.ProtoReflect.Descriptor instead.
+func (*ListReviewGroupsResponse) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListReviewGroupsResponse) GetReviewGroups() []*ReviewGroup {
+	if x != nil {
+		return x.ReviewGroups
+	}
+	return nil
+}
+
+type DeleteReviewGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Org           string                 `protobuf:"bytes,2,opt,name=org,proto3" json:"org,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteReviewGroupRequest) Reset() {
+	*x = DeleteReviewGroupRequest{}
+	mi := &file_v1_review_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteReviewGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteReviewGroupRequest) ProtoMessage() {}
+
+func (x *DeleteReviewGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteReviewGroupRequest.ProtoReflect.Descriptor instead.
+func (*DeleteReviewGroupRequest) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeleteReviewGroupRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DeleteReviewGroupRequest) GetOrg() string {
+	if x != nil {
+		return x.Org
+	}
+	return ""
+}
+
+type DeleteReviewResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteReviewResponse) Reset() {
+	*x = DeleteReviewResponse{}
+	mi := &file_v1_review_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteReviewResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteReviewResponse) ProtoMessage() {}
+
+func (x *DeleteReviewResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_review_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteReviewResponse.ProtoReflect.Descriptor instead.
+func (*DeleteReviewResponse) Descriptor() ([]byte, []int) {
+	return file_v1_review_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteReviewResponse) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
 var File_v1_review_service_proto protoreflect.FileDescriptor
 
 const file_v1_review_service_proto_rawDesc = "" +
 	"\n" +
-	"\x17v1/review_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.protoB\x0eZ\fgenerated/v1b\x06proto3"
+	"\x17v1/review_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0fv1/common.proto\"\xb1\x01\n" +
+	"\n" +
+	"ReviewRule\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x120\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x1a.woxqaq.v1.ReviewRuleLevelR\x05level\x12\x18\n" +
+	"\apayload\x18\x03 \x01(\tR\apayload\x12)\n" +
+	"\x06engine\x18\x04 \x01(\x0e2\x11.woxqaq.v1.EngineR\x06engine\x12\x18\n" +
+	"\acomment\x18\x05 \x01(\tR\acomment\"\xae\x01\n" +
+	"\vReviewGroup\x12\x17\n" +
+	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x03R\x04name\x12\x10\n" +
+	"\x03org\x18\x02 \x01(\tR\x03org\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x18\n" +
+	"\aenabled\x18\x04 \x01(\bR\aenabled\x12+\n" +
+	"\x05rules\x18\a \x03(\v2\x15.woxqaq.v1.ReviewRuleR\x05rules:\x17\xeaA\x14\n" +
+	"\x12woxQAQ/ReviewGroup\"[\n" +
+	"\x17ListReviewGroupsRequest\x12.\n" +
+	"\x04name\x18\x01 \x01(\tB\x1a\xe0A\x02\xfaA\x14\n" +
+	"\x12woxQAQ/ReviewGroupR\x04name\x12\x10\n" +
+	"\x03org\x18\x02 \x01(\tR\x03org\"W\n" +
+	"\x18ListReviewGroupsResponse\x12;\n" +
+	"\rreview_groups\x18\x01 \x03(\v2\x16.woxqaq.v1.ReviewGroupR\freviewGroups\"E\n" +
+	"\x18DeleteReviewGroupRequest\x12\x17\n" +
+	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x02R\x04name\x12\x10\n" +
+	"\x03org\x18\x02 \x01(\tR\x03org\"&\n" +
+	"\x14DeleteReviewResponse\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok*N\n" +
+	"\x0fReviewRuleLevel\x12\x15\n" +
+	"\x11LEVEL_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05ERROR\x10\x01\x12\v\n" +
+	"\aWARNING\x10\x02\x12\f\n" +
+	"\bDISABLED\x10\x032\xc0\x04\n" +
+	"\rReviewServive\x12\x93\x01\n" +
+	"\x10ListReviewGroups\x12\".woxqaq.v1.ListReviewGroupsRequest\x1a#.woxqaq.v1.ListReviewGroupsResponse\"6\x82\xd3\xe4\x93\x020Z\x1c\x12\x1a/v1/org/{org}/reviewGroups\x12\x10/v1/reviewGroups\x12{\n" +
+	"\x11CreateReviewGroup\x12\x16.woxqaq.v1.ReviewGroup\x1a\x16.google.protobuf.Empty\"6\x82\xd3\xe4\x93\x020Z\x1c\"\x1a/v1/org/{org}/reviewGroups\"\x10/v1/reviewGroups\x12\x82\x01\n" +
+	"\x11UpdateReviewGroup\x12\x16.woxqaq.v1.ReviewGroup\x1a\x16.woxqaq.v1.ReviewGroup\"=\x82\xd3\xe4\x93\x027Z\x1c2\x1a/v1/org/{org}/reviewGroups2\x17/v1/reviewGroups/{name}\x12\x96\x01\n" +
+	"\x11DeleteReviewGroup\x12#.woxqaq.v1.DeleteReviewGroupRequest\x1a\x16.google.protobuf.Empty\"D\x82\xd3\xe4\x93\x02>Z#*!/v1/org/{org}/reviewGroups/{name}*\x17/v1/reviewGroups/{name}B\x0eZ\fgenerated/v1b\x06proto3"
 
-var file_v1_review_service_proto_goTypes = []any{}
+var (
+	file_v1_review_service_proto_rawDescOnce sync.Once
+	file_v1_review_service_proto_rawDescData []byte
+)
+
+func file_v1_review_service_proto_rawDescGZIP() []byte {
+	file_v1_review_service_proto_rawDescOnce.Do(func() {
+		file_v1_review_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_v1_review_service_proto_rawDesc), len(file_v1_review_service_proto_rawDesc)))
+	})
+	return file_v1_review_service_proto_rawDescData
+}
+
+var file_v1_review_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_v1_review_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_v1_review_service_proto_goTypes = []any{
+	(ReviewRuleLevel)(0),             // 0: woxqaq.v1.ReviewRuleLevel
+	(*ReviewRule)(nil),               // 1: woxqaq.v1.ReviewRule
+	(*ReviewGroup)(nil),              // 2: woxqaq.v1.ReviewGroup
+	(*ListReviewGroupsRequest)(nil),  // 3: woxqaq.v1.ListReviewGroupsRequest
+	(*ListReviewGroupsResponse)(nil), // 4: woxqaq.v1.ListReviewGroupsResponse
+	(*DeleteReviewGroupRequest)(nil), // 5: woxqaq.v1.DeleteReviewGroupRequest
+	(*DeleteReviewResponse)(nil),     // 6: woxqaq.v1.DeleteReviewResponse
+	(Engine)(0),                      // 7: woxqaq.v1.Engine
+	(*emptypb.Empty)(nil),            // 8: google.protobuf.Empty
+}
 var file_v1_review_service_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: woxqaq.v1.ReviewRule.level:type_name -> woxqaq.v1.ReviewRuleLevel
+	7, // 1: woxqaq.v1.ReviewRule.engine:type_name -> woxqaq.v1.Engine
+	1, // 2: woxqaq.v1.ReviewGroup.rules:type_name -> woxqaq.v1.ReviewRule
+	2, // 3: woxqaq.v1.ListReviewGroupsResponse.review_groups:type_name -> woxqaq.v1.ReviewGroup
+	3, // 4: woxqaq.v1.ReviewServive.ListReviewGroups:input_type -> woxqaq.v1.ListReviewGroupsRequest
+	2, // 5: woxqaq.v1.ReviewServive.CreateReviewGroup:input_type -> woxqaq.v1.ReviewGroup
+	2, // 6: woxqaq.v1.ReviewServive.UpdateReviewGroup:input_type -> woxqaq.v1.ReviewGroup
+	5, // 7: woxqaq.v1.ReviewServive.DeleteReviewGroup:input_type -> woxqaq.v1.DeleteReviewGroupRequest
+	4, // 8: woxqaq.v1.ReviewServive.ListReviewGroups:output_type -> woxqaq.v1.ListReviewGroupsResponse
+	8, // 9: woxqaq.v1.ReviewServive.CreateReviewGroup:output_type -> google.protobuf.Empty
+	2, // 10: woxqaq.v1.ReviewServive.UpdateReviewGroup:output_type -> woxqaq.v1.ReviewGroup
+	8, // 11: woxqaq.v1.ReviewServive.DeleteReviewGroup:output_type -> google.protobuf.Empty
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_v1_review_service_proto_init() }
@@ -41,18 +510,21 @@ func file_v1_review_service_proto_init() {
 	if File_v1_review_service_proto != nil {
 		return
 	}
+	file_v1_common_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_review_service_proto_rawDesc), len(file_v1_review_service_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   0,
+			NumEnums:      1,
+			NumMessages:   6,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_v1_review_service_proto_goTypes,
 		DependencyIndexes: file_v1_review_service_proto_depIdxs,
+		EnumInfos:         file_v1_review_service_proto_enumTypes,
+		MessageInfos:      file_v1_review_service_proto_msgTypes,
 	}.Build()
 	File_v1_review_service_proto = out.File
 	file_v1_review_service_proto_goTypes = nil

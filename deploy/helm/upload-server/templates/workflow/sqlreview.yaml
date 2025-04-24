@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: sqlreview-template
+spec:
+  entrypoint: sqlreview
+  arguments:
+    parameters:
+        - name: organization
+        - name: instance
+        - name: dbType
+        - name: statement
+  templates:
+    - name: sqlreview
+      steps:
+        - - name: sqlreview
+            template: sqlreview
+            container:
+                name: sqlreview
+                image: "ghcr.io/woxQAQ/sqlreview:latest"
+                command: ["sqlreview"]
+                args: ["--organization", "{{workflow.parameters.organization}}", "--instance", "{{workflow.parameters.instance}}", "--db-type", "{{workflow.parameters.dbType}}", "--statement", "{{workflow.parameters.statement}}"]
