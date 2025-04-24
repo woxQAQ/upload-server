@@ -24,55 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Encoding int32
-
-const (
-	Encoding_ENCODING_UNSPECIFIED Encoding = 0
-	Encoding_UTF8                 Encoding = 1
-	Encoding_GBK                  Encoding = 2
-)
-
-// Enum value maps for Encoding.
-var (
-	Encoding_name = map[int32]string{
-		0: "ENCODING_UNSPECIFIED",
-		1: "UTF8",
-		2: "GBK",
-	}
-	Encoding_value = map[string]int32{
-		"ENCODING_UNSPECIFIED": 0,
-		"UTF8":                 1,
-		"GBK":                  2,
-	}
-)
-
-func (x Encoding) Enum() *Encoding {
-	p := new(Encoding)
-	*p = x
-	return p
-}
-
-func (x Encoding) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Encoding) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[0].Descriptor()
-}
-
-func (Encoding) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[0]
-}
-
-func (x Encoding) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Encoding.Descriptor instead.
-func (Encoding) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{0}
-}
-
 type TriggerKind int32
 
 const (
@@ -106,11 +57,11 @@ func (x TriggerKind) String() string {
 }
 
 func (TriggerKind) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[1].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[0].Descriptor()
 }
 
 func (TriggerKind) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[1]
+	return &file_v1_issue_service_proto_enumTypes[0]
 }
 
 func (x TriggerKind) Number() protoreflect.EnumNumber {
@@ -119,209 +70,7 @@ func (x TriggerKind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TriggerKind.Descriptor instead.
 func (TriggerKind) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{1}
-}
-
-type ExportMethod int32
-
-const (
-	ExportMethod_EXPORT_METHOD_UNSPECIFIED ExportMethod = 0
-	ExportMethod_SQL                       ExportMethod = 1
-	ExportMethod_TABLES                    ExportMethod = 2
-)
-
-// Enum value maps for ExportMethod.
-var (
-	ExportMethod_name = map[int32]string{
-		0: "EXPORT_METHOD_UNSPECIFIED",
-		1: "SQL",
-		2: "TABLES",
-	}
-	ExportMethod_value = map[string]int32{
-		"EXPORT_METHOD_UNSPECIFIED": 0,
-		"SQL":                       1,
-		"TABLES":                    2,
-	}
-)
-
-func (x ExportMethod) Enum() *ExportMethod {
-	p := new(ExportMethod)
-	*p = x
-	return p
-}
-
-func (x ExportMethod) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ExportMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[2].Descriptor()
-}
-
-func (ExportMethod) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[2]
-}
-
-func (x ExportMethod) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ExportMethod.Descriptor instead.
-func (ExportMethod) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{2}
-}
-
-type ExportContent int32
-
-const (
-	ExportContent_EXPORT_CONTENT_UNSPECIFIED ExportContent = 0
-	ExportContent_DATA                       ExportContent = 1
-	ExportContent_STRUCT                     ExportContent = 2
-	ExportContent_ALL                        ExportContent = 3
-)
-
-// Enum value maps for ExportContent.
-var (
-	ExportContent_name = map[int32]string{
-		0: "EXPORT_CONTENT_UNSPECIFIED",
-		1: "DATA",
-		2: "STRUCT",
-		3: "ALL",
-	}
-	ExportContent_value = map[string]int32{
-		"EXPORT_CONTENT_UNSPECIFIED": 0,
-		"DATA":                       1,
-		"STRUCT":                     2,
-		"ALL":                        3,
-	}
-)
-
-func (x ExportContent) Enum() *ExportContent {
-	p := new(ExportContent)
-	*p = x
-	return p
-}
-
-func (x ExportContent) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ExportContent) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[3].Descriptor()
-}
-
-func (ExportContent) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[3]
-}
-
-func (x ExportContent) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ExportContent.Descriptor instead.
-func (ExportContent) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{3}
-}
-
-type ExportType int32
-
-const (
-	ExportType_EXPORT_TYPE_UNSPECIFIED ExportType = 0
-	ExportType_CSV                     ExportType = 1
-	ExportType_EXCEL                   ExportType = 2
-)
-
-// Enum value maps for ExportType.
-var (
-	ExportType_name = map[int32]string{
-		0: "EXPORT_TYPE_UNSPECIFIED",
-		1: "CSV",
-		2: "EXCEL",
-	}
-	ExportType_value = map[string]int32{
-		"EXPORT_TYPE_UNSPECIFIED": 0,
-		"CSV":                     1,
-		"EXCEL":                   2,
-	}
-)
-
-func (x ExportType) Enum() *ExportType {
-	p := new(ExportType)
-	*p = x
-	return p
-}
-
-func (x ExportType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ExportType) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[4].Descriptor()
-}
-
-func (ExportType) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[4]
-}
-
-func (x ExportType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ExportType.Descriptor instead.
-func (ExportType) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{4}
-}
-
-type Exec int32
-
-const (
-	Exec_EXEC_UNSPECIFIED Exec = 0
-	Exec_APPROVER         Exec = 1
-	Exec_COMMITTER        Exec = 2
-	Exec_AUTO             Exec = 3
-)
-
-// Enum value maps for Exec.
-var (
-	Exec_name = map[int32]string{
-		0: "EXEC_UNSPECIFIED",
-		1: "APPROVER",
-		2: "COMMITTER",
-		3: "AUTO",
-	}
-	Exec_value = map[string]int32{
-		"EXEC_UNSPECIFIED": 0,
-		"APPROVER":         1,
-		"COMMITTER":        2,
-		"AUTO":             3,
-	}
-)
-
-func (x Exec) Enum() *Exec {
-	p := new(Exec)
-	*p = x
-	return p
-}
-
-func (x Exec) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Exec) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[5].Descriptor()
-}
-
-func (Exec) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[5]
-}
-
-func (x Exec) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Exec.Descriptor instead.
-func (Exec) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{5}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{0}
 }
 
 type IssueKind int32
@@ -360,11 +109,11 @@ func (x IssueKind) String() string {
 }
 
 func (IssueKind) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[6].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[1].Descriptor()
 }
 
 func (IssueKind) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[6]
+	return &file_v1_issue_service_proto_enumTypes[1]
 }
 
 func (x IssueKind) Number() protoreflect.EnumNumber {
@@ -373,7 +122,7 @@ func (x IssueKind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use IssueKind.Descriptor instead.
 func (IssueKind) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{6}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{1}
 }
 
 type IssueStatus int32
@@ -424,11 +173,11 @@ func (x IssueStatus) String() string {
 }
 
 func (IssueStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[7].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[2].Descriptor()
 }
 
 func (IssueStatus) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[7]
+	return &file_v1_issue_service_proto_enumTypes[2]
 }
 
 func (x IssueStatus) Number() protoreflect.EnumNumber {
@@ -437,7 +186,7 @@ func (x IssueStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use IssueStatus.Descriptor instead.
 func (IssueStatus) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{7}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{2}
 }
 
 type ApprovalStep_Type int32
@@ -473,11 +222,11 @@ func (x ApprovalStep_Type) String() string {
 }
 
 func (ApprovalStep_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[8].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[3].Descriptor()
 }
 
 func (ApprovalStep_Type) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[8]
+	return &file_v1_issue_service_proto_enumTypes[3]
 }
 
 func (x ApprovalStep_Type) Number() protoreflect.EnumNumber {
@@ -519,11 +268,11 @@ func (x ApprovalNode_Type) String() string {
 }
 
 func (ApprovalNode_Type) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[9].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[4].Descriptor()
 }
 
 func (ApprovalNode_Type) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[9]
+	return &file_v1_issue_service_proto_enumTypes[4]
 }
 
 func (x ApprovalNode_Type) Number() protoreflect.EnumNumber {
@@ -577,11 +326,11 @@ func (x ApprovalNodeNotifyConfig_NotifyType) String() string {
 }
 
 func (ApprovalNodeNotifyConfig_NotifyType) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[10].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[5].Descriptor()
 }
 
 func (ApprovalNodeNotifyConfig_NotifyType) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[10]
+	return &file_v1_issue_service_proto_enumTypes[5]
 }
 
 func (x ApprovalNodeNotifyConfig_NotifyType) Number() protoreflect.EnumNumber {
@@ -632,11 +381,11 @@ func (x ApprovalNodeNotifyConfig_Receiver) String() string {
 }
 
 func (ApprovalNodeNotifyConfig_Receiver) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[11].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[6].Descriptor()
 }
 
 func (ApprovalNodeNotifyConfig_Receiver) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[11]
+	return &file_v1_issue_service_proto_enumTypes[6]
 }
 
 func (x ApprovalNodeNotifyConfig_Receiver) Number() protoreflect.EnumNumber {
@@ -684,11 +433,11 @@ func (x Issue_Approver_Status) String() string {
 }
 
 func (Issue_Approver_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[12].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[7].Descriptor()
 }
 
 func (Issue_Approver_Status) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[12]
+	return &file_v1_issue_service_proto_enumTypes[7]
 }
 
 func (x Issue_Approver_Status) Number() protoreflect.EnumNumber {
@@ -742,11 +491,11 @@ func (x ListIssueRequest_IssueRole) String() string {
 }
 
 func (ListIssueRequest_IssueRole) Descriptor() protoreflect.EnumDescriptor {
-	return file_v1_issue_service_proto_enumTypes[13].Descriptor()
+	return file_v1_issue_service_proto_enumTypes[8].Descriptor()
 }
 
 func (ListIssueRequest_IssueRole) Type() protoreflect.EnumType {
-	return &file_v1_issue_service_proto_enumTypes[13]
+	return &file_v1_issue_service_proto_enumTypes[8]
 }
 
 func (x ListIssueRequest_IssueRole) Number() protoreflect.EnumNumber {
@@ -755,7 +504,7 @@ func (x ListIssueRequest_IssueRole) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ListIssueRequest_IssueRole.Descriptor instead.
 func (ListIssueRequest_IssueRole) EnumDescriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{16, 0}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{15, 0}
 }
 
 type IssueDetail struct {
@@ -1210,128 +959,6 @@ func (x *Issue) GetApprovalTemplates() []*ApprovalTemplate {
 	return nil
 }
 
-type DataExportDetail struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	Database string                 `protobuf:"bytes,1,opt,name=database,proto3" json:"database,omitempty"`
-	// Types that are valid to be assigned to ExportDetail:
-	//
-	//	*DataExportDetail_Ebs
-	//	*DataExportDetail_Eatt
-	ExportDetail  isDataExportDetail_ExportDetail `protobuf_oneof:"export_detail"`
-	Type          ExportType                      `protobuf:"varint,4,opt,name=type,proto3,enum=woxqaq.v1.ExportType" json:"type,omitempty"`
-	Encoding      Encoding                        `protobuf:"varint,5,opt,name=encoding,proto3,enum=woxqaq.v1.Encoding" json:"encoding,omitempty"`
-	ExportReason  string                          `protobuf:"bytes,6,opt,name=export_reason,json=exportReason,proto3" json:"export_reason,omitempty"`
-	Exector       Exec                            `protobuf:"varint,7,opt,name=exector,proto3,enum=woxqaq.v1.Exec" json:"exector,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DataExportDetail) Reset() {
-	*x = DataExportDetail{}
-	mi := &file_v1_issue_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DataExportDetail) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DataExportDetail) ProtoMessage() {}
-
-func (x *DataExportDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DataExportDetail.ProtoReflect.Descriptor instead.
-func (*DataExportDetail) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *DataExportDetail) GetDatabase() string {
-	if x != nil {
-		return x.Database
-	}
-	return ""
-}
-
-func (x *DataExportDetail) GetExportDetail() isDataExportDetail_ExportDetail {
-	if x != nil {
-		return x.ExportDetail
-	}
-	return nil
-}
-
-func (x *DataExportDetail) GetEbs() *DataExportDetail_ExportBySQL {
-	if x != nil {
-		if x, ok := x.ExportDetail.(*DataExportDetail_Ebs); ok {
-			return x.Ebs
-		}
-	}
-	return nil
-}
-
-func (x *DataExportDetail) GetEatt() *DataExportDetail_ExportAccordingToTable {
-	if x != nil {
-		if x, ok := x.ExportDetail.(*DataExportDetail_Eatt); ok {
-			return x.Eatt
-		}
-	}
-	return nil
-}
-
-func (x *DataExportDetail) GetType() ExportType {
-	if x != nil {
-		return x.Type
-	}
-	return ExportType_EXPORT_TYPE_UNSPECIFIED
-}
-
-func (x *DataExportDetail) GetEncoding() Encoding {
-	if x != nil {
-		return x.Encoding
-	}
-	return Encoding_ENCODING_UNSPECIFIED
-}
-
-func (x *DataExportDetail) GetExportReason() string {
-	if x != nil {
-		return x.ExportReason
-	}
-	return ""
-}
-
-func (x *DataExportDetail) GetExector() Exec {
-	if x != nil {
-		return x.Exector
-	}
-	return Exec_EXEC_UNSPECIFIED
-}
-
-type isDataExportDetail_ExportDetail interface {
-	isDataExportDetail_ExportDetail()
-}
-
-type DataExportDetail_Ebs struct {
-	Ebs *DataExportDetail_ExportBySQL `protobuf:"bytes,2,opt,name=ebs,proto3,oneof"`
-}
-
-type DataExportDetail_Eatt struct {
-	Eatt *DataExportDetail_ExportAccordingToTable `protobuf:"bytes,3,opt,name=eatt,proto3,oneof"`
-}
-
-func (*DataExportDetail_Ebs) isDataExportDetail_ExportDetail() {}
-
-func (*DataExportDetail_Eatt) isDataExportDetail_ExportDetail() {}
-
 type SubmitIssueRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -1343,7 +970,7 @@ type SubmitIssueRequest struct {
 
 func (x *SubmitIssueRequest) Reset() {
 	*x = SubmitIssueRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[8]
+	mi := &file_v1_issue_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1355,7 +982,7 @@ func (x *SubmitIssueRequest) String() string {
 func (*SubmitIssueRequest) ProtoMessage() {}
 
 func (x *SubmitIssueRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[8]
+	mi := &file_v1_issue_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1368,7 +995,7 @@ func (x *SubmitIssueRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIssueRequest.ProtoReflect.Descriptor instead.
 func (*SubmitIssueRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{8}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SubmitIssueRequest) GetName() string {
@@ -1402,7 +1029,7 @@ type SubmitIssueResponse struct {
 
 func (x *SubmitIssueResponse) Reset() {
 	*x = SubmitIssueResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[9]
+	mi := &file_v1_issue_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1414,7 +1041,7 @@ func (x *SubmitIssueResponse) String() string {
 func (*SubmitIssueResponse) ProtoMessage() {}
 
 func (x *SubmitIssueResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[9]
+	mi := &file_v1_issue_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1427,7 +1054,7 @@ func (x *SubmitIssueResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIssueResponse.ProtoReflect.Descriptor instead.
 func (*SubmitIssueResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{9}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SubmitIssueResponse) GetOk() bool {
@@ -1453,7 +1080,7 @@ type GetIssueDetailRequest struct {
 
 func (x *GetIssueDetailRequest) Reset() {
 	*x = GetIssueDetailRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[10]
+	mi := &file_v1_issue_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1465,7 +1092,7 @@ func (x *GetIssueDetailRequest) String() string {
 func (*GetIssueDetailRequest) ProtoMessage() {}
 
 func (x *GetIssueDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[10]
+	mi := &file_v1_issue_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1478,7 +1105,7 @@ func (x *GetIssueDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIssueDetailRequest.ProtoReflect.Descriptor instead.
 func (*GetIssueDetailRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{10}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetIssueDetailRequest) GetName() string {
@@ -1501,7 +1128,7 @@ type GetIssueDetailResponse struct {
 
 func (x *GetIssueDetailResponse) Reset() {
 	*x = GetIssueDetailResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[11]
+	mi := &file_v1_issue_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1513,7 +1140,7 @@ func (x *GetIssueDetailResponse) String() string {
 func (*GetIssueDetailResponse) ProtoMessage() {}
 
 func (x *GetIssueDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[11]
+	mi := &file_v1_issue_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1526,7 +1153,7 @@ func (x *GetIssueDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIssueDetailResponse.ProtoReflect.Descriptor instead.
 func (*GetIssueDetailResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{11}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetIssueDetailResponse) GetOk() bool {
@@ -1572,7 +1199,7 @@ type ApproveRequest struct {
 
 func (x *ApproveRequest) Reset() {
 	*x = ApproveRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[12]
+	mi := &file_v1_issue_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1584,7 +1211,7 @@ func (x *ApproveRequest) String() string {
 func (*ApproveRequest) ProtoMessage() {}
 
 func (x *ApproveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[12]
+	mi := &file_v1_issue_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1597,7 +1224,7 @@ func (x *ApproveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveRequest.ProtoReflect.Descriptor instead.
 func (*ApproveRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{12}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ApproveRequest) GetName() string {
@@ -1623,7 +1250,7 @@ type ApproveResponse struct {
 
 func (x *ApproveResponse) Reset() {
 	*x = ApproveResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[13]
+	mi := &file_v1_issue_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1635,7 +1262,7 @@ func (x *ApproveResponse) String() string {
 func (*ApproveResponse) ProtoMessage() {}
 
 func (x *ApproveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[13]
+	mi := &file_v1_issue_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1648,7 +1275,7 @@ func (x *ApproveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveResponse.ProtoReflect.Descriptor instead.
 func (*ApproveResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{13}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ApproveResponse) GetOk() bool {
@@ -1668,7 +1295,7 @@ type RejectRequest struct {
 
 func (x *RejectRequest) Reset() {
 	*x = RejectRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[14]
+	mi := &file_v1_issue_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1680,7 +1307,7 @@ func (x *RejectRequest) String() string {
 func (*RejectRequest) ProtoMessage() {}
 
 func (x *RejectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[14]
+	mi := &file_v1_issue_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1693,7 +1320,7 @@ func (x *RejectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectRequest.ProtoReflect.Descriptor instead.
 func (*RejectRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{14}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *RejectRequest) GetName() string {
@@ -1719,7 +1346,7 @@ type RejectResponse struct {
 
 func (x *RejectResponse) Reset() {
 	*x = RejectResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[15]
+	mi := &file_v1_issue_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1731,7 +1358,7 @@ func (x *RejectResponse) String() string {
 func (*RejectResponse) ProtoMessage() {}
 
 func (x *RejectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[15]
+	mi := &file_v1_issue_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1744,7 +1371,7 @@ func (x *RejectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectResponse.ProtoReflect.Descriptor instead.
 func (*RejectResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{15}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RejectResponse) GetOk() bool {
@@ -1768,7 +1395,7 @@ type ListIssueRequest struct {
 
 func (x *ListIssueRequest) Reset() {
 	*x = ListIssueRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[16]
+	mi := &file_v1_issue_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1780,7 +1407,7 @@ func (x *ListIssueRequest) String() string {
 func (*ListIssueRequest) ProtoMessage() {}
 
 func (x *ListIssueRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[16]
+	mi := &file_v1_issue_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1793,7 +1420,7 @@ func (x *ListIssueRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIssueRequest.ProtoReflect.Descriptor instead.
 func (*ListIssueRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{16}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListIssueRequest) GetName() string {
@@ -1850,7 +1477,7 @@ type ListIssueResponse struct {
 
 func (x *ListIssueResponse) Reset() {
 	*x = ListIssueResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[17]
+	mi := &file_v1_issue_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1862,7 +1489,7 @@ func (x *ListIssueResponse) String() string {
 func (*ListIssueResponse) ProtoMessage() {}
 
 func (x *ListIssueResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[17]
+	mi := &file_v1_issue_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1875,7 +1502,7 @@ func (x *ListIssueResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIssueResponse.ProtoReflect.Descriptor instead.
 func (*ListIssueResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{17}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListIssueResponse) GetOk() bool {
@@ -1915,7 +1542,7 @@ type ListApproveConfigRequest struct {
 
 func (x *ListApproveConfigRequest) Reset() {
 	*x = ListApproveConfigRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[18]
+	mi := &file_v1_issue_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1927,7 +1554,7 @@ func (x *ListApproveConfigRequest) String() string {
 func (*ListApproveConfigRequest) ProtoMessage() {}
 
 func (x *ListApproveConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[18]
+	mi := &file_v1_issue_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1940,7 +1567,7 @@ func (x *ListApproveConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListApproveConfigRequest.ProtoReflect.Descriptor instead.
 func (*ListApproveConfigRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{18}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListApproveConfigRequest) GetName() string {
@@ -1960,7 +1587,7 @@ type ListApproveConfigResponse struct {
 
 func (x *ListApproveConfigResponse) Reset() {
 	*x = ListApproveConfigResponse{}
-	mi := &file_v1_issue_service_proto_msgTypes[19]
+	mi := &file_v1_issue_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1972,7 +1599,7 @@ func (x *ListApproveConfigResponse) String() string {
 func (*ListApproveConfigResponse) ProtoMessage() {}
 
 func (x *ListApproveConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[19]
+	mi := &file_v1_issue_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1985,7 +1612,7 @@ func (x *ListApproveConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListApproveConfigResponse.ProtoReflect.Descriptor instead.
 func (*ListApproveConfigResponse) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{19}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListApproveConfigResponse) GetOk() bool {
@@ -2012,7 +1639,7 @@ type UpdateApproveNotifyConfigRequest struct {
 
 func (x *UpdateApproveNotifyConfigRequest) Reset() {
 	*x = UpdateApproveNotifyConfigRequest{}
-	mi := &file_v1_issue_service_proto_msgTypes[20]
+	mi := &file_v1_issue_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2024,7 +1651,7 @@ func (x *UpdateApproveNotifyConfigRequest) String() string {
 func (*UpdateApproveNotifyConfigRequest) ProtoMessage() {}
 
 func (x *UpdateApproveNotifyConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[20]
+	mi := &file_v1_issue_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2037,7 +1664,7 @@ func (x *UpdateApproveNotifyConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateApproveNotifyConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateApproveNotifyConfigRequest) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{20}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateApproveNotifyConfigRequest) GetName() string {
@@ -2065,7 +1692,7 @@ type Issue_Approver struct {
 
 func (x *Issue_Approver) Reset() {
 	*x = Issue_Approver{}
-	mi := &file_v1_issue_service_proto_msgTypes[22]
+	mi := &file_v1_issue_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2077,7 +1704,7 @@ func (x *Issue_Approver) String() string {
 func (*Issue_Approver) ProtoMessage() {}
 
 func (x *Issue_Approver) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[22]
+	mi := &file_v1_issue_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2107,178 +1734,6 @@ func (x *Issue_Approver) GetPrincipal() string {
 	return ""
 }
 
-type DataExportDetail_ExportAccordingToTable struct {
-	state         protoimpl.MessageState                                 `protogen:"open.v1"`
-	ExportAll     bool                                                   `protobuf:"varint,1,opt,name=export_all,json=exportAll,proto3" json:"export_all,omitempty"`
-	Content       ExportContent                                          `protobuf:"varint,2,opt,name=content,proto3,enum=woxqaq.v1.ExportContent" json:"content,omitempty"`
-	Option        []*DataExportDetail_ExportAccordingToTable_TableOption `protobuf:"bytes,3,rep,name=option,proto3" json:"option,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DataExportDetail_ExportAccordingToTable) Reset() {
-	*x = DataExportDetail_ExportAccordingToTable{}
-	mi := &file_v1_issue_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DataExportDetail_ExportAccordingToTable) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DataExportDetail_ExportAccordingToTable) ProtoMessage() {}
-
-func (x *DataExportDetail_ExportAccordingToTable) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DataExportDetail_ExportAccordingToTable.ProtoReflect.Descriptor instead.
-func (*DataExportDetail_ExportAccordingToTable) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{7, 0}
-}
-
-func (x *DataExportDetail_ExportAccordingToTable) GetExportAll() bool {
-	if x != nil {
-		return x.ExportAll
-	}
-	return false
-}
-
-func (x *DataExportDetail_ExportAccordingToTable) GetContent() ExportContent {
-	if x != nil {
-		return x.Content
-	}
-	return ExportContent_EXPORT_CONTENT_UNSPECIFIED
-}
-
-func (x *DataExportDetail_ExportAccordingToTable) GetOption() []*DataExportDetail_ExportAccordingToTable_TableOption {
-	if x != nil {
-		return x.Option
-	}
-	return nil
-}
-
-type DataExportDetail_ExportBySQL struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Statement     string                 `protobuf:"bytes,1,opt,name=statement,proto3" json:"statement,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DataExportDetail_ExportBySQL) Reset() {
-	*x = DataExportDetail_ExportBySQL{}
-	mi := &file_v1_issue_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DataExportDetail_ExportBySQL) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DataExportDetail_ExportBySQL) ProtoMessage() {}
-
-func (x *DataExportDetail_ExportBySQL) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DataExportDetail_ExportBySQL.ProtoReflect.Descriptor instead.
-func (*DataExportDetail_ExportBySQL) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{7, 1}
-}
-
-func (x *DataExportDetail_ExportBySQL) GetStatement() string {
-	if x != nil {
-		return x.Statement
-	}
-	return ""
-}
-
-type DataExportDetail_ExportAccordingToTable_TableOption struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Table         string                 `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
-	AllField      bool                   `protobuf:"varint,2,opt,name=all_field,json=allField,proto3" json:"all_field,omitempty"`
-	Fields        []string               `protobuf:"bytes,3,rep,name=fields,proto3" json:"fields,omitempty"`
-	Filter        string                 `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) Reset() {
-	*x = DataExportDetail_ExportAccordingToTable_TableOption{}
-	mi := &file_v1_issue_service_proto_msgTypes[25]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DataExportDetail_ExportAccordingToTable_TableOption) ProtoMessage() {}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[25]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DataExportDetail_ExportAccordingToTable_TableOption.ProtoReflect.Descriptor instead.
-func (*DataExportDetail_ExportAccordingToTable_TableOption) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{7, 0, 0}
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) GetTable() string {
-	if x != nil {
-		return x.Table
-	}
-	return ""
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) GetAllField() bool {
-	if x != nil {
-		return x.AllField
-	}
-	return false
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) GetFields() []string {
-	if x != nil {
-		return x.Fields
-	}
-	return nil
-}
-
-func (x *DataExportDetail_ExportAccordingToTable_TableOption) GetFilter() string {
-	if x != nil {
-		return x.Filter
-	}
-	return ""
-}
-
 type ApproveRequestApproveMeta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Approver      string                 `protobuf:"bytes,1,opt,name=approver,proto3" json:"approver,omitempty"`
@@ -2289,7 +1744,7 @@ type ApproveRequestApproveMeta struct {
 
 func (x *ApproveRequestApproveMeta) Reset() {
 	*x = ApproveRequestApproveMeta{}
-	mi := &file_v1_issue_service_proto_msgTypes[26]
+	mi := &file_v1_issue_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2301,7 +1756,7 @@ func (x *ApproveRequestApproveMeta) String() string {
 func (*ApproveRequestApproveMeta) ProtoMessage() {}
 
 func (x *ApproveRequestApproveMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[26]
+	mi := &file_v1_issue_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2314,7 +1769,7 @@ func (x *ApproveRequestApproveMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ApproveRequestApproveMeta.ProtoReflect.Descriptor instead.
 func (*ApproveRequestApproveMeta) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{12, 0}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{11, 0}
 }
 
 func (x *ApproveRequestApproveMeta) GetApprover() string {
@@ -2341,7 +1796,7 @@ type RejectRequestApproveMeta struct {
 
 func (x *RejectRequestApproveMeta) Reset() {
 	*x = RejectRequestApproveMeta{}
-	mi := &file_v1_issue_service_proto_msgTypes[27]
+	mi := &file_v1_issue_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2353,7 +1808,7 @@ func (x *RejectRequestApproveMeta) String() string {
 func (*RejectRequestApproveMeta) ProtoMessage() {}
 
 func (x *RejectRequestApproveMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_issue_service_proto_msgTypes[27]
+	mi := &file_v1_issue_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2366,7 +1821,7 @@ func (x *RejectRequestApproveMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectRequestApproveMeta.ProtoReflect.Descriptor instead.
 func (*RejectRequestApproveMeta) Descriptor() ([]byte, []int) {
-	return file_v1_issue_service_proto_rawDescGZIP(), []int{14, 0}
+	return file_v1_issue_service_proto_rawDescGZIP(), []int{13, 0}
 }
 
 func (x *RejectRequestApproveMeta) GetApprover() string {
@@ -2387,9 +1842,9 @@ var File_v1_issue_service_proto protoreflect.FileDescriptor
 
 const file_v1_issue_service_proto_rawDesc = "" +
 	"\n" +
-	"\x16v1/issue_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"<\n" +
-	"\vIssueDetail\x12-\n" +
-	"\x03ded\x18\x01 \x01(\v2\x1b.woxqaq.v1.DataExportDetailR\x03ded\"\xa2\x01\n" +
+	"\x16v1/issue_service.proto\x12\twoxqaq.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ev1/issue.proto\"2\n" +
+	"\vIssueDetail\x12#\n" +
+	"\x03ded\x18\x01 \x01(\v2\x11.DataExportDetailR\x03ded\"\xa2\x01\n" +
 	"\x10ApprovalTemplate\x12+\n" +
 	"\x04flow\x18\x01 \x01(\v2\x17.woxqaq.v1.ApprovalFlowR\x04flow\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2457,28 +1912,7 @@ const file_v1_issue_service_proto_rawDesc = "" +
 	"\aPENDING\x10\x01\x12\f\n" +
 	"\bAPPROVED\x10\x02\x12\f\n" +
 	"\bREJECTED\x10\x03:\x9e\x01\xeaA\x9a\x01\n" +
-	"\fwoxQAQ/Issue\x125org/{orgName}/instance/{instanceName}/issue/{issueId}\x12%org/{orgName}/instance/{instanceName}\x12\x1dorg/{orgName}/issue/{issueId}\x12\rorg/{orgName}\"\xd7\x05\n" +
-	"\x10DataExportDetail\x12\x1a\n" +
-	"\bdatabase\x18\x01 \x01(\tR\bdatabase\x12;\n" +
-	"\x03ebs\x18\x02 \x01(\v2'.woxqaq.v1.DataExportDetail.ExportBySQLH\x00R\x03ebs\x12H\n" +
-	"\x04eatt\x18\x03 \x01(\v22.woxqaq.v1.DataExportDetail.ExportAccordingToTableH\x00R\x04eatt\x12)\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x15.woxqaq.v1.ExportTypeR\x04type\x12/\n" +
-	"\bencoding\x18\x05 \x01(\x0e2\x13.woxqaq.v1.EncodingR\bencoding\x12#\n" +
-	"\rexport_reason\x18\x06 \x01(\tR\fexportReason\x12)\n" +
-	"\aexector\x18\a \x01(\x0e2\x0f.woxqaq.v1.ExecR\aexector\x1a\xb5\x02\n" +
-	"\x16ExportAccordingToTable\x12\x1d\n" +
-	"\n" +
-	"export_all\x18\x01 \x01(\bR\texportAll\x122\n" +
-	"\acontent\x18\x02 \x01(\x0e2\x18.woxqaq.v1.ExportContentR\acontent\x12V\n" +
-	"\x06option\x18\x03 \x03(\v2>.woxqaq.v1.DataExportDetail.ExportAccordingToTable.TableOptionR\x06option\x1ap\n" +
-	"\vTableOption\x12\x14\n" +
-	"\x05table\x18\x01 \x01(\tR\x05table\x12\x1b\n" +
-	"\tall_field\x18\x02 \x01(\bR\ballField\x12\x16\n" +
-	"\x06fields\x18\x03 \x03(\tR\x06fields\x12\x16\n" +
-	"\x06filter\x18\x04 \x01(\tR\x06filter\x1a+\n" +
-	"\vExportBySQL\x12\x1c\n" +
-	"\tstatement\x18\x01 \x01(\tR\tstatementB\x0f\n" +
-	"\rexport_detail\"\x82\x01\n" +
+	"\fwoxQAQ/Issue\x125org/{orgName}/instance/{instanceName}/issue/{issueId}\x12%org/{orgName}/instance/{instanceName}\x12\x1dorg/{orgName}/issue/{issueId}\x12\rorg/{orgName}\"\x82\x01\n" +
 	"\x12SubmitIssueRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12(\n" +
 	"\x04kind\x18\x02 \x01(\x0e2\x14.woxqaq.v1.IssueKindR\x04kind\x12.\n" +
@@ -2488,10 +1922,10 @@ const file_v1_issue_service_proto_rawDesc = "" +
 	"\bissue_id\x18\x02 \x01(\tR\aissueId\"A\n" +
 	"\x15GetIssueDetailRequest\x12(\n" +
 	"\x04name\x18\x01 \x01(\tB\x14\xe0A\x02\xfaA\x0e\n" +
-	"\fwoxQAQ/IssueR\x04name\"a\n" +
+	"\fwoxQAQ/IssueR\x04name\"W\n" +
 	"\x16GetIssueDetailResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok\x12/\n" +
-	"\x03ded\x18\x04 \x01(\v2\x1b.woxqaq.v1.DataExportDetailH\x00R\x03dedB\x06\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\x12%\n" +
+	"\x03ded\x18\x04 \x01(\v2\x11.DataExportDetailH\x00R\x03dedB\x06\n" +
 	"\x04data\"\xba\x01\n" +
 	"\x0eApproveRequest\x12(\n" +
 	"\x04name\x18\x01 \x01(\tB\x14\xe0A\x02\xfaA\x0e\n" +
@@ -2542,36 +1976,11 @@ const file_v1_issue_service_proto_rawDesc = "" +
 	" UpdateApproveNotifyConfigRequest\x120\n" +
 	"\x04name\x18\x01 \x01(\tB\x1c\xe0A\x02\xfaA\x16\n" +
 	"\x14woxQAQ/ApproveConfigR\x04name\x127\n" +
-	"\x04data\x18\x02 \x01(\v2#.woxqaq.v1.ApprovalNodeNotifyConfigR\x04data*7\n" +
-	"\bEncoding\x12\x18\n" +
-	"\x14ENCODING_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04UTF8\x10\x01\x12\a\n" +
-	"\x03GBK\x10\x02*B\n" +
+	"\x04data\x18\x02 \x01(\v2#.woxqaq.v1.ApprovalNodeNotifyConfigR\x04data*B\n" +
 	"\vTriggerKind\x12\x1c\n" +
 	"\x18TRIGGER_KIND_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aCURRENT\x10\x01\x12\b\n" +
-	"\x04CRON\x10\x02*B\n" +
-	"\fExportMethod\x12\x1d\n" +
-	"\x19EXPORT_METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
-	"\x03SQL\x10\x01\x12\n" +
-	"\n" +
-	"\x06TABLES\x10\x02*N\n" +
-	"\rExportContent\x12\x1e\n" +
-	"\x1aEXPORT_CONTENT_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04DATA\x10\x01\x12\n" +
-	"\n" +
-	"\x06STRUCT\x10\x02\x12\a\n" +
-	"\x03ALL\x10\x03*=\n" +
-	"\n" +
-	"ExportType\x12\x1b\n" +
-	"\x17EXPORT_TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
-	"\x03CSV\x10\x01\x12\t\n" +
-	"\x05EXCEL\x10\x02*C\n" +
-	"\x04Exec\x12\x14\n" +
-	"\x10EXEC_UNSPECIFIED\x10\x00\x12\f\n" +
-	"\bAPPROVER\x10\x01\x12\r\n" +
-	"\tCOMMITTER\x10\x02\x12\b\n" +
-	"\x04AUTO\x10\x03*\\\n" +
+	"\x04CRON\x10\x02*\\\n" +
 	"\tIssueKind\x12\x1a\n" +
 	"\x16ISSUE_KIND_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vDATA_IMPORT\x10\x01\x12\x0f\n" +
@@ -2607,110 +2016,95 @@ func file_v1_issue_service_proto_rawDescGZIP() []byte {
 	return file_v1_issue_service_proto_rawDescData
 }
 
-var file_v1_issue_service_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
-var file_v1_issue_service_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_v1_issue_service_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_v1_issue_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_v1_issue_service_proto_goTypes = []any{
-	(Encoding)(0),                                   // 0: woxqaq.v1.Encoding
-	(TriggerKind)(0),                                // 1: woxqaq.v1.TriggerKind
-	(ExportMethod)(0),                               // 2: woxqaq.v1.ExportMethod
-	(ExportContent)(0),                              // 3: woxqaq.v1.ExportContent
-	(ExportType)(0),                                 // 4: woxqaq.v1.ExportType
-	(Exec)(0),                                       // 5: woxqaq.v1.Exec
-	(IssueKind)(0),                                  // 6: woxqaq.v1.IssueKind
-	(IssueStatus)(0),                                // 7: woxqaq.v1.IssueStatus
-	(ApprovalStep_Type)(0),                          // 8: woxqaq.v1.ApprovalStep.Type
-	(ApprovalNode_Type)(0),                          // 9: woxqaq.v1.ApprovalNode.Type
-	(ApprovalNodeNotifyConfig_NotifyType)(0),        // 10: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType
-	(ApprovalNodeNotifyConfig_Receiver)(0),          // 11: woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
-	(Issue_Approver_Status)(0),                      // 12: woxqaq.v1.Issue.Approver.Status
-	(ListIssueRequest_IssueRole)(0),                 // 13: woxqaq.v1.ListIssueRequest.IssueRole
-	(*IssueDetail)(nil),                             // 14: woxqaq.v1.IssueDetail
-	(*ApprovalTemplate)(nil),                        // 15: woxqaq.v1.ApprovalTemplate
-	(*ApprovalFlow)(nil),                            // 16: woxqaq.v1.ApprovalFlow
-	(*ApprovalStep)(nil),                            // 17: woxqaq.v1.ApprovalStep
-	(*ApprovalNode)(nil),                            // 18: woxqaq.v1.ApprovalNode
-	(*ApprovalNodeNotifyConfig)(nil),                // 19: woxqaq.v1.ApprovalNodeNotifyConfig
-	(*Issue)(nil),                                   // 20: woxqaq.v1.Issue
-	(*DataExportDetail)(nil),                        // 21: woxqaq.v1.DataExportDetail
-	(*SubmitIssueRequest)(nil),                      // 22: woxqaq.v1.SubmitIssueRequest
-	(*SubmitIssueResponse)(nil),                     // 23: woxqaq.v1.SubmitIssueResponse
-	(*GetIssueDetailRequest)(nil),                   // 24: woxqaq.v1.GetIssueDetailRequest
-	(*GetIssueDetailResponse)(nil),                  // 25: woxqaq.v1.GetIssueDetailResponse
-	(*ApproveRequest)(nil),                          // 26: woxqaq.v1.ApproveRequest
-	(*ApproveResponse)(nil),                         // 27: woxqaq.v1.ApproveResponse
-	(*RejectRequest)(nil),                           // 28: woxqaq.v1.RejectRequest
-	(*RejectResponse)(nil),                          // 29: woxqaq.v1.RejectResponse
-	(*ListIssueRequest)(nil),                        // 30: woxqaq.v1.ListIssueRequest
-	(*ListIssueResponse)(nil),                       // 31: woxqaq.v1.ListIssueResponse
-	(*ListApproveConfigRequest)(nil),                // 32: woxqaq.v1.ListApproveConfigRequest
-	(*ListApproveConfigResponse)(nil),               // 33: woxqaq.v1.ListApproveConfigResponse
-	(*UpdateApproveNotifyConfigRequest)(nil),        // 34: woxqaq.v1.UpdateApproveNotifyConfigRequest
-	nil,                                             // 35: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry
-	(*Issue_Approver)(nil),                          // 36: woxqaq.v1.Issue.Approver
-	(*DataExportDetail_ExportAccordingToTable)(nil), // 37: woxqaq.v1.DataExportDetail.ExportAccordingToTable
-	(*DataExportDetail_ExportBySQL)(nil),            // 38: woxqaq.v1.DataExportDetail.ExportBySQL
-	(*DataExportDetail_ExportAccordingToTable_TableOption)(nil), // 39: woxqaq.v1.DataExportDetail.ExportAccordingToTable.TableOption
-	(*ApproveRequestApproveMeta)(nil),                           // 40: woxqaq.v1.ApproveRequest.approveMeta
-	(*RejectRequestApproveMeta)(nil),                            // 41: woxqaq.v1.RejectRequest.approveMeta
-	(*timestamppb.Timestamp)(nil),                               // 42: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                                       // 43: google.protobuf.Empty
+	(TriggerKind)(0),                         // 0: woxqaq.v1.TriggerKind
+	(IssueKind)(0),                           // 1: woxqaq.v1.IssueKind
+	(IssueStatus)(0),                         // 2: woxqaq.v1.IssueStatus
+	(ApprovalStep_Type)(0),                   // 3: woxqaq.v1.ApprovalStep.Type
+	(ApprovalNode_Type)(0),                   // 4: woxqaq.v1.ApprovalNode.Type
+	(ApprovalNodeNotifyConfig_NotifyType)(0), // 5: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType
+	(ApprovalNodeNotifyConfig_Receiver)(0),   // 6: woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
+	(Issue_Approver_Status)(0),               // 7: woxqaq.v1.Issue.Approver.Status
+	(ListIssueRequest_IssueRole)(0),          // 8: woxqaq.v1.ListIssueRequest.IssueRole
+	(*IssueDetail)(nil),                      // 9: woxqaq.v1.IssueDetail
+	(*ApprovalTemplate)(nil),                 // 10: woxqaq.v1.ApprovalTemplate
+	(*ApprovalFlow)(nil),                     // 11: woxqaq.v1.ApprovalFlow
+	(*ApprovalStep)(nil),                     // 12: woxqaq.v1.ApprovalStep
+	(*ApprovalNode)(nil),                     // 13: woxqaq.v1.ApprovalNode
+	(*ApprovalNodeNotifyConfig)(nil),         // 14: woxqaq.v1.ApprovalNodeNotifyConfig
+	(*Issue)(nil),                            // 15: woxqaq.v1.Issue
+	(*SubmitIssueRequest)(nil),               // 16: woxqaq.v1.SubmitIssueRequest
+	(*SubmitIssueResponse)(nil),              // 17: woxqaq.v1.SubmitIssueResponse
+	(*GetIssueDetailRequest)(nil),            // 18: woxqaq.v1.GetIssueDetailRequest
+	(*GetIssueDetailResponse)(nil),           // 19: woxqaq.v1.GetIssueDetailResponse
+	(*ApproveRequest)(nil),                   // 20: woxqaq.v1.ApproveRequest
+	(*ApproveResponse)(nil),                  // 21: woxqaq.v1.ApproveResponse
+	(*RejectRequest)(nil),                    // 22: woxqaq.v1.RejectRequest
+	(*RejectResponse)(nil),                   // 23: woxqaq.v1.RejectResponse
+	(*ListIssueRequest)(nil),                 // 24: woxqaq.v1.ListIssueRequest
+	(*ListIssueResponse)(nil),                // 25: woxqaq.v1.ListIssueResponse
+	(*ListApproveConfigRequest)(nil),         // 26: woxqaq.v1.ListApproveConfigRequest
+	(*ListApproveConfigResponse)(nil),        // 27: woxqaq.v1.ListApproveConfigResponse
+	(*UpdateApproveNotifyConfigRequest)(nil), // 28: woxqaq.v1.UpdateApproveNotifyConfigRequest
+	nil,                                      // 29: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry
+	(*Issue_Approver)(nil),                   // 30: woxqaq.v1.Issue.Approver
+	(*ApproveRequestApproveMeta)(nil),        // 31: woxqaq.v1.ApproveRequest.approveMeta
+	(*RejectRequestApproveMeta)(nil),         // 32: woxqaq.v1.RejectRequest.approveMeta
+	(*DataExportDetail)(nil),                 // 33: DataExportDetail
+	(*timestamppb.Timestamp)(nil),            // 34: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                    // 35: google.protobuf.Empty
 }
 var file_v1_issue_service_proto_depIdxs = []int32{
-	21, // 0: woxqaq.v1.IssueDetail.ded:type_name -> woxqaq.v1.DataExportDetail
-	16, // 1: woxqaq.v1.ApprovalTemplate.flow:type_name -> woxqaq.v1.ApprovalFlow
-	17, // 2: woxqaq.v1.ApprovalFlow.steps:type_name -> woxqaq.v1.ApprovalStep
-	8,  // 3: woxqaq.v1.ApprovalStep.type:type_name -> woxqaq.v1.ApprovalStep.Type
-	18, // 4: woxqaq.v1.ApprovalStep.nodes:type_name -> woxqaq.v1.ApprovalNode
-	9,  // 5: woxqaq.v1.ApprovalNode.type:type_name -> woxqaq.v1.ApprovalNode.Type
-	35, // 6: woxqaq.v1.ApprovalNodeNotifyConfig.notify_types:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry
-	11, // 7: woxqaq.v1.ApprovalNodeNotifyConfig.available_receiver:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
-	11, // 8: woxqaq.v1.ApprovalNodeNotifyConfig.selected_receiver:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
-	6,  // 9: woxqaq.v1.Issue.kind:type_name -> woxqaq.v1.IssueKind
-	42, // 10: woxqaq.v1.Issue.create_time:type_name -> google.protobuf.Timestamp
-	42, // 11: woxqaq.v1.Issue.update_time:type_name -> google.protobuf.Timestamp
-	7,  // 12: woxqaq.v1.Issue.status:type_name -> woxqaq.v1.IssueStatus
-	14, // 13: woxqaq.v1.Issue.detail:type_name -> woxqaq.v1.IssueDetail
-	36, // 14: woxqaq.v1.Issue.approvers:type_name -> woxqaq.v1.Issue.Approver
-	15, // 15: woxqaq.v1.Issue.approval_templates:type_name -> woxqaq.v1.ApprovalTemplate
-	38, // 16: woxqaq.v1.DataExportDetail.ebs:type_name -> woxqaq.v1.DataExportDetail.ExportBySQL
-	37, // 17: woxqaq.v1.DataExportDetail.eatt:type_name -> woxqaq.v1.DataExportDetail.ExportAccordingToTable
-	4,  // 18: woxqaq.v1.DataExportDetail.type:type_name -> woxqaq.v1.ExportType
-	0,  // 19: woxqaq.v1.DataExportDetail.encoding:type_name -> woxqaq.v1.Encoding
-	5,  // 20: woxqaq.v1.DataExportDetail.exector:type_name -> woxqaq.v1.Exec
-	6,  // 21: woxqaq.v1.SubmitIssueRequest.kind:type_name -> woxqaq.v1.IssueKind
-	14, // 22: woxqaq.v1.SubmitIssueRequest.detail:type_name -> woxqaq.v1.IssueDetail
-	21, // 23: woxqaq.v1.GetIssueDetailResponse.ded:type_name -> woxqaq.v1.DataExportDetail
-	40, // 24: woxqaq.v1.ApproveRequest.meta:type_name -> woxqaq.v1.ApproveRequest.approveMeta
-	41, // 25: woxqaq.v1.RejectRequest.meta:type_name -> woxqaq.v1.RejectRequest.approveMeta
-	6,  // 26: woxqaq.v1.ListIssueRequest.kind:type_name -> woxqaq.v1.IssueKind
-	7,  // 27: woxqaq.v1.ListIssueRequest.status:type_name -> woxqaq.v1.IssueStatus
-	13, // 28: woxqaq.v1.ListIssueRequest.role:type_name -> woxqaq.v1.ListIssueRequest.IssueRole
-	20, // 29: woxqaq.v1.ListIssueResponse.data:type_name -> woxqaq.v1.Issue
-	19, // 30: woxqaq.v1.ListApproveConfigResponse.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
-	19, // 31: woxqaq.v1.UpdateApproveNotifyConfigRequest.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
-	10, // 32: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry.value:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType
-	12, // 33: woxqaq.v1.Issue.Approver.status:type_name -> woxqaq.v1.Issue.Approver.Status
-	3,  // 34: woxqaq.v1.DataExportDetail.ExportAccordingToTable.content:type_name -> woxqaq.v1.ExportContent
-	39, // 35: woxqaq.v1.DataExportDetail.ExportAccordingToTable.option:type_name -> woxqaq.v1.DataExportDetail.ExportAccordingToTable.TableOption
-	24, // 36: woxqaq.v1.IssueService.GetIssueDetail:input_type -> woxqaq.v1.GetIssueDetailRequest
-	30, // 37: woxqaq.v1.IssueService.ListIssue:input_type -> woxqaq.v1.ListIssueRequest
-	22, // 38: woxqaq.v1.IssueService.SubmitIssue:input_type -> woxqaq.v1.SubmitIssueRequest
-	26, // 39: woxqaq.v1.IssueService.Approve:input_type -> woxqaq.v1.ApproveRequest
-	28, // 40: woxqaq.v1.IssueService.Reject:input_type -> woxqaq.v1.RejectRequest
-	32, // 41: woxqaq.v1.IssueService.ListApproveConfig:input_type -> woxqaq.v1.ListApproveConfigRequest
-	34, // 42: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:input_type -> woxqaq.v1.UpdateApproveNotifyConfigRequest
-	25, // 43: woxqaq.v1.IssueService.GetIssueDetail:output_type -> woxqaq.v1.GetIssueDetailResponse
-	31, // 44: woxqaq.v1.IssueService.ListIssue:output_type -> woxqaq.v1.ListIssueResponse
-	23, // 45: woxqaq.v1.IssueService.SubmitIssue:output_type -> woxqaq.v1.SubmitIssueResponse
-	27, // 46: woxqaq.v1.IssueService.Approve:output_type -> woxqaq.v1.ApproveResponse
-	29, // 47: woxqaq.v1.IssueService.Reject:output_type -> woxqaq.v1.RejectResponse
-	33, // 48: woxqaq.v1.IssueService.ListApproveConfig:output_type -> woxqaq.v1.ListApproveConfigResponse
-	43, // 49: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:output_type -> google.protobuf.Empty
-	43, // [43:50] is the sub-list for method output_type
-	36, // [36:43] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	33, // 0: woxqaq.v1.IssueDetail.ded:type_name -> DataExportDetail
+	11, // 1: woxqaq.v1.ApprovalTemplate.flow:type_name -> woxqaq.v1.ApprovalFlow
+	12, // 2: woxqaq.v1.ApprovalFlow.steps:type_name -> woxqaq.v1.ApprovalStep
+	3,  // 3: woxqaq.v1.ApprovalStep.type:type_name -> woxqaq.v1.ApprovalStep.Type
+	13, // 4: woxqaq.v1.ApprovalStep.nodes:type_name -> woxqaq.v1.ApprovalNode
+	4,  // 5: woxqaq.v1.ApprovalNode.type:type_name -> woxqaq.v1.ApprovalNode.Type
+	29, // 6: woxqaq.v1.ApprovalNodeNotifyConfig.notify_types:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry
+	6,  // 7: woxqaq.v1.ApprovalNodeNotifyConfig.available_receiver:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
+	6,  // 8: woxqaq.v1.ApprovalNodeNotifyConfig.selected_receiver:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.Receiver
+	1,  // 9: woxqaq.v1.Issue.kind:type_name -> woxqaq.v1.IssueKind
+	34, // 10: woxqaq.v1.Issue.create_time:type_name -> google.protobuf.Timestamp
+	34, // 11: woxqaq.v1.Issue.update_time:type_name -> google.protobuf.Timestamp
+	2,  // 12: woxqaq.v1.Issue.status:type_name -> woxqaq.v1.IssueStatus
+	9,  // 13: woxqaq.v1.Issue.detail:type_name -> woxqaq.v1.IssueDetail
+	30, // 14: woxqaq.v1.Issue.approvers:type_name -> woxqaq.v1.Issue.Approver
+	10, // 15: woxqaq.v1.Issue.approval_templates:type_name -> woxqaq.v1.ApprovalTemplate
+	1,  // 16: woxqaq.v1.SubmitIssueRequest.kind:type_name -> woxqaq.v1.IssueKind
+	9,  // 17: woxqaq.v1.SubmitIssueRequest.detail:type_name -> woxqaq.v1.IssueDetail
+	33, // 18: woxqaq.v1.GetIssueDetailResponse.ded:type_name -> DataExportDetail
+	31, // 19: woxqaq.v1.ApproveRequest.meta:type_name -> woxqaq.v1.ApproveRequest.approveMeta
+	32, // 20: woxqaq.v1.RejectRequest.meta:type_name -> woxqaq.v1.RejectRequest.approveMeta
+	1,  // 21: woxqaq.v1.ListIssueRequest.kind:type_name -> woxqaq.v1.IssueKind
+	2,  // 22: woxqaq.v1.ListIssueRequest.status:type_name -> woxqaq.v1.IssueStatus
+	8,  // 23: woxqaq.v1.ListIssueRequest.role:type_name -> woxqaq.v1.ListIssueRequest.IssueRole
+	15, // 24: woxqaq.v1.ListIssueResponse.data:type_name -> woxqaq.v1.Issue
+	14, // 25: woxqaq.v1.ListApproveConfigResponse.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
+	14, // 26: woxqaq.v1.UpdateApproveNotifyConfigRequest.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
+	5,  // 27: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry.value:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType
+	7,  // 28: woxqaq.v1.Issue.Approver.status:type_name -> woxqaq.v1.Issue.Approver.Status
+	18, // 29: woxqaq.v1.IssueService.GetIssueDetail:input_type -> woxqaq.v1.GetIssueDetailRequest
+	24, // 30: woxqaq.v1.IssueService.ListIssue:input_type -> woxqaq.v1.ListIssueRequest
+	16, // 31: woxqaq.v1.IssueService.SubmitIssue:input_type -> woxqaq.v1.SubmitIssueRequest
+	20, // 32: woxqaq.v1.IssueService.Approve:input_type -> woxqaq.v1.ApproveRequest
+	22, // 33: woxqaq.v1.IssueService.Reject:input_type -> woxqaq.v1.RejectRequest
+	26, // 34: woxqaq.v1.IssueService.ListApproveConfig:input_type -> woxqaq.v1.ListApproveConfigRequest
+	28, // 35: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:input_type -> woxqaq.v1.UpdateApproveNotifyConfigRequest
+	19, // 36: woxqaq.v1.IssueService.GetIssueDetail:output_type -> woxqaq.v1.GetIssueDetailResponse
+	25, // 37: woxqaq.v1.IssueService.ListIssue:output_type -> woxqaq.v1.ListIssueResponse
+	17, // 38: woxqaq.v1.IssueService.SubmitIssue:output_type -> woxqaq.v1.SubmitIssueResponse
+	21, // 39: woxqaq.v1.IssueService.Approve:output_type -> woxqaq.v1.ApproveResponse
+	23, // 40: woxqaq.v1.IssueService.Reject:output_type -> woxqaq.v1.RejectResponse
+	27, // 41: woxqaq.v1.IssueService.ListApproveConfig:output_type -> woxqaq.v1.ListApproveConfigResponse
+	35, // 42: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:output_type -> google.protobuf.Empty
+	36, // [36:43] is the sub-list for method output_type
+	29, // [29:36] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_v1_issue_service_proto_init() }
@@ -2718,11 +2112,8 @@ func file_v1_issue_service_proto_init() {
 	if File_v1_issue_service_proto != nil {
 		return
 	}
-	file_v1_issue_service_proto_msgTypes[7].OneofWrappers = []any{
-		(*DataExportDetail_Ebs)(nil),
-		(*DataExportDetail_Eatt)(nil),
-	}
-	file_v1_issue_service_proto_msgTypes[11].OneofWrappers = []any{
+	file_v1_issue_proto_init()
+	file_v1_issue_service_proto_msgTypes[10].OneofWrappers = []any{
 		(*GetIssueDetailResponse_Ded)(nil),
 	}
 	type x struct{}
@@ -2730,8 +2121,8 @@ func file_v1_issue_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_issue_service_proto_rawDesc), len(file_v1_issue_service_proto_rawDesc)),
-			NumEnums:      14,
-			NumMessages:   28,
+			NumEnums:      9,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

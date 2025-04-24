@@ -6,44 +6,14 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "v1/issue.proto";
 
 option go_package = "generated/v1";
-
-enum Encoding {
-  ENCODING_UNSPECIFIED = 0;
-  UTF8 = 1;
-  GBK = 2;
-}
 
 enum TriggerKind {
   TRIGGER_KIND_UNSPECIFIED = 0;
   CURRENT = 1;
   CRON = 2;
-}
-enum ExportMethod {
-  EXPORT_METHOD_UNSPECIFIED = 0;
-  SQL = 1;
-  TABLES = 2;
-}
-
-enum ExportContent {
-  EXPORT_CONTENT_UNSPECIFIED = 0;
-  DATA = 1;
-  STRUCT = 2;
-  ALL = 3;
-}
-
-enum ExportType {
-  EXPORT_TYPE_UNSPECIFIED = 0;
-  CSV = 1;
-  EXCEL = 2;
-}
-
-enum Exec {
-  EXEC_UNSPECIFIED = 0;
-  APPROVER = 1;
-  COMMITTER = 2;
-  AUTO = 3;
 }
 
 enum IssueKind {
@@ -156,36 +126,6 @@ message Issue {
   }
   repeated Approver approvers = 10;
   repeated ApprovalTemplate approval_templates = 11;
-}
-
-message DataExportDetail {
-  string database = 1;
-
-  message ExportAccordingToTable {
-    bool export_all = 1;
-    ExportContent content = 2;
-    message TableOption {
-      string table = 1;
-      bool all_field = 2;
-      repeated string fields = 3;
-      string filter = 4;
-    }
-    repeated TableOption option = 3;
-  }
-
-  message ExportBySQL {
-    string statement = 1;
-  }
-
-  oneof export_detail {
-    ExportBySQL ebs = 2;
-    ExportAccordingToTable eatt = 3;
-  }
-
-  ExportType type = 4;
-  Encoding encoding = 5;
-  string export_reason = 6;
-  Exec exector = 7;
 }
 
 message SubmitIssueRequest {

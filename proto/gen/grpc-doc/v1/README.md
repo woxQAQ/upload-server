@@ -34,6 +34,18 @@
   
     - [RuleService](#woxqaq-v1-RuleService)
   
+- [v1/issue.proto](#v1_issue-proto)
+    - [DataExportDetail](#-DataExportDetail)
+    - [DataExportDetail.ExportAccordingToTable](#-DataExportDetail-ExportAccordingToTable)
+    - [DataExportDetail.ExportAccordingToTable.TableOption](#-DataExportDetail-ExportAccordingToTable-TableOption)
+    - [DataExportDetail.ExportBySQL](#-DataExportDetail-ExportBySQL)
+  
+    - [DataExportDetail.Encoding](#-DataExportDetail-Encoding)
+    - [DataExportDetail.ExportContent](#-DataExportDetail-ExportContent)
+    - [DataExportDetail.ExportMethod](#-DataExportDetail-ExportMethod)
+    - [DataExportDetail.ExportType](#-DataExportDetail-ExportType)
+    - [Exec](#-Exec)
+  
 - [v1/issue_service.proto](#v1_issue_service-proto)
     - [ApprovalFlow](#woxqaq-v1-ApprovalFlow)
     - [ApprovalNode](#woxqaq-v1-ApprovalNode)
@@ -44,10 +56,6 @@
     - [ApproveRequest](#woxqaq-v1-ApproveRequest)
     - [ApproveRequest.approveMeta](#woxqaq-v1-ApproveRequest-approveMeta)
     - [ApproveResponse](#woxqaq-v1-ApproveResponse)
-    - [DataExportDetail](#woxqaq-v1-DataExportDetail)
-    - [DataExportDetail.ExportAccordingToTable](#woxqaq-v1-DataExportDetail-ExportAccordingToTable)
-    - [DataExportDetail.ExportAccordingToTable.TableOption](#woxqaq-v1-DataExportDetail-ExportAccordingToTable-TableOption)
-    - [DataExportDetail.ExportBySQL](#woxqaq-v1-DataExportDetail-ExportBySQL)
     - [GetIssueDetailRequest](#woxqaq-v1-GetIssueDetailRequest)
     - [GetIssueDetailResponse](#woxqaq-v1-GetIssueDetailResponse)
     - [Issue](#woxqaq-v1-Issue)
@@ -68,11 +76,6 @@
     - [ApprovalNodeNotifyConfig.NotifyType](#woxqaq-v1-ApprovalNodeNotifyConfig-NotifyType)
     - [ApprovalNodeNotifyConfig.Receiver](#woxqaq-v1-ApprovalNodeNotifyConfig-Receiver)
     - [ApprovalStep.Type](#woxqaq-v1-ApprovalStep-Type)
-    - [Encoding](#woxqaq-v1-Encoding)
-    - [Exec](#woxqaq-v1-Exec)
-    - [ExportContent](#woxqaq-v1-ExportContent)
-    - [ExportMethod](#woxqaq-v1-ExportMethod)
-    - [ExportType](#woxqaq-v1-ExportType)
     - [Issue.Approver.Status](#woxqaq-v1-Issue-Approver-Status)
     - [IssueKind](#woxqaq-v1-IssueKind)
     - [IssueStatus](#woxqaq-v1-IssueStatus)
@@ -564,6 +567,160 @@
 
 
 
+<a name="v1_issue-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## v1/issue.proto
+
+
+
+<a name="-DataExportDetail"></a>
+
+### DataExportDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| database | [string](#string) |  |  |
+| ebs | [DataExportDetail.ExportBySQL](#DataExportDetail-ExportBySQL) |  |  |
+| eatt | [DataExportDetail.ExportAccordingToTable](#DataExportDetail-ExportAccordingToTable) |  |  |
+| type | [DataExportDetail.ExportType](#DataExportDetail-ExportType) |  |  |
+| encoding | [DataExportDetail.Encoding](#DataExportDetail-Encoding) |  |  |
+| export_reason | [string](#string) |  |  |
+| exector | [Exec](#Exec) |  |  |
+
+
+
+
+
+
+<a name="-DataExportDetail-ExportAccordingToTable"></a>
+
+### DataExportDetail.ExportAccordingToTable
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| export_all | [bool](#bool) |  |  |
+| content | [DataExportDetail.ExportContent](#DataExportDetail-ExportContent) |  |  |
+| option | [DataExportDetail.ExportAccordingToTable.TableOption](#DataExportDetail-ExportAccordingToTable-TableOption) | repeated |  |
+
+
+
+
+
+
+<a name="-DataExportDetail-ExportAccordingToTable-TableOption"></a>
+
+### DataExportDetail.ExportAccordingToTable.TableOption
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| table | [string](#string) |  |  |
+| all_field | [bool](#bool) |  |  |
+| fields | [string](#string) | repeated |  |
+| filter | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="-DataExportDetail-ExportBySQL"></a>
+
+### DataExportDetail.ExportBySQL
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| statement | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="-DataExportDetail-Encoding"></a>
+
+### DataExportDetail.Encoding
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ENCODING_UNSPECIFIED | 0 |  |
+| UTF8 | 1 |  |
+| GBK | 2 |  |
+
+
+
+<a name="-DataExportDetail-ExportContent"></a>
+
+### DataExportDetail.ExportContent
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EXPORT_CONTENT_UNSPECIFIED | 0 |  |
+| DATA | 1 |  |
+| STRUCT | 2 |  |
+| ALL | 3 |  |
+
+
+
+<a name="-DataExportDetail-ExportMethod"></a>
+
+### DataExportDetail.ExportMethod
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EXPORT_METHOD_UNSPECIFIED | 0 |  |
+| SQL | 1 |  |
+| TABLES | 2 |  |
+
+
+
+<a name="-DataExportDetail-ExportType"></a>
+
+### DataExportDetail.ExportType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EXPORT_TYPE_UNSPECIFIED | 0 |  |
+| CSV | 1 |  |
+| EXCEL | 2 |  |
+
+
+
+<a name="-Exec"></a>
+
+### Exec
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EXEC_UNSPECIFIED | 0 |  |
+| APPROVER | 1 |  |
+| COMMITTER | 2 |  |
+| AUTO | 3 |  |
+
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="v1_issue_service-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -718,77 +875,6 @@
 
 
 
-<a name="woxqaq-v1-DataExportDetail"></a>
-
-### DataExportDetail
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| database | [string](#string) |  |  |
-| ebs | [DataExportDetail.ExportBySQL](#woxqaq-v1-DataExportDetail-ExportBySQL) |  |  |
-| eatt | [DataExportDetail.ExportAccordingToTable](#woxqaq-v1-DataExportDetail-ExportAccordingToTable) |  |  |
-| type | [ExportType](#woxqaq-v1-ExportType) |  |  |
-| encoding | [Encoding](#woxqaq-v1-Encoding) |  |  |
-| export_reason | [string](#string) |  |  |
-| exector | [Exec](#woxqaq-v1-Exec) |  |  |
-
-
-
-
-
-
-<a name="woxqaq-v1-DataExportDetail-ExportAccordingToTable"></a>
-
-### DataExportDetail.ExportAccordingToTable
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| export_all | [bool](#bool) |  |  |
-| content | [ExportContent](#woxqaq-v1-ExportContent) |  |  |
-| option | [DataExportDetail.ExportAccordingToTable.TableOption](#woxqaq-v1-DataExportDetail-ExportAccordingToTable-TableOption) | repeated |  |
-
-
-
-
-
-
-<a name="woxqaq-v1-DataExportDetail-ExportAccordingToTable-TableOption"></a>
-
-### DataExportDetail.ExportAccordingToTable.TableOption
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| table | [string](#string) |  |  |
-| all_field | [bool](#bool) |  |  |
-| fields | [string](#string) | repeated |  |
-| filter | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="woxqaq-v1-DataExportDetail-ExportBySQL"></a>
-
-### DataExportDetail.ExportBySQL
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| statement | [string](#string) |  |  |
-
-
-
-
-
-
 <a name="woxqaq-v1-GetIssueDetailRequest"></a>
 
 ### GetIssueDetailRequest
@@ -813,7 +899,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ok | [bool](#bool) |  |  |
-| ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
+| ded | [DataExportDetail](#DataExportDetail) |  |  |
 
 
 
@@ -868,7 +954,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ded | [DataExportDetail](#woxqaq-v1-DataExportDetail) |  |  |
+| ded | [DataExportDetail](#DataExportDetail) |  |  |
 
 
 
@@ -1095,73 +1181,6 @@
 | TYPE_UNSPECIFIED | 0 |  |
 | ALL | 1 |  |
 | ANY | 2 |  |
-
-
-
-<a name="woxqaq-v1-Encoding"></a>
-
-### Encoding
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| ENCODING_UNSPECIFIED | 0 |  |
-| UTF8 | 1 |  |
-| GBK | 2 |  |
-
-
-
-<a name="woxqaq-v1-Exec"></a>
-
-### Exec
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| EXEC_UNSPECIFIED | 0 |  |
-| APPROVER | 1 |  |
-| COMMITTER | 2 |  |
-| AUTO | 3 |  |
-
-
-
-<a name="woxqaq-v1-ExportContent"></a>
-
-### ExportContent
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| EXPORT_CONTENT_UNSPECIFIED | 0 |  |
-| DATA | 1 |  |
-| STRUCT | 2 |  |
-| ALL | 3 |  |
-
-
-
-<a name="woxqaq-v1-ExportMethod"></a>
-
-### ExportMethod
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| EXPORT_METHOD_UNSPECIFIED | 0 |  |
-| SQL | 1 |  |
-| TABLES | 2 |  |
-
-
-
-<a name="woxqaq-v1-ExportType"></a>
-
-### ExportType
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| EXPORT_TYPE_UNSPECIFIED | 0 |  |
-| CSV | 1 |  |
-| EXCEL | 2 |  |
 
 
 
