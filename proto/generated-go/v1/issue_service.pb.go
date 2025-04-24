@@ -2002,7 +2002,7 @@ func (x *ListApproveConfigResponse) GetData() []*ApprovalNodeNotifyConfig {
 	return nil
 }
 
-type UpdateApproveNotifyRequest struct {
+type UpdateApproveNotifyConfigRequest struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Name          string                    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Data          *ApprovalNodeNotifyConfig `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
@@ -2010,20 +2010,20 @@ type UpdateApproveNotifyRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateApproveNotifyRequest) Reset() {
-	*x = UpdateApproveNotifyRequest{}
+func (x *UpdateApproveNotifyConfigRequest) Reset() {
+	*x = UpdateApproveNotifyConfigRequest{}
 	mi := &file_v1_issue_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateApproveNotifyRequest) String() string {
+func (x *UpdateApproveNotifyConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateApproveNotifyRequest) ProtoMessage() {}
+func (*UpdateApproveNotifyConfigRequest) ProtoMessage() {}
 
-func (x *UpdateApproveNotifyRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateApproveNotifyConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_issue_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2035,19 +2035,19 @@ func (x *UpdateApproveNotifyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateApproveNotifyRequest.ProtoReflect.Descriptor instead.
-func (*UpdateApproveNotifyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateApproveNotifyConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateApproveNotifyConfigRequest) Descriptor() ([]byte, []int) {
 	return file_v1_issue_service_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *UpdateApproveNotifyRequest) GetName() string {
+func (x *UpdateApproveNotifyConfigRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *UpdateApproveNotifyRequest) GetData() *ApprovalNodeNotifyConfig {
+func (x *UpdateApproveNotifyConfigRequest) GetData() *ApprovalNodeNotifyConfig {
 	if x != nil {
 		return x.Data
 	}
@@ -2538,8 +2538,8 @@ const file_v1_issue_service_proto_rawDesc = "" +
 	"\x14woxQAQ/ApproveConfigR\x04name\"d\n" +
 	"\x19ListApproveConfigResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x127\n" +
-	"\x04data\x18\x02 \x03(\v2#.woxqaq.v1.ApprovalNodeNotifyConfigR\x04data\"\x87\x01\n" +
-	"\x1aUpdateApproveNotifyRequest\x120\n" +
+	"\x04data\x18\x02 \x03(\v2#.woxqaq.v1.ApprovalNodeNotifyConfigR\x04data\"\x8d\x01\n" +
+	" UpdateApproveNotifyConfigRequest\x120\n" +
 	"\x04name\x18\x01 \x01(\tB\x1c\xe0A\x02\xfaA\x16\n" +
 	"\x14woxQAQ/ApproveConfigR\x04name\x127\n" +
 	"\x04data\x18\x02 \x01(\v2#.woxqaq.v1.ApprovalNodeNotifyConfigR\x04data*7\n" +
@@ -2585,15 +2585,15 @@ const file_v1_issue_service_proto_rawDesc = "" +
 	"\x10PRE_CHECK_FAILED\x10\x04\x12\r\n" +
 	"\tAPPROVING\x10\x05\x12\f\n" +
 	"\bAPPROVED\x10\x06\x12\x10\n" +
-	"\fNOT_APPROVED\x10\a2\xd0\b\n" +
+	"\fNOT_APPROVED\x10\a2\xd5\b\n" +
 	"\fIssueService\x12\x9e\x01\n" +
 	"\x0eGetIssueDetail\x12 .woxqaq.v1.GetIssueDetailRequest\x1a!.woxqaq.v1.GetIssueDetailResponse\"G\x82\xd3\xe4\x93\x02AZ\x1a\x12\x18/v1/{name=org/*/issue/*}\x12#/v1/{name=org/*/instance/*/issue/*}\x12\x7f\n" +
 	"\tListIssue\x12\x1b.woxqaq.v1.ListIssueRequest\x1a\x1c.woxqaq.v1.ListIssueResponse\"7\x82\xd3\xe4\x93\x021Z\x12\x12\x10/v1/{name=org/*}\x12\x1b/v1/{name=org/*/instance/*}\x12\xb3\x01\n" +
 	"\vSubmitIssue\x12\x1d.woxqaq.v1.SubmitIssueRequest\x1a\x1e.woxqaq.v1.SubmitIssueResponse\"e\x82\xd3\xe4\x93\x02_:\x06detailZ):\x06detail\"\x1f/v1/{name=org/*/issue/*}/submit\"*/v1/{name=org/*/instance/*/issue/*}/submit\x12\xa5\x01\n" +
 	"\aApprove\x12\x19.woxqaq.v1.ApproveRequest\x1a\x1a.woxqaq.v1.ApproveResponse\"c\x82\xd3\xe4\x93\x02]:\x04metaZ3:\x04meta\x1a+/v1/{name=org/*/instance/*/issue/*}/approve\x1a /v1/{name=org/*/issue/*}/approve\x12\xa0\x01\n" +
 	"\x06Reject\x12\x18.woxqaq.v1.RejectRequest\x1a\x19.woxqaq.v1.RejectResponse\"a\x82\xd3\xe4\x93\x02[:\x04metaZ2:\x04meta\x1a*/v1/{name=org/*/instance/*/issue/*}/reject\x1a\x1f/v1/{name=org/*/issue/*}/reject\x12\x8e\x01\n" +
-	"\x11ListApproveConfig\x12#.woxqaq.v1.ListApproveConfigRequest\x1a$.woxqaq.v1.ListApproveConfigResponse\".\x82\xd3\xe4\x93\x02(\x12&/v1/{name=org/*/approval/notifyConfig}\x12\x8b\x01\n" +
-	"\x1aUpdateApproveRequestConfig\x12%.woxqaq.v1.UpdateApproveNotifyRequest\x1a\x16.google.protobuf.Empty\".\x82\xd3\xe4\x93\x02(\x1a&/v1/{name=org/*/approval/notifyConfig}B\x0eZ\fgenerated/v1b\x06proto3"
+	"\x11ListApproveConfig\x12#.woxqaq.v1.ListApproveConfigRequest\x1a$.woxqaq.v1.ListApproveConfigResponse\".\x82\xd3\xe4\x93\x02(\x12&/v1/{name=org/*/approval/notifyConfig}\x12\x90\x01\n" +
+	"\x19UpdateApproveNotifyConfig\x12+.woxqaq.v1.UpdateApproveNotifyConfigRequest\x1a\x16.google.protobuf.Empty\".\x82\xd3\xe4\x93\x02(\x1a&/v1/{name=org/*/approval/notifyConfig}B\x0eZ\fgenerated/v1b\x06proto3"
 
 var (
 	file_v1_issue_service_proto_rawDescOnce sync.Once
@@ -2644,7 +2644,7 @@ var file_v1_issue_service_proto_goTypes = []any{
 	(*ListIssueResponse)(nil),                       // 31: woxqaq.v1.ListIssueResponse
 	(*ListApproveConfigRequest)(nil),                // 32: woxqaq.v1.ListApproveConfigRequest
 	(*ListApproveConfigResponse)(nil),               // 33: woxqaq.v1.ListApproveConfigResponse
-	(*UpdateApproveNotifyRequest)(nil),              // 34: woxqaq.v1.UpdateApproveNotifyRequest
+	(*UpdateApproveNotifyConfigRequest)(nil),        // 34: woxqaq.v1.UpdateApproveNotifyConfigRequest
 	nil,                                             // 35: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry
 	(*Issue_Approver)(nil),                          // 36: woxqaq.v1.Issue.Approver
 	(*DataExportDetail_ExportAccordingToTable)(nil), // 37: woxqaq.v1.DataExportDetail.ExportAccordingToTable
@@ -2687,7 +2687,7 @@ var file_v1_issue_service_proto_depIdxs = []int32{
 	13, // 28: woxqaq.v1.ListIssueRequest.role:type_name -> woxqaq.v1.ListIssueRequest.IssueRole
 	20, // 29: woxqaq.v1.ListIssueResponse.data:type_name -> woxqaq.v1.Issue
 	19, // 30: woxqaq.v1.ListApproveConfigResponse.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
-	19, // 31: woxqaq.v1.UpdateApproveNotifyRequest.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
+	19, // 31: woxqaq.v1.UpdateApproveNotifyConfigRequest.data:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig
 	10, // 32: woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry.value:type_name -> woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType
 	12, // 33: woxqaq.v1.Issue.Approver.status:type_name -> woxqaq.v1.Issue.Approver.Status
 	3,  // 34: woxqaq.v1.DataExportDetail.ExportAccordingToTable.content:type_name -> woxqaq.v1.ExportContent
@@ -2698,14 +2698,14 @@ var file_v1_issue_service_proto_depIdxs = []int32{
 	26, // 39: woxqaq.v1.IssueService.Approve:input_type -> woxqaq.v1.ApproveRequest
 	28, // 40: woxqaq.v1.IssueService.Reject:input_type -> woxqaq.v1.RejectRequest
 	32, // 41: woxqaq.v1.IssueService.ListApproveConfig:input_type -> woxqaq.v1.ListApproveConfigRequest
-	34, // 42: woxqaq.v1.IssueService.UpdateApproveRequestConfig:input_type -> woxqaq.v1.UpdateApproveNotifyRequest
+	34, // 42: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:input_type -> woxqaq.v1.UpdateApproveNotifyConfigRequest
 	25, // 43: woxqaq.v1.IssueService.GetIssueDetail:output_type -> woxqaq.v1.GetIssueDetailResponse
 	31, // 44: woxqaq.v1.IssueService.ListIssue:output_type -> woxqaq.v1.ListIssueResponse
 	23, // 45: woxqaq.v1.IssueService.SubmitIssue:output_type -> woxqaq.v1.SubmitIssueResponse
 	27, // 46: woxqaq.v1.IssueService.Approve:output_type -> woxqaq.v1.ApproveResponse
 	29, // 47: woxqaq.v1.IssueService.Reject:output_type -> woxqaq.v1.RejectResponse
 	33, // 48: woxqaq.v1.IssueService.ListApproveConfig:output_type -> woxqaq.v1.ListApproveConfigResponse
-	43, // 49: woxqaq.v1.IssueService.UpdateApproveRequestConfig:output_type -> google.protobuf.Empty
+	43, // 49: woxqaq.v1.IssueService.UpdateApproveNotifyConfig:output_type -> google.protobuf.Empty
 	43, // [43:50] is the sub-list for method output_type
 	36, // [36:43] is the sub-list for method input_type
 	36, // [36:36] is the sub-list for extension type_name

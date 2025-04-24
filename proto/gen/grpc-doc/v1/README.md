@@ -62,7 +62,7 @@
     - [RejectResponse](#woxqaq-v1-RejectResponse)
     - [SubmitIssueRequest](#woxqaq-v1-SubmitIssueRequest)
     - [SubmitIssueResponse](#woxqaq-v1-SubmitIssueResponse)
-    - [UpdateApproveNotifyRequest](#woxqaq-v1-UpdateApproveNotifyRequest)
+    - [UpdateApproveNotifyConfigRequest](#woxqaq-v1-UpdateApproveNotifyConfigRequest)
   
     - [ApprovalNode.Type](#woxqaq-v1-ApprovalNode-Type)
     - [ApprovalNodeNotifyConfig.NotifyType](#woxqaq-v1-ApprovalNodeNotifyConfig-NotifyType)
@@ -1024,9 +1024,9 @@
 
 
 
-<a name="woxqaq-v1-UpdateApproveNotifyRequest"></a>
+<a name="woxqaq-v1-UpdateApproveNotifyConfigRequest"></a>
 
-### UpdateApproveNotifyRequest
+### UpdateApproveNotifyConfigRequest
 
 
 
@@ -1257,7 +1257,7 @@
 | Approve | [ApproveRequest](#woxqaq-v1-ApproveRequest) | [ApproveResponse](#woxqaq-v1-ApproveResponse) |  |
 | Reject | [RejectRequest](#woxqaq-v1-RejectRequest) | [RejectResponse](#woxqaq-v1-RejectResponse) |  |
 | ListApproveConfig | [ListApproveConfigRequest](#woxqaq-v1-ListApproveConfigRequest) | [ListApproveConfigResponse](#woxqaq-v1-ListApproveConfigResponse) |  |
-| UpdateApproveRequestConfig | [UpdateApproveNotifyRequest](#woxqaq-v1-UpdateApproveNotifyRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
+| UpdateApproveNotifyConfig | [UpdateApproveNotifyConfigRequest](#woxqaq-v1-UpdateApproveNotifyConfigRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) |  |
 
  
 

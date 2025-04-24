@@ -20,13 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	IssueService_GetIssueDetail_FullMethodName             = "/woxqaq.v1.IssueService/GetIssueDetail"
-	IssueService_ListIssue_FullMethodName                  = "/woxqaq.v1.IssueService/ListIssue"
-	IssueService_SubmitIssue_FullMethodName                = "/woxqaq.v1.IssueService/SubmitIssue"
-	IssueService_Approve_FullMethodName                    = "/woxqaq.v1.IssueService/Approve"
-	IssueService_Reject_FullMethodName                     = "/woxqaq.v1.IssueService/Reject"
-	IssueService_ListApproveConfig_FullMethodName          = "/woxqaq.v1.IssueService/ListApproveConfig"
-	IssueService_UpdateApproveRequestConfig_FullMethodName = "/woxqaq.v1.IssueService/UpdateApproveRequestConfig"
+	IssueService_GetIssueDetail_FullMethodName            = "/woxqaq.v1.IssueService/GetIssueDetail"
+	IssueService_ListIssue_FullMethodName                 = "/woxqaq.v1.IssueService/ListIssue"
+	IssueService_SubmitIssue_FullMethodName               = "/woxqaq.v1.IssueService/SubmitIssue"
+	IssueService_Approve_FullMethodName                   = "/woxqaq.v1.IssueService/Approve"
+	IssueService_Reject_FullMethodName                    = "/woxqaq.v1.IssueService/Reject"
+	IssueService_ListApproveConfig_FullMethodName         = "/woxqaq.v1.IssueService/ListApproveConfig"
+	IssueService_UpdateApproveNotifyConfig_FullMethodName = "/woxqaq.v1.IssueService/UpdateApproveNotifyConfig"
 )
 
 // IssueServiceClient is the client API for IssueService service.
@@ -39,7 +39,7 @@ type IssueServiceClient interface {
 	Approve(ctx context.Context, in *ApproveRequest, opts ...grpc.CallOption) (*ApproveResponse, error)
 	Reject(ctx context.Context, in *RejectRequest, opts ...grpc.CallOption) (*RejectResponse, error)
 	ListApproveConfig(ctx context.Context, in *ListApproveConfigRequest, opts ...grpc.CallOption) (*ListApproveConfigResponse, error)
-	UpdateApproveRequestConfig(ctx context.Context, in *UpdateApproveNotifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateApproveNotifyConfig(ctx context.Context, in *UpdateApproveNotifyConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type issueServiceClient struct {
@@ -110,10 +110,10 @@ func (c *issueServiceClient) ListApproveConfig(ctx context.Context, in *ListAppr
 	return out, nil
 }
 
-func (c *issueServiceClient) UpdateApproveRequestConfig(ctx context.Context, in *UpdateApproveNotifyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *issueServiceClient) UpdateApproveNotifyConfig(ctx context.Context, in *UpdateApproveNotifyConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, IssueService_UpdateApproveRequestConfig_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, IssueService_UpdateApproveNotifyConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type IssueServiceServer interface {
 	Approve(context.Context, *ApproveRequest) (*ApproveResponse, error)
 	Reject(context.Context, *RejectRequest) (*RejectResponse, error)
 	ListApproveConfig(context.Context, *ListApproveConfigRequest) (*ListApproveConfigResponse, error)
-	UpdateApproveRequestConfig(context.Context, *UpdateApproveNotifyRequest) (*emptypb.Empty, error)
+	UpdateApproveNotifyConfig(context.Context, *UpdateApproveNotifyConfigRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIssueServiceServer()
 }
 
@@ -159,8 +159,8 @@ func (UnimplementedIssueServiceServer) Reject(context.Context, *RejectRequest) (
 func (UnimplementedIssueServiceServer) ListApproveConfig(context.Context, *ListApproveConfigRequest) (*ListApproveConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListApproveConfig not implemented")
 }
-func (UnimplementedIssueServiceServer) UpdateApproveRequestConfig(context.Context, *UpdateApproveNotifyRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateApproveRequestConfig not implemented")
+func (UnimplementedIssueServiceServer) UpdateApproveNotifyConfig(context.Context, *UpdateApproveNotifyConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateApproveNotifyConfig not implemented")
 }
 func (UnimplementedIssueServiceServer) mustEmbedUnimplementedIssueServiceServer() {}
 func (UnimplementedIssueServiceServer) testEmbeddedByValue()                      {}
@@ -291,20 +291,20 @@ func _IssueService_ListApproveConfig_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IssueService_UpdateApproveRequestConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateApproveNotifyRequest)
+func _IssueService_UpdateApproveNotifyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateApproveNotifyConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IssueServiceServer).UpdateApproveRequestConfig(ctx, in)
+		return srv.(IssueServiceServer).UpdateApproveNotifyConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IssueService_UpdateApproveRequestConfig_FullMethodName,
+		FullMethod: IssueService_UpdateApproveNotifyConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IssueServiceServer).UpdateApproveRequestConfig(ctx, req.(*UpdateApproveNotifyRequest))
+		return srv.(IssueServiceServer).UpdateApproveNotifyConfig(ctx, req.(*UpdateApproveNotifyConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -341,8 +341,8 @@ var IssueService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _IssueService_ListApproveConfig_Handler,
 		},
 		{
-			MethodName: "UpdateApproveRequestConfig",
-			Handler:    _IssueService_UpdateApproveRequestConfig_Handler,
+			MethodName: "UpdateApproveNotifyConfig",
+			Handler:    _IssueService_UpdateApproveNotifyConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

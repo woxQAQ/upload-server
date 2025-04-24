@@ -158,7 +158,7 @@ paths:
         put:
             tags:
                 - IssueService
-            operationId: IssueService_UpdateApproveRequestConfig
+            operationId: IssueService_UpdateApproveNotifyConfig
             parameters:
                 - name: org
                   in: path

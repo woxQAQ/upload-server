@@ -284,7 +284,7 @@ message ListApproveConfigResponse {
   repeated ApprovalNodeNotifyConfig data = 2;
 }
 
-message UpdateApproveNotifyRequest {
+message UpdateApproveNotifyConfigRequest {
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "woxQAQ/ApproveConfig"}
@@ -346,7 +346,7 @@ service IssueService {
     option (google.api.http) = {get: "/v1/{name=org/*/approval/notifyConfig}"};
   }
 
-  rpc UpdateApproveRequestConfig(UpdateApproveNotifyRequest) returns (google.protobuf.Empty) {
+  rpc UpdateApproveNotifyConfig(UpdateApproveNotifyConfigRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {put: "/v1/{name=org/*/approval/notifyConfig}"};
   }
 }
