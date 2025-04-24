@@ -1,0 +1,182 @@
+syntax = "proto3";
+
+package woxqaq.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+
+option go_package = "generated/v1";
+
+enum RuleCategory {
+  RULE_CATEGORY_UNSPECIFIED = 0;
+  RULE_CATEGORY_PERSONAL = 1;
+  RULE_CATEGORY_PRODUCT = 2;
+  RULE_CATEGORY_COMMERCE = 3;
+  RULE_CATEGORY_COMMON = 4;
+  RULE_CATEGORY_POSITION = 5;
+  RULE_CATEGORY_CUSTOM = 6;
+}
+
+enum GenerateAlgorithm {
+  GENERATE_ALGORITHM_UNSPECIFIED = 0;
+  GENERATE_ALGORITHM_TIME = 1;
+  GENERATE_ALGORITHM_TIME_DATE = 2;
+  GENERATE_ALGORITHM_DEPARTMENT = 3;
+  GENERATE_ALGORITHM_COMPANY = 4;
+  GENERATE_ALGORITHM_SCRIPT = 5;
+}
+
+message StringList {
+  repeated string values = 1;
+}
+message AlgoValue {
+  oneof value_type {
+    string single_string = 1;
+    StringList string_list = 2;
+  }
+}
+
+message Rule {
+  option (google.api.resource) = {
+    type: "woxQAQ/Rule"
+    pattern: "org/{orgName}/rule/{ruleName}"
+    pattern: "org/{orgName}/rules"
+  };
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  RuleCategory category = 4;
+  bool enable = 5;
+  string column_condition = 6;
+  float empty_ratio = 7;
+  GenerateAlgorithm algorithm = 8;
+  map<string, AlgoValue> algo_meta = 9;
+  bool internal = 10;
+}
+
+message ListRuleRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+}
+
+message ListRuleResponse {
+  repeated Rule rules = 1;
+}
+
+message CreateRuleRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+  Rule rule = 2;
+}
+
+message CreateRuleResponse {
+  bool ok = 1;
+}
+
+message UpdateRuleRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+  Rule rule = 2;
+}
+
+message UpdateRuleResponse {
+  bool ok = 1;
+}
+
+message DeleteRuleRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+}
+
+message DeleteRuleResponse {
+  bool ok = 1;
+}
+
+message AddRuleCatagoryRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+  message RuleCatagoryMeta {
+    string name = 1;
+    string description = 2;
+  }
+  RuleCatagoryMeta meta = 2;
+}
+
+message AddRuleCatagoryResponse {
+  bool ok = 1;
+}
+
+message PreviewRuleGenerateRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+  message algoMeta {
+    GenerateAlgorithm algo = 1;
+    map<string, AlgoValue> algo_meta = 2;
+  }
+  algoMeta meta = 2;
+}
+
+message PreviewRuleGenerateResponse {
+  bool ok = 1;
+  string value = 2;
+}
+
+message GetRuleRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Rule"}
+  ];
+}
+
+message GetRuleResponse {
+  Rule rule = 1;
+}
+
+service RuleService {
+  rpc GetRule(GetRuleRequest) returns (GetRuleResponse) {
+    option (google.api.http) = {get: "/v1/{name=org/*/rule/*}"};
+  }
+  rpc ListRule(ListRuleRequest) returns (ListRuleResponse) {
+    option (google.api.http) = {get: "/v1/{name=org/*/rules}"};
+  }
+  rpc CreateRule(CreateRuleRequest) returns (CreateRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=org/*/rules}"
+      body: "rule"
+    };
+  }
+  rpc UpdateRule(UpdateRuleRequest) returns (UpdateRuleResponse) {
+    option (google.api.http) = {
+      put: "/v1/{name=org/*/rule/*}"
+      body: "rule"
+    };
+  }
+  rpc DeleteRule(DeleteRuleRequest) returns (DeleteRuleResponse) {
+    option (google.api.http) = {delete: "/v1/{name=org/*/rule/*}"};
+  }
+  rpc AddRuleCatagory(AddRuleCatagoryRequest) returns (AddRuleCatagoryResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=org/*/rules}/catagory"
+      body: "meta"
+    };
+  }
+  rpc PreviewRuleGenerate(PreviewRuleGenerateRequest) returns (PreviewRuleGenerateResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=org/*/rules}/preview"
+      body: "meta"
+    };
+  }
+}

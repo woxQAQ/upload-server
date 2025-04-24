@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package woxqaq.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/empty.proto";
+import "v1/common.proto";
+
+option go_package = "generated/v1";
+
+enum ReviewRuleLevel {
+  LEVEL_UNSPECIFIED = 0;
+  ERROR = 1;
+  WARNING = 2;
+  DISABLED = 3;
+}
+
+message ReviewRule {
+  string type = 1;
+  ReviewRuleLevel level = 2;
+  string payload = 3;
+  Engine engine = 4;
+  string comment = 5;
+}
+
+message ReviewGroup {
+  option (google.api.resource) = {type: "woxQAQ/ReviewGroup"};
+
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  string org = 2;
+  string title = 3;
+
+  bool enabled = 4;
+
+  repeated ReviewRule rules = 7;
+}
+
+message ListReviewGroupsRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/ReviewGroup"}
+  ];
+  string org = 2;
+}
+
+message ListReviewGroupsResponse {
+  repeated ReviewGroup review_groups = 1;
+}
+
+message DeleteReviewGroupRequest {
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+  string org = 2;
+}
+
+message DeleteReviewResponse {
+  bool ok = 1;
+}
+
+service ReviewServive {
+  rpc ListReviewGroups(ListReviewGroupsRequest) returns (ListReviewGroupsResponse) {
+    option (google.api.http) = {
+      get: "/v1/reviewGroups"
+      additional_bindings: {get: "/v1/org/{org}/reviewGroups"}
+    };
+  }
+
+  rpc CreateReviewGroup(ReviewGroup) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/reviewGroups"
+      additional_bindings: {post: "/v1/org/{org}/reviewGroups"}
+    };
+  }
+
+  rpc UpdateReviewGroup(ReviewGroup) returns (ReviewGroup) {
+    option (google.api.http) = {
+      patch: "/v1/reviewGroups/{name}"
+      additional_bindings: {patch: "/v1/org/{org}/reviewGroups"}
+    };
+  }
+
+  rpc DeleteReviewGroup(DeleteReviewGroupRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/reviewGroups/{name}"
+      additional_bindings: {delete: "/v1/org/{org}/reviewGroups/{name}"}
+    };
+  }
+}

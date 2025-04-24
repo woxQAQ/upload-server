@@ -1,0 +1,1597 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /v1/notification:
+        get:
+            tags:
+                - NotifyServices
+            operationId: NotifyServices_Notify
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/NotifyResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{orgName}/instance/{instanceName}/presign:
+        get:
+            tags:
+                - UploadService
+            operationId: UploadService_PreSign
+            parameters:
+                - name: orgName
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: instanceName
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PreSignResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}:
+        get:
+            tags:
+                - IssueService
+            operationId: IssueService_ListIssue
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_KIND_UNSPECIFIED
+                        - DATA_IMPORT
+                        - DATA_EXPORT
+                        - DATA_GENERATE
+                    type: string
+                    format: enum
+                - name: current
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: status
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_STATUS_UNSPECIFIED
+                        - NOT_START
+                        - PRE_CHECK
+                        - PRE_CHECK_SUCCESS
+                        - PRE_CHECK_FAILED
+                        - APPROVING
+                        - APPROVED
+                        - NOT_APPROVED
+                    type: string
+                    format: enum
+                - name: role
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_ROLE_UNSPECIFIED
+                        - COMMITTER
+                        - TO_APPROVE
+                        - TO_EXECUTE
+                        - APPROVED
+                        - EXECUTED
+                    type: string
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListIssueResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/approval/{approval}:
+        get:
+            tags:
+                - IssueService
+            operationId: IssueService_ListApproveConfig
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: approval
+                  in: path
+                  description: The approval id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListApproveConfigResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - IssueService
+            operationId: IssueService_UpdateApproveNotifyConfig
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: approval
+                  in: path
+                  description: The approval id.
+                  required: true
+                  schema:
+                    type: string
+                - name: data.webhooks
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: data.availableReceiver
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        enum:
+                            - RECEIVER_UNSPECIFIED
+                            - APPROVER
+                            - COMMITTER
+                            - EXECUTOR
+                            - CUSTOM
+                        type: string
+                        format: enum
+                - name: data.selectedReceiver
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        enum:
+                            - RECEIVER_UNSPECIFIED
+                            - APPROVER
+                            - COMMITTER
+                            - EXECUTOR
+                            - CUSTOM
+                        type: string
+                        format: enum
+                - name: data.customReceivers
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}:
+        get:
+            tags:
+                - IssueService
+            operationId: IssueService_ListIssue
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_KIND_UNSPECIFIED
+                        - DATA_IMPORT
+                        - DATA_EXPORT
+                        - DATA_GENERATE
+                    type: string
+                    format: enum
+                - name: current
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: status
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_STATUS_UNSPECIFIED
+                        - NOT_START
+                        - PRE_CHECK
+                        - PRE_CHECK_SUCCESS
+                        - PRE_CHECK_FAILED
+                        - APPROVING
+                        - APPROVED
+                        - NOT_APPROVED
+                    type: string
+                    format: enum
+                - name: role
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_ROLE_UNSPECIFIED
+                        - COMMITTER
+                        - TO_APPROVE
+                        - TO_EXECUTE
+                        - APPROVED
+                        - EXECUTED
+                    type: string
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListIssueResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/issue/{issue}:
+        get:
+            tags:
+                - IssueService
+            operationId: IssueService_GetIssueDetail
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetIssueDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/issue/{issue}/approve:
+        put:
+            tags:
+                - IssueService
+            operationId: IssueService_Approve
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApproveRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApproveResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/issue/{issue}/reject:
+        put:
+            tags:
+                - IssueService
+            operationId: IssueService_Reject
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RejectRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RejectResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/instance/{instance}/issue/{issue}/submit:
+        post:
+            tags:
+                - IssueService
+            operationId: IssueService_SubmitIssue
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: instance
+                  in: path
+                  description: The instance id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_KIND_UNSPECIFIED
+                        - DATA_IMPORT
+                        - DATA_EXPORT
+                        - DATA_GENERATE
+                    type: string
+                    format: enum
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/IssueDetail'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubmitIssueResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/issue/{issue}:
+        get:
+            tags:
+                - IssueService
+            operationId: IssueService_GetIssueDetail
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetIssueDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/issue/{issue}/approve:
+        put:
+            tags:
+                - IssueService
+            operationId: IssueService_Approve
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApproveRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApproveResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/issue/{issue}/reject:
+        put:
+            tags:
+                - IssueService
+            operationId: IssueService_Reject
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RejectRequest_approveMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RejectResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/issue/{issue}/submit:
+        post:
+            tags:
+                - IssueService
+            operationId: IssueService_SubmitIssue
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: issue
+                  in: path
+                  description: The issue id.
+                  required: true
+                  schema:
+                    type: string
+                - name: kind
+                  in: query
+                  schema:
+                    enum:
+                        - ISSUE_KIND_UNSPECIFIED
+                        - DATA_IMPORT
+                        - DATA_EXPORT
+                        - DATA_GENERATE
+                    type: string
+                    format: enum
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/IssueDetail'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubmitIssueResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/reviewGroups:
+        get:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_ListReviewGroups
+            parameters:
+                - name: org
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListReviewGroupsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_CreateReviewGroup
+            parameters:
+                - name: org
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+                - name: enabled
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_UpdateReviewGroup
+            parameters:
+                - name: org
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+                - name: enabled
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReviewGroup'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/reviewGroups/{name}:
+        delete:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_DeleteReviewGroup
+            parameters:
+                - name: org
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rule/{rule}:
+        get:
+            tags:
+                - RuleService
+            operationId: RuleService_GetRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        put:
+            tags:
+                - RuleService
+            operationId: RuleService_UpdateRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Rule'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - RuleService
+            operationId: RuleService_DeleteRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+                - name: rule
+                  in: path
+                  description: The rule id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules:
+        get:
+            tags:
+                - RuleService
+            operationId: RuleService_ListRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_CreateRule
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Rule'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateRuleResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules/catagory:
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_AddRuleCatagory
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddRuleCatagoryRequest_RuleCatagoryMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AddRuleCatagoryResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/org/{org}/rules/preview:
+        post:
+            tags:
+                - RuleService
+            operationId: RuleService_PreviewRuleGenerate
+            parameters:
+                - name: org
+                  in: path
+                  description: The org id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PreviewRuleGenerateRequest_algoMeta'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PreviewRuleGenerateResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/reviewGroups:
+        get:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_ListReviewGroups
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: org
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListReviewGroupsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_CreateReviewGroup
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: org
+                  in: query
+                  schema:
+                    type: string
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+                - name: enabled
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /v1/reviewGroups/{name}:
+        delete:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_DeleteReviewGroup
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: org
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - ReviewServive
+            operationId: ReviewServive_UpdateReviewGroup
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: org
+                  in: query
+                  schema:
+                    type: string
+                - name: title
+                  in: query
+                  schema:
+                    type: string
+                - name: enabled
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReviewGroup'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        AddRuleCatagoryRequest_RuleCatagoryMeta:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+        AddRuleCatagoryResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        AlgoValue:
+            type: object
+            properties:
+                singleString:
+                    type: string
+                stringList:
+                    $ref: '#/components/schemas/StringList'
+        ApprovalFlow:
+            type: object
+            properties:
+                steps:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ApprovalStep'
+        ApprovalNode:
+            type: object
+            properties:
+                type:
+                    enum:
+                        - TYPE_UNSPECIFIED
+                        - ANY_IN_GROUP
+                    type: string
+                    format: enum
+                role:
+                    type: string
+        ApprovalNodeNotifyConfig:
+            type: object
+            properties:
+                notifyTypes:
+                    type: object
+                    additionalProperties:
+                        enum:
+                            - TYPE_UNSPECIFIED
+                            - SITE_NOTIFY
+                            - SMS
+                            - EMAIL
+                            - PHONE
+                            - WEBHOOK
+                        type: string
+                        format: enum
+                webhooks:
+                    type: array
+                    items:
+                        type: string
+                availableReceiver:
+                    type: array
+                    items:
+                        enum:
+                            - RECEIVER_UNSPECIFIED
+                            - APPROVER
+                            - COMMITTER
+                            - EXECUTOR
+                            - CUSTOM
+                        type: string
+                        format: enum
+                selectedReceiver:
+                    type: array
+                    items:
+                        enum:
+                            - RECEIVER_UNSPECIFIED
+                            - APPROVER
+                            - COMMITTER
+                            - EXECUTOR
+                            - CUSTOM
+                        type: string
+                        format: enum
+                customReceivers:
+                    type: array
+                    items:
+                        type: string
+        ApprovalStep:
+            type: object
+            properties:
+                type:
+                    enum:
+                        - TYPE_UNSPECIFIED
+                        - ALL
+                        - ANY
+                    type: string
+                    format: enum
+                nodes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ApprovalNode'
+        ApprovalTemplate:
+            type: object
+            properties:
+                flow:
+                    $ref: '#/components/schemas/ApprovalFlow'
+                name:
+                    type: string
+                description:
+                    type: string
+                requiredApprover:
+                    type: array
+                    items:
+                        type: string
+        ApproveRequest_approveMeta:
+            type: object
+            properties:
+                approver:
+                    type: string
+                comment:
+                    type: string
+        ApproveResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        CreateRuleResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        DataExportDetail:
+            type: object
+            properties:
+                database:
+                    type: string
+                ebs:
+                    $ref: '#/components/schemas/DataExportDetail_ExportBySQL'
+                eatt:
+                    $ref: '#/components/schemas/DataExportDetail_ExportAccordingToTable'
+                type:
+                    enum:
+                        - EXPORT_TYPE_UNSPECIFIED
+                        - CSV
+                        - EXCEL
+                    type: string
+                    format: enum
+                encoding:
+                    enum:
+                        - ENCODING_UNSPECIFIED
+                        - UTF8
+                        - GBK
+                    type: string
+                    format: enum
+                exportReason:
+                    type: string
+                exector:
+                    enum:
+                        - EXEC_UNSPECIFIED
+                        - APPROVER
+                        - COMMITTER
+                        - AUTO
+                    type: string
+                    format: enum
+        DataExportDetail_ExportAccordingToTable:
+            type: object
+            properties:
+                exportAll:
+                    type: boolean
+                content:
+                    enum:
+                        - EXPORT_CONTENT_UNSPECIFIED
+                        - DATA
+                        - STRUCT
+                        - ALL
+                    type: string
+                    format: enum
+                option:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ExportAccordingToTable_TableOption'
+        DataExportDetail_ExportBySQL:
+            type: object
+            properties:
+                statement:
+                    type: string
+        DeleteRuleResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        ExportAccordingToTable_TableOption:
+            type: object
+            properties:
+                table:
+                    type: string
+                allField:
+                    type: boolean
+                fields:
+                    type: array
+                    items:
+                        type: string
+                filter:
+                    type: string
+        GetIssueDetailResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                ded:
+                    $ref: '#/components/schemas/DataExportDetail'
+        GetRuleResponse:
+            type: object
+            properties:
+                rule:
+                    $ref: '#/components/schemas/Rule'
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        Issue:
+            type: object
+            properties:
+                name:
+                    type: string
+                kind:
+                    enum:
+                        - ISSUE_KIND_UNSPECIFIED
+                        - DATA_IMPORT
+                        - DATA_EXPORT
+                        - DATA_GENERATE
+                    type: string
+                    format: enum
+                database:
+                    type: string
+                createTime:
+                    type: string
+                    format: date-time
+                updateTime:
+                    type: string
+                    format: date-time
+                submitter:
+                    type: string
+                status:
+                    enum:
+                        - ISSUE_STATUS_UNSPECIFIED
+                        - NOT_START
+                        - PRE_CHECK
+                        - PRE_CHECK_SUCCESS
+                        - PRE_CHECK_FAILED
+                        - APPROVING
+                        - APPROVED
+                        - NOT_APPROVED
+                    type: string
+                    format: enum
+                detail:
+                    $ref: '#/components/schemas/IssueDetail'
+                approvers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Issue_Approver'
+                approvalTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ApprovalTemplate'
+        IssueDetail:
+            type: object
+            properties:
+                ded:
+                    $ref: '#/components/schemas/DataExportDetail'
+        Issue_Approver:
+            type: object
+            properties:
+                status:
+                    enum:
+                        - STATUS_UNSPECIFIED
+                        - PENDING
+                        - APPROVED
+                        - REJECTED
+                    type: string
+                    description: The new status.
+                    format: enum
+                principal:
+                    type: string
+        ListApproveConfigResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ApprovalNodeNotifyConfig'
+        ListIssueResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Issue'
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        ListReviewGroupsResponse:
+            type: object
+            properties:
+                reviewGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ReviewGroup'
+        ListRuleResponse:
+            type: object
+            properties:
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Rule'
+        NotifyResponse:
+            type: object
+            properties: {}
+        PreSignResponse:
+            type: object
+            properties:
+                url:
+                    type: string
+        PreviewRuleGenerateRequest_algoMeta:
+            type: object
+            properties:
+                algo:
+                    enum:
+                        - GENERATE_ALGORITHM_UNSPECIFIED
+                        - GENERATE_ALGORITHM_TIME
+                        - GENERATE_ALGORITHM_TIME_DATE
+                        - GENERATE_ALGORITHM_DEPARTMENT
+                        - GENERATE_ALGORITHM_COMPANY
+                        - GENERATE_ALGORITHM_SCRIPT
+                    type: string
+                    format: enum
+                algoMeta:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/AlgoValue'
+        PreviewRuleGenerateResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                value:
+                    type: string
+        RejectRequest_approveMeta:
+            type: object
+            properties:
+                approver:
+                    type: string
+                comment:
+                    type: string
+        RejectResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+        ReviewGroup:
+            type: object
+            properties:
+                name:
+                    readOnly: true
+                    type: string
+                org:
+                    type: string
+                title:
+                    type: string
+                enabled:
+                    type: boolean
+                rules:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ReviewRule'
+        ReviewRule:
+            type: object
+            properties:
+                type:
+                    type: string
+                level:
+                    enum:
+                        - LEVEL_UNSPECIFIED
+                        - ERROR
+                        - WARNING
+                        - DISABLED
+                    type: string
+                    format: enum
+                payload:
+                    type: string
+                engine:
+                    enum:
+                        - ENGINE_UNSPECIFIED
+                        - CLICKHOUSE
+                        - MYSQL
+                        - POSTGRES
+                        - SNOWFLAKE
+                        - SQLITE
+                        - TIDB
+                        - MONGODB
+                        - REDIS
+                        - ORACLE
+                        - SPANNER
+                        - MSSQL
+                        - REDSHIFT
+                        - MARIADB
+                        - OCEANBASE
+                        - DM
+                        - RISINGWAVE
+                        - OCEANBASE_ORACLE
+                        - STARROCKS
+                        - DORIS
+                        - HIVE
+                        - ELASTICSEARCH
+                        - BIGQUERY
+                        - DYNAMODB
+                        - DATABRICKS
+                        - COCKROACHDB
+                        - COSMOSDB
+                        - TRINO
+                        - CASSANDRA
+                    type: string
+                    format: enum
+                comment:
+                    type: string
+        Rule:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                category:
+                    enum:
+                        - RULE_CATEGORY_UNSPECIFIED
+                        - RULE_CATEGORY_PERSONAL
+                        - RULE_CATEGORY_PRODUCT
+                        - RULE_CATEGORY_COMMERCE
+                        - RULE_CATEGORY_COMMON
+                        - RULE_CATEGORY_POSITION
+                        - RULE_CATEGORY_CUSTOM
+                    type: string
+                    format: enum
+                enable:
+                    type: boolean
+                columnCondition:
+                    type: string
+                emptyRatio:
+                    type: number
+                    format: float
+                algorithm:
+                    enum:
+                        - GENERATE_ALGORITHM_UNSPECIFIED
+                        - GENERATE_ALGORITHM_TIME
+                        - GENERATE_ALGORITHM_TIME_DATE
+                        - GENERATE_ALGORITHM_DEPARTMENT
+                        - GENERATE_ALGORITHM_COMPANY
+                        - GENERATE_ALGORITHM_SCRIPT
+                    type: string
+                    format: enum
+                algoMeta:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/AlgoValue'
+                internal:
+                    type: boolean
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        StringList:
+            type: object
+            properties:
+                values:
+                    type: array
+                    items:
+                        type: string
+        SubmitIssueResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                issueId:
+                    type: string
+        UpdateRuleResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+tags:
+    - name: IssueService
+    - name: NotifyServices
+    - name: ReviewServive
+    - name: RuleService
+    - name: UploadService

@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: data-export
+spec:
+  entrypoint: data-export
+  arguments:
+    parameters:
+      - name: organization
+        value: "wox"
+      - name: instance
+        value: "test"
+      - name: dbType
+        value: "postgres"
+      - name: statement
+        value: "select * from users"
+  templates:
+    - name: data-export
+      steps:
+        - - name: sql-review
+            templateRef:
+              name: sqlreview-template
+              template: sqlreview
+            hooks:
+              exit:
+                templateRef:
+                  name: notify-template
+                  template: notify
+            
+        - - name: suspend
+            inputs:
+                parameters:
+                - name: approved
+                  default: false
+            outputs:
+                parameters:
+                - name: approved
+                  valueFrom:
+                    supplied: {}
+            suspend: {}
+

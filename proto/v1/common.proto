@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package woxqaq.v1;
+
+option go_package = "generated/v1";
+
+enum Engine {
+  ENGINE_UNSPECIFIED = 0;
+  CLICKHOUSE = 1;
+  MYSQL = 2;
+  POSTGRES = 3;
+  SNOWFLAKE = 4;
+  SQLITE = 5;
+  TIDB = 6;
+  MONGODB = 7;
+  REDIS = 8;
+  ORACLE = 9;
+  SPANNER = 10;
+  MSSQL = 11;
+  REDSHIFT = 12;
+  MARIADB = 13;
+  OCEANBASE = 14;
+  DM = 15;
+  RISINGWAVE = 16;
+  OCEANBASE_ORACLE = 17;
+  STARROCKS = 18;
+  DORIS = 19;
+  HIVE = 20;
+  ELASTICSEARCH = 21;
+  BIGQUERY = 22;
+  DYNAMODB = 23;
+  DATABRICKS = 24;
+  COCKROACHDB = 25;
+  COSMOSDB = 26;
+  TRINO = 27;
+  CASSANDRA = 28;
+}

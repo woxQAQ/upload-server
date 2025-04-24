@@ -1,0 +1,292 @@
+syntax = "proto3";
+package woxqaq.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "v1/issue.proto";
+
+option go_package = "generated/v1";
+
+enum TriggerKind {
+  TRIGGER_KIND_UNSPECIFIED = 0;
+  CURRENT = 1;
+  CRON = 2;
+}
+
+enum IssueKind {
+  ISSUE_KIND_UNSPECIFIED = 0;
+  DATA_IMPORT = 1;
+  DATA_EXPORT = 2;
+  DATA_GENERATE = 3;
+}
+
+enum IssueStatus {
+  ISSUE_STATUS_UNSPECIFIED = 0;
+  NOT_START = 1;
+  PRE_CHECK = 2;
+  PRE_CHECK_SUCCESS = 3;
+  PRE_CHECK_FAILED = 4;
+  APPROVING = 5;
+  APPROVED = 6;
+  NOT_APPROVED = 7;
+}
+
+message IssueDetail {
+  DataExportDetail ded = 1;
+}
+
+message ApprovalTemplate {
+  ApprovalFlow flow = 1;
+  string name = 2;
+  string description = 3;
+  repeated string required_approver = 4;
+}
+
+message ApprovalFlow {
+  repeated ApprovalStep steps = 1;
+}
+
+message ApprovalStep {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    ALL = 1;
+    ANY = 2;
+  }
+  Type type = 1;
+
+  repeated ApprovalNode nodes = 2;
+}
+
+message ApprovalNode {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    ANY_IN_GROUP = 1;
+  }
+  Type type = 1;
+
+  string role = 2;
+}
+
+message ApprovalNodeNotifyConfig {
+  option (google.api.resource) = {
+    type: "woxQAQ/ApprovalNodeNotifyConfig"
+    pattern: "org/{orgName}/approval/notifyConfig"
+  };
+  enum NotifyType {
+    TYPE_UNSPECIFIED = 0;
+    SITE_NOTIFY = 1;
+    SMS = 2;
+    EMAIL = 3;
+    PHONE = 4;
+    WEBHOOK = 5;
+  }
+  map<bool, NotifyType> notify_types = 1;
+  repeated string webhooks = 2;
+  enum Receiver {
+    RECEIVER_UNSPECIFIED = 0;
+    APPROVER = 1;
+    COMMITTER = 2;
+    EXECUTOR = 3;
+    CUSTOM = 4;
+  }
+  repeated Receiver available_receiver = 3;
+  repeated Receiver selected_receiver = 4;
+  repeated string custom_receivers = 5;
+}
+
+message Issue {
+  option (google.api.resource) = {
+    type: "woxQAQ/Issue"
+    pattern: "org/{orgName}/instance/{instanceName}/issue/{issueId}"
+    pattern: "org/{orgName}/instance/{instanceName}"
+    pattern: "org/{orgName}/issue/{issueId}"
+    pattern: "org/{orgName}"
+  };
+  string name = 1;
+  IssueKind kind = 3;
+  string database = 4;
+  google.protobuf.Timestamp create_time = 5;
+  google.protobuf.Timestamp update_time = 6;
+  string submitter = 7;
+  IssueStatus status = 8;
+  IssueDetail detail = 9;
+  message Approver {
+    enum Status {
+      STATUS_UNSPECIFIED = 0;
+      PENDING = 1;
+      APPROVED = 2;
+      REJECTED = 3;
+    }
+    // The new status.
+    Status status = 1;
+    string principal = 2;
+  }
+  repeated Approver approvers = 10;
+  repeated ApprovalTemplate approval_templates = 11;
+}
+
+message SubmitIssueRequest {
+  string name = 1;
+  IssueKind kind = 2;
+  IssueDetail detail = 3;
+}
+
+message SubmitIssueResponse {
+  bool ok = 1;
+  string issue_id = 2;
+}
+
+message GetIssueDetailRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
+}
+
+message GetIssueDetailResponse {
+  bool ok = 1;
+  oneof data {
+    DataExportDetail ded = 4;
+  }
+}
+
+message ApproveRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
+  message approveMeta {
+    string approver = 1;
+    string comment = 2;
+  }
+  approveMeta meta = 2;
+}
+
+message ApproveResponse {
+  bool ok = 1;
+}
+
+message RejectRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Issue"}
+  ];
+  message approveMeta {
+    string approver = 1;
+    string comment = 2;
+  }
+  approveMeta meta = 2;
+}
+
+message RejectResponse {
+  bool ok = 1;
+}
+
+message ListIssueRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/Instance"}
+  ];
+
+  enum IssueRole {
+    ISSUE_ROLE_UNSPECIFIED = 0;
+    COMMITTER = 1;
+    TO_APPROVE = 2;
+    TO_EXECUTE = 3;
+    APPROVED = 4;
+    EXECUTED = 5;
+  }
+  IssueKind kind = 2;
+  int32 current = 3;
+  int32 page_size = 4;
+  IssueStatus status = 5;
+  IssueRole role = 7;
+}
+
+message ListIssueResponse {
+  bool ok = 1;
+  repeated Issue data = 2;
+  int32 page_size = 3;
+  int32 total = 4;
+}
+
+message ListApproveConfigRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/ApproveConfig"}
+  ];
+}
+message ListApproveConfigResponse {
+  bool ok = 1;
+  repeated ApprovalNodeNotifyConfig data = 2;
+}
+
+message UpdateApproveNotifyConfigRequest {
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "woxQAQ/ApproveConfig"}
+  ];
+  ApprovalNodeNotifyConfig data = 2;
+}
+
+service IssueService {
+  rpc GetIssueDetail(GetIssueDetailRequest) returns (GetIssueDetailResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=org/*/instance/*/issue/*}"
+
+      additional_bindings: {get: "/v1/{name=org/*/issue/*}"}
+    };
+  }
+  rpc ListIssue(ListIssueRequest) returns (ListIssueResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=org/*/instance/*}"
+
+      additional_bindings: {get: "/v1/{name=org/*}"}
+    };
+  }
+  rpc SubmitIssue(SubmitIssueRequest) returns (SubmitIssueResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=org/*/instance/*/issue/*}/submit"
+      body: "detail"
+
+      additional_bindings: {
+        post: "/v1/{name=org/*/issue/*}/submit"
+        body: "detail"
+      }
+    };
+  }
+
+  rpc Approve(ApproveRequest) returns (ApproveResponse) {
+    option (google.api.http) = {
+      put: "/v1/{name=org/*/issue/*}/approve"
+      body: "meta"
+
+      additional_bindings: {
+        put: "/v1/{name=org/*/instance/*/issue/*}/approve"
+        body: "meta"
+      }
+    };
+  }
+
+  rpc Reject(RejectRequest) returns (RejectResponse) {
+    option (google.api.http) = {
+      put: "/v1/{name=org/*/issue/*}/reject"
+      body: "meta"
+      additional_bindings: {
+        put: "/v1/{name=org/*/instance/*/issue/*}/reject"
+        body: "meta"
+      }
+    };
+  }
+
+  rpc ListApproveConfig(ListApproveConfigRequest) returns (ListApproveConfigResponse) {
+    option (google.api.http) = {get: "/v1/{name=org/*/approval/notifyConfig}"};
+  }
+
+  rpc UpdateApproveNotifyConfig(UpdateApproveNotifyConfigRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {put: "/v1/{name=org/*/approval/notifyConfig}"};
+  }
+}

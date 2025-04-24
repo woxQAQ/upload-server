@@ -15,6 +15,10 @@ type ApproveRequest struct {
 	Trigger    string  `json:"trigger" default:"current" binding:"oneof 'current after'"`
 }
 
+type ExecRequest struct {
+	ProgressId uint64 `json:"id" binding:"require"`
+}
+
 const (
 	TriggerCurrent = "current"
 	TriggerAfter   = "after"

@@ -1,0 +1,4211 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#v1%2fcommon.proto">v1/common.proto</a>
+            <ul>
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.Engine"><span class="badge">E</span>Engine</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fgenerate_service.proto">v1/generate_service.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#woxqaq.v1.AddRuleCatagoryRequest"><span class="badge">M</span>AddRuleCatagoryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.AddRuleCatagoryRequest.RuleCatagoryMeta"><span class="badge">M</span>AddRuleCatagoryRequest.RuleCatagoryMeta</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.AddRuleCatagoryResponse"><span class="badge">M</span>AddRuleCatagoryResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.AlgoValue"><span class="badge">M</span>AlgoValue</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.CreateRuleRequest"><span class="badge">M</span>CreateRuleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.CreateRuleResponse"><span class="badge">M</span>CreateRuleResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.DeleteRuleRequest"><span class="badge">M</span>DeleteRuleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.DeleteRuleResponse"><span class="badge">M</span>DeleteRuleResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.GetRuleRequest"><span class="badge">M</span>GetRuleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.GetRuleResponse"><span class="badge">M</span>GetRuleResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListRuleRequest"><span class="badge">M</span>ListRuleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListRuleResponse"><span class="badge">M</span>ListRuleResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreviewRuleGenerateRequest"><span class="badge">M</span>PreviewRuleGenerateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreviewRuleGenerateRequest.algoMeta"><span class="badge">M</span>PreviewRuleGenerateRequest.algoMeta</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry"><span class="badge">M</span>PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreviewRuleGenerateResponse"><span class="badge">M</span>PreviewRuleGenerateResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.Rule"><span class="badge">M</span>Rule</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.Rule.AlgoMetaEntry"><span class="badge">M</span>Rule.AlgoMetaEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.StringList"><span class="badge">M</span>StringList</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.UpdateRuleRequest"><span class="badge">M</span>UpdateRuleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.UpdateRuleResponse"><span class="badge">M</span>UpdateRuleResponse</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.GenerateAlgorithm"><span class="badge">E</span>GenerateAlgorithm</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RuleCategory"><span class="badge">E</span>RuleCategory</a>
+                </li>
+              
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.RuleService"><span class="badge">S</span>RuleService</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fissue.proto">v1/issue.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#.DataExportDetail"><span class="badge">M</span>DataExportDetail</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportAccordingToTable"><span class="badge">M</span>DataExportDetail.ExportAccordingToTable</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportAccordingToTable.TableOption"><span class="badge">M</span>DataExportDetail.ExportAccordingToTable.TableOption</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportBySQL"><span class="badge">M</span>DataExportDetail.ExportBySQL</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#.DataExportDetail.Encoding"><span class="badge">E</span>DataExportDetail.Encoding</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportContent"><span class="badge">E</span>DataExportDetail.ExportContent</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportMethod"><span class="badge">E</span>DataExportDetail.ExportMethod</a>
+                </li>
+              
+                <li>
+                  <a href="#.DataExportDetail.ExportType"><span class="badge">E</span>DataExportDetail.ExportType</a>
+                </li>
+              
+                <li>
+                  <a href="#.Exec"><span class="badge">E</span>Exec</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fissue_service.proto">v1/issue_service.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalFlow"><span class="badge">M</span>ApprovalFlow</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNode"><span class="badge">M</span>ApprovalNode</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNodeNotifyConfig"><span class="badge">M</span>ApprovalNodeNotifyConfig</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry"><span class="badge">M</span>ApprovalNodeNotifyConfig.NotifyTypesEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalStep"><span class="badge">M</span>ApprovalStep</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalTemplate"><span class="badge">M</span>ApprovalTemplate</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApproveRequest"><span class="badge">M</span>ApproveRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApproveRequest.approveMeta"><span class="badge">M</span>ApproveRequest.approveMeta</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApproveResponse"><span class="badge">M</span>ApproveResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.GetIssueDetailRequest"><span class="badge">M</span>GetIssueDetailRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.GetIssueDetailResponse"><span class="badge">M</span>GetIssueDetailResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.Issue"><span class="badge">M</span>Issue</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.Issue.Approver"><span class="badge">M</span>Issue.Approver</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.IssueDetail"><span class="badge">M</span>IssueDetail</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListApproveConfigRequest"><span class="badge">M</span>ListApproveConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListApproveConfigResponse"><span class="badge">M</span>ListApproveConfigResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListIssueRequest"><span class="badge">M</span>ListIssueRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListIssueResponse"><span class="badge">M</span>ListIssueResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RejectRequest"><span class="badge">M</span>RejectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RejectRequest.approveMeta"><span class="badge">M</span>RejectRequest.approveMeta</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.RejectResponse"><span class="badge">M</span>RejectResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.SubmitIssueRequest"><span class="badge">M</span>SubmitIssueRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.SubmitIssueResponse"><span class="badge">M</span>SubmitIssueResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.UpdateApproveNotifyConfigRequest"><span class="badge">M</span>UpdateApproveNotifyConfigRequest</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNode.Type"><span class="badge">E</span>ApprovalNode.Type</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType"><span class="badge">E</span>ApprovalNodeNotifyConfig.NotifyType</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalNodeNotifyConfig.Receiver"><span class="badge">E</span>ApprovalNodeNotifyConfig.Receiver</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ApprovalStep.Type"><span class="badge">E</span>ApprovalStep.Type</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.Issue.Approver.Status"><span class="badge">E</span>Issue.Approver.Status</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.IssueKind"><span class="badge">E</span>IssueKind</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.IssueStatus"><span class="badge">E</span>IssueStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListIssueRequest.IssueRole"><span class="badge">E</span>ListIssueRequest.IssueRole</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.TriggerKind"><span class="badge">E</span>TriggerKind</a>
+                </li>
+              
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.IssueService"><span class="badge">S</span>IssueService</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fmask_service.proto">v1/mask_service.proto</a>
+            <ul>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fnotify_service.proto">v1/notify_service.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#woxqaq.v1.NotifyRequest"><span class="badge">M</span>NotifyRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.NotifyResponse"><span class="badge">M</span>NotifyResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.NotifyServices"><span class="badge">S</span>NotifyServices</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2freview_service.proto">v1/review_service.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#woxqaq.v1.DeleteReviewGroupRequest"><span class="badge">M</span>DeleteReviewGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.DeleteReviewResponse"><span class="badge">M</span>DeleteReviewResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListReviewGroupsRequest"><span class="badge">M</span>ListReviewGroupsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ListReviewGroupsResponse"><span class="badge">M</span>ListReviewGroupsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ReviewGroup"><span class="badge">M</span>ReviewGroup</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.ReviewRule"><span class="badge">M</span>ReviewRule</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.ReviewRuleLevel"><span class="badge">E</span>ReviewRuleLevel</a>
+                </li>
+              
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.ReviewServive"><span class="badge">S</span>ReviewServive</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#v1%2fupload_service.proto">v1/upload_service.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreSignRequest"><span class="badge">M</span>PreSignRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#woxqaq.v1.PreSignResponse"><span class="badge">M</span>PreSignResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#woxqaq.v1.UploadService"><span class="badge">S</span>UploadService</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/common.proto">v1/common.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+
+      
+        <h3 id="woxqaq.v1.Engine">Engine</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ENGINE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CLICKHOUSE</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MYSQL</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>POSTGRES</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SNOWFLAKE</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SQLITE</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TIDB</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MONGODB</td>
+                <td>7</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>REDIS</td>
+                <td>8</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ORACLE</td>
+                <td>9</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SPANNER</td>
+                <td>10</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MSSQL</td>
+                <td>11</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>REDSHIFT</td>
+                <td>12</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MARIADB</td>
+                <td>13</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OCEANBASE</td>
+                <td>14</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DM</td>
+                <td>15</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RISINGWAVE</td>
+                <td>16</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OCEANBASE_ORACLE</td>
+                <td>17</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>STARROCKS</td>
+                <td>18</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DORIS</td>
+                <td>19</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>HIVE</td>
+                <td>20</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ELASTICSEARCH</td>
+                <td>21</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>BIGQUERY</td>
+                <td>22</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DYNAMODB</td>
+                <td>23</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DATABRICKS</td>
+                <td>24</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COCKROACHDB</td>
+                <td>25</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COSMOSDB</td>
+                <td>26</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TRINO</td>
+                <td>27</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CASSANDRA</td>
+                <td>28</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/generate_service.proto">v1/generate_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="woxqaq.v1.AddRuleCatagoryRequest">AddRuleCatagoryRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#woxqaq.v1.AddRuleCatagoryRequest.RuleCatagoryMeta">AddRuleCatagoryRequest.RuleCatagoryMeta</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.AddRuleCatagoryRequest.RuleCatagoryMeta">AddRuleCatagoryRequest.RuleCatagoryMeta</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.AddRuleCatagoryResponse">AddRuleCatagoryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.AlgoValue">AlgoValue</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>single_string</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string_list</td>
+                  <td><a href="#woxqaq.v1.StringList">StringList</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.CreateRuleRequest">CreateRuleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rule</td>
+                  <td><a href="#woxqaq.v1.Rule">Rule</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.CreateRuleResponse">CreateRuleResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.DeleteRuleRequest">DeleteRuleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.DeleteRuleResponse">DeleteRuleResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.GetRuleRequest">GetRuleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.GetRuleResponse">GetRuleResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rule</td>
+                  <td><a href="#woxqaq.v1.Rule">Rule</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListRuleRequest">ListRuleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListRuleResponse">ListRuleResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rules</td>
+                  <td><a href="#woxqaq.v1.Rule">Rule</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.PreviewRuleGenerateRequest">PreviewRuleGenerateRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#woxqaq.v1.PreviewRuleGenerateRequest.algoMeta">PreviewRuleGenerateRequest.algoMeta</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.PreviewRuleGenerateRequest.algoMeta">PreviewRuleGenerateRequest.algoMeta</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>algo</td>
+                  <td><a href="#woxqaq.v1.GenerateAlgorithm">GenerateAlgorithm</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>algo_meta</td>
+                  <td><a href="#woxqaq.v1.PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry">PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry">PreviewRuleGenerateRequest.algoMeta.AlgoMetaEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#woxqaq.v1.AlgoValue">AlgoValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.PreviewRuleGenerateResponse">PreviewRuleGenerateResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.Rule">Rule</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category</td>
+                  <td><a href="#woxqaq.v1.RuleCategory">RuleCategory</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>column_condition</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>empty_ratio</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>algorithm</td>
+                  <td><a href="#woxqaq.v1.GenerateAlgorithm">GenerateAlgorithm</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>algo_meta</td>
+                  <td><a href="#woxqaq.v1.Rule.AlgoMetaEntry">Rule.AlgoMetaEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>internal</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.Rule.AlgoMetaEntry">Rule.AlgoMetaEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#woxqaq.v1.AlgoValue">AlgoValue</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.StringList">StringList</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.UpdateRuleRequest">UpdateRuleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rule</td>
+                  <td><a href="#woxqaq.v1.Rule">Rule</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.UpdateRuleResponse">UpdateRuleResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="woxqaq.v1.GenerateAlgorithm">GenerateAlgorithm</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_TIME</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_TIME_DATE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_DEPARTMENT</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_COMPANY</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GENERATE_ALGORITHM_SCRIPT</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.RuleCategory">RuleCategory</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>RULE_CATEGORY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_PERSONAL</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_PRODUCT</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_COMMERCE</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_COMMON</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_POSITION</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>RULE_CATEGORY_CUSTOM</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <h3 id="woxqaq.v1.RuleService">RuleService</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetRule</td>
+                <td><a href="#woxqaq.v1.GetRuleRequest">GetRuleRequest</a></td>
+                <td><a href="#woxqaq.v1.GetRuleResponse">GetRuleResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListRule</td>
+                <td><a href="#woxqaq.v1.ListRuleRequest">ListRuleRequest</a></td>
+                <td><a href="#woxqaq.v1.ListRuleResponse">ListRuleResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateRule</td>
+                <td><a href="#woxqaq.v1.CreateRuleRequest">CreateRuleRequest</a></td>
+                <td><a href="#woxqaq.v1.CreateRuleResponse">CreateRuleResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateRule</td>
+                <td><a href="#woxqaq.v1.UpdateRuleRequest">UpdateRuleRequest</a></td>
+                <td><a href="#woxqaq.v1.UpdateRuleResponse">UpdateRuleResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteRule</td>
+                <td><a href="#woxqaq.v1.DeleteRuleRequest">DeleteRuleRequest</a></td>
+                <td><a href="#woxqaq.v1.DeleteRuleResponse">DeleteRuleResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AddRuleCatagory</td>
+                <td><a href="#woxqaq.v1.AddRuleCatagoryRequest">AddRuleCatagoryRequest</a></td>
+                <td><a href="#woxqaq.v1.AddRuleCatagoryResponse">AddRuleCatagoryResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PreviewRuleGenerate</td>
+                <td><a href="#woxqaq.v1.PreviewRuleGenerateRequest">PreviewRuleGenerateRequest</a></td>
+                <td><a href="#woxqaq.v1.PreviewRuleGenerateResponse">PreviewRuleGenerateResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>GetRule</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/rule/*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListRule</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/rules}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateRule</td>
+                <td>POST</td>
+                <td>/v1/{name=org/*/rules}</td>
+                <td>rule</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateRule</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/rule/*}</td>
+                <td>rule</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteRule</td>
+                <td>DELETE</td>
+                <td>/v1/{name=org/*/rule/*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddRuleCatagory</td>
+                <td>POST</td>
+                <td>/v1/{name=org/*/rules}/catagory</td>
+                <td>meta</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>PreviewRuleGenerate</td>
+                <td>POST</td>
+                <td>/v1/{name=org/*/rules}/preview</td>
+                <td>meta</td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/issue.proto">v1/issue.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id=".DataExportDetail">DataExportDetail</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>database</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ebs</td>
+                  <td><a href="#DataExportDetail.ExportBySQL">DataExportDetail.ExportBySQL</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>eatt</td>
+                  <td><a href="#DataExportDetail.ExportAccordingToTable">DataExportDetail.ExportAccordingToTable</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#DataExportDetail.ExportType">DataExportDetail.ExportType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>encoding</td>
+                  <td><a href="#DataExportDetail.Encoding">DataExportDetail.Encoding</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>export_reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exector</td>
+                  <td><a href="#Exec">Exec</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id=".DataExportDetail.ExportAccordingToTable">DataExportDetail.ExportAccordingToTable</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>export_all</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#DataExportDetail.ExportContent">DataExportDetail.ExportContent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>option</td>
+                  <td><a href="#DataExportDetail.ExportAccordingToTable.TableOption">DataExportDetail.ExportAccordingToTable.TableOption</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id=".DataExportDetail.ExportAccordingToTable.TableOption">DataExportDetail.ExportAccordingToTable.TableOption</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>table</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>all_field</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fields</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id=".DataExportDetail.ExportBySQL">DataExportDetail.ExportBySQL</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>statement</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id=".DataExportDetail.Encoding">DataExportDetail.Encoding</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ENCODING_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UTF8</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GBK</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id=".DataExportDetail.ExportContent">DataExportDetail.ExportContent</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXPORT_CONTENT_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DATA</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>STRUCT</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALL</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id=".DataExportDetail.ExportMethod">DataExportDetail.ExportMethod</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXPORT_METHOD_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SQL</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TABLES</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id=".DataExportDetail.ExportType">DataExportDetail.ExportType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXPORT_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CSV</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EXCEL</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id=".Exec">Exec</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXEC_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVER</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COMMITTER</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AUTO</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/issue_service.proto">v1/issue_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="woxqaq.v1.ApprovalFlow">ApprovalFlow</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>steps</td>
+                  <td><a href="#woxqaq.v1.ApprovalStep">ApprovalStep</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApprovalNode">ApprovalNode</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#woxqaq.v1.ApprovalNode.Type">ApprovalNode.Type</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApprovalNodeNotifyConfig">ApprovalNodeNotifyConfig</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>notify_types</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry">ApprovalNodeNotifyConfig.NotifyTypesEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>webhooks</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>available_receiver</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig.Receiver">ApprovalNodeNotifyConfig.Receiver</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>selected_receiver</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig.Receiver">ApprovalNodeNotifyConfig.Receiver</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>custom_receivers</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApprovalNodeNotifyConfig.NotifyTypesEntry">ApprovalNodeNotifyConfig.NotifyTypesEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType">ApprovalNodeNotifyConfig.NotifyType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApprovalStep">ApprovalStep</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#woxqaq.v1.ApprovalStep.Type">ApprovalStep.Type</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nodes</td>
+                  <td><a href="#woxqaq.v1.ApprovalNode">ApprovalNode</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApprovalTemplate">ApprovalTemplate</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>flow</td>
+                  <td><a href="#woxqaq.v1.ApprovalFlow">ApprovalFlow</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>required_approver</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApproveRequest">ApproveRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#woxqaq.v1.ApproveRequest.approveMeta">ApproveRequest.approveMeta</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApproveRequest.approveMeta">ApproveRequest.approveMeta</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>approver</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comment</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ApproveResponse">ApproveResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.GetIssueDetailRequest">GetIssueDetailRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.GetIssueDetailResponse">GetIssueDetailResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ded</td>
+                  <td><a href="#DataExportDetail">DataExportDetail</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.Issue">Issue</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#woxqaq.v1.IssueKind">IssueKind</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>database</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>create_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>submitter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#woxqaq.v1.IssueStatus">IssueStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>detail</td>
+                  <td><a href="#woxqaq.v1.IssueDetail">IssueDetail</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approvers</td>
+                  <td><a href="#woxqaq.v1.Issue.Approver">Issue.Approver</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval_templates</td>
+                  <td><a href="#woxqaq.v1.ApprovalTemplate">ApprovalTemplate</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.Issue.Approver">Issue.Approver</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#woxqaq.v1.Issue.Approver.Status">Issue.Approver.Status</a></td>
+                  <td></td>
+                  <td><p>The new status. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>principal</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.IssueDetail">IssueDetail</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ded</td>
+                  <td><a href="#DataExportDetail">DataExportDetail</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListApproveConfigRequest">ListApproveConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListApproveConfigResponse">ListApproveConfigResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig">ApprovalNodeNotifyConfig</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListIssueRequest">ListIssueRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#woxqaq.v1.IssueKind">IssueKind</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>current</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#woxqaq.v1.IssueStatus">IssueStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#woxqaq.v1.ListIssueRequest.IssueRole">ListIssueRequest.IssueRole</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListIssueResponse">ListIssueResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#woxqaq.v1.Issue">Issue</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.RejectRequest">RejectRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#woxqaq.v1.RejectRequest.approveMeta">RejectRequest.approveMeta</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.RejectRequest.approveMeta">RejectRequest.approveMeta</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>approver</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comment</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.RejectResponse">RejectResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.SubmitIssueRequest">SubmitIssueRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#woxqaq.v1.IssueKind">IssueKind</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>detail</td>
+                  <td><a href="#woxqaq.v1.IssueDetail">IssueDetail</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.SubmitIssueResponse">SubmitIssueResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>issue_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.UpdateApproveNotifyConfigRequest">UpdateApproveNotifyConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#woxqaq.v1.ApprovalNodeNotifyConfig">ApprovalNodeNotifyConfig</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="woxqaq.v1.ApprovalNode.Type">ApprovalNode.Type</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ANY_IN_GROUP</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.ApprovalNodeNotifyConfig.NotifyType">ApprovalNodeNotifyConfig.NotifyType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SITE_NOTIFY</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SMS</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EMAIL</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PHONE</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>WEBHOOK</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.ApprovalNodeNotifyConfig.Receiver">ApprovalNodeNotifyConfig.Receiver</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>RECEIVER_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVER</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COMMITTER</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EXECUTOR</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CUSTOM</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.ApprovalStep.Type">ApprovalStep.Type</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALL</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ANY</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.Issue.Approver.Status">Issue.Approver.Status</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PENDING</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVED</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>REJECTED</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.IssueKind">IssueKind</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ISSUE_KIND_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DATA_IMPORT</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DATA_EXPORT</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DATA_GENERATE</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.IssueStatus">IssueStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ISSUE_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>NOT_START</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PRE_CHECK</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PRE_CHECK_SUCCESS</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PRE_CHECK_FAILED</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVING</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVED</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>NOT_APPROVED</td>
+                <td>7</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.ListIssueRequest.IssueRole">ListIssueRequest.IssueRole</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ISSUE_ROLE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COMMITTER</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TO_APPROVE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TO_EXECUTE</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>APPROVED</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EXECUTED</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="woxqaq.v1.TriggerKind">TriggerKind</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TRIGGER_KIND_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CURRENT</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CRON</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <h3 id="woxqaq.v1.IssueService">IssueService</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetIssueDetail</td>
+                <td><a href="#woxqaq.v1.GetIssueDetailRequest">GetIssueDetailRequest</a></td>
+                <td><a href="#woxqaq.v1.GetIssueDetailResponse">GetIssueDetailResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListIssue</td>
+                <td><a href="#woxqaq.v1.ListIssueRequest">ListIssueRequest</a></td>
+                <td><a href="#woxqaq.v1.ListIssueResponse">ListIssueResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SubmitIssue</td>
+                <td><a href="#woxqaq.v1.SubmitIssueRequest">SubmitIssueRequest</a></td>
+                <td><a href="#woxqaq.v1.SubmitIssueResponse">SubmitIssueResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>Approve</td>
+                <td><a href="#woxqaq.v1.ApproveRequest">ApproveRequest</a></td>
+                <td><a href="#woxqaq.v1.ApproveResponse">ApproveResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>Reject</td>
+                <td><a href="#woxqaq.v1.RejectRequest">RejectRequest</a></td>
+                <td><a href="#woxqaq.v1.RejectResponse">RejectResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListApproveConfig</td>
+                <td><a href="#woxqaq.v1.ListApproveConfigRequest">ListApproveConfigRequest</a></td>
+                <td><a href="#woxqaq.v1.ListApproveConfigResponse">ListApproveConfigResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateApproveNotifyConfig</td>
+                <td><a href="#woxqaq.v1.UpdateApproveNotifyConfigRequest">UpdateApproveNotifyConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>GetIssueDetail</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/instance/*/issue/*}</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>GetIssueDetail</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/issue/*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListIssue</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/instance/*}</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>ListIssue</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SubmitIssue</td>
+                <td>POST</td>
+                <td>/v1/{name=org/*/instance/*/issue/*}/submit</td>
+                <td>detail</td>
+              </tr>
+              
+              <tr>
+                <td>SubmitIssue</td>
+                <td>POST</td>
+                <td>/v1/{name=org/*/issue/*}/submit</td>
+                <td>detail</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>Approve</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/issue/*}/approve</td>
+                <td>meta</td>
+              </tr>
+              
+              <tr>
+                <td>Approve</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/instance/*/issue/*}/approve</td>
+                <td>meta</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>Reject</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/issue/*}/reject</td>
+                <td>meta</td>
+              </tr>
+              
+              <tr>
+                <td>Reject</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/instance/*/issue/*}/reject</td>
+                <td>meta</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListApproveConfig</td>
+                <td>GET</td>
+                <td>/v1/{name=org/*/approval/notifyConfig}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateApproveNotifyConfig</td>
+                <td>PUT</td>
+                <td>/v1/{name=org/*/approval/notifyConfig}</td>
+                <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/mask_service.proto">v1/mask_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/notify_service.proto">v1/notify_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="woxqaq.v1.NotifyRequest">NotifyRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="woxqaq.v1.NotifyResponse">NotifyResponse</h3>
+        <p></p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="woxqaq.v1.NotifyServices">NotifyServices</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Notify</td>
+                <td><a href="#woxqaq.v1.NotifyRequest">NotifyRequest</a></td>
+                <td><a href="#woxqaq.v1.NotifyResponse">NotifyResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>Notify</td>
+                <td>GET</td>
+                <td>/v1/notification</td>
+                <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/review_service.proto">v1/review_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="woxqaq.v1.DeleteReviewGroupRequest">DeleteReviewGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.DeleteReviewResponse">DeleteReviewResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListReviewGroupsRequest">ListReviewGroupsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ListReviewGroupsResponse">ListReviewGroupsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>review_groups</td>
+                  <td><a href="#woxqaq.v1.ReviewGroup">ReviewGroup</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ReviewGroup">ReviewGroup</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rules</td>
+                  <td><a href="#woxqaq.v1.ReviewRule">ReviewRule</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.ReviewRule">ReviewRule</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>level</td>
+                  <td><a href="#woxqaq.v1.ReviewRuleLevel">ReviewRuleLevel</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payload</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>engine</td>
+                  <td><a href="#woxqaq.v1.Engine">Engine</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comment</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="woxqaq.v1.ReviewRuleLevel">ReviewRuleLevel</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>LEVEL_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ERROR</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>WARNING</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DISABLED</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <h3 id="woxqaq.v1.ReviewServive">ReviewServive</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ListReviewGroups</td>
+                <td><a href="#woxqaq.v1.ListReviewGroupsRequest">ListReviewGroupsRequest</a></td>
+                <td><a href="#woxqaq.v1.ListReviewGroupsResponse">ListReviewGroupsResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateReviewGroup</td>
+                <td><a href="#woxqaq.v1.ReviewGroup">ReviewGroup</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateReviewGroup</td>
+                <td><a href="#woxqaq.v1.ReviewGroup">ReviewGroup</a></td>
+                <td><a href="#woxqaq.v1.ReviewGroup">ReviewGroup</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteReviewGroup</td>
+                <td><a href="#woxqaq.v1.DeleteReviewGroupRequest">DeleteReviewGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>ListReviewGroups</td>
+                <td>GET</td>
+                <td>/v1/reviewGroups</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>ListReviewGroups</td>
+                <td>GET</td>
+                <td>/v1/org/{org}/reviewGroups</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateReviewGroup</td>
+                <td>POST</td>
+                <td>/v1/reviewGroups</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>CreateReviewGroup</td>
+                <td>POST</td>
+                <td>/v1/org/{org}/reviewGroups</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateReviewGroup</td>
+                <td>PATCH</td>
+                <td>/v1/reviewGroups/{name}</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>UpdateReviewGroup</td>
+                <td>PATCH</td>
+                <td>/v1/org/{org}/reviewGroups</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteReviewGroup</td>
+                <td>DELETE</td>
+                <td>/v1/reviewGroups/{name}</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>DeleteReviewGroup</td>
+                <td>DELETE</td>
+                <td>/v1/org/{org}/reviewGroups/{name}</td>
+                <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="v1/upload_service.proto">v1/upload_service.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="woxqaq.v1.PreSignRequest">PreSignRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>org_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instance_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="woxqaq.v1.PreSignResponse">PreSignResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="woxqaq.v1.UploadService">UploadService</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>PreSign</td>
+                <td><a href="#woxqaq.v1.PreSignRequest">PreSignRequest</a></td>
+                <td><a href="#woxqaq.v1.PreSignResponse">PreSignResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>PreSign</td>
+                <td>GET</td>
+                <td>/v1/org/{org_name}/instance/{instance_name}/presign</td>
+                <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+
